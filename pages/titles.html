@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Titles — DPRK Title Registry</title>
+  <link rel="stylesheet" href="/public/style.css">
+  <style>
+    .page-hero{background:var(--cn);padding:48px 40px;border-bottom:4px solid var(--red);position:relative;overflow:hidden;}
+    .page-hero::before{content:'';position:absolute;inset:0;background:repeating-conic-gradient(from 0deg at 50% 130%,rgba(255,221,0,.018) 0deg 4deg,transparent 4deg 14deg);pointer-events:none;}
+    .hi{max-width:1300px;margin:0 auto;position:relative;z-index:1;}
+    .h-kick{font-family:monospace;font-size:11px;font-weight:700;letter-spacing:4px;color:var(--cr);text-transform:uppercase;display:block;margin-bottom:14px;border-left:3px solid var(--cr);padding-left:12px;}
+    .h-title{font-family:'VT323',monospace;font-size:64px;color:var(--gold2);line-height:1;margin-bottom:14px;text-shadow:2px 2px 0 rgba(0,0,0,.4);}
+    .h-sub{font-size:18px;color:#aaccff;line-height:1.7;max-width:700px;}
+
+    .filter-bar{background:var(--grey);border-bottom:3px solid var(--red);padding:12px 40px;position:sticky;top:0;z-index:50;}
+    .filter-inner{max-width:1300px;margin:0 auto;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+    .filter-lbl{font-family:monospace;font-size:10px;font-weight:700;letter-spacing:2px;color:var(--dkgrey);white-space:nowrap;}
+    .fbtn{background:var(--grey);border:2px solid;border-color:#fff var(--dkgrey) var(--dkgrey) #fff;font-family:monospace;font-size:10px;font-weight:700;letter-spacing:1px;padding:4px 12px;cursor:pointer;white-space:nowrap;}
+    .fbtn:hover{background:#d4d4d4;}
+    .fbtn.on{background:var(--navy);color:var(--gold2);border-color:#000040;}
+    .fsearch{background:#fff;border:2px solid;border-color:var(--dkgrey) #fff #fff var(--dkgrey);font-family:monospace;font-size:12px;padding:4px 10px;flex:1;min-width:200px;}
+    .fsearch:focus{outline:none;}
+    .fcount{font-family:monospace;font-size:10px;color:var(--dkgrey);letter-spacing:1px;white-space:nowrap;margin-left:auto;}
+
+    .titles-wrap{padding:36px 40px;}
+    .titles-inner{max-width:1300px;margin:0 auto;}
+    .grade-group{margin-bottom:40px;}
+    .grade-head{display:flex;align-items:center;gap:14px;margin-bottom:12px;}
+    .grade-pip{width:14px;height:14px;border-radius:50%;flex-shrink:0;}
+    .grade-name{font-family:'VT323',monospace;font-size:28px;color:var(--navy);line-height:1;}
+    .grade-cnt{font-family:monospace;font-size:10px;color:var(--dkgrey);letter-spacing:2px;}
+
+    .tc{background:#fff;border:2px solid;border-color:#fff var(--dkgrey) var(--dkgrey) #fff;margin-bottom:6px;display:grid;grid-template-columns:52px 1fr auto;cursor:pointer;transition:border-color .15s;}
+    .tc:hover{border-color:var(--navy);}
+    .tc-rank{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px 4px;gap:4px;border-right:1px solid var(--dkgrey);flex-shrink:0;}
+    .tc-icon{font-size:20px;}
+    .tc-lbl{font-size:7px;font-weight:700;color:#fff;letter-spacing:1px;text-transform:uppercase;writing-mode:vertical-rl;transform:rotate(180deg);font-family:monospace;}
+    .tc-body{padding:12px 18px;}
+    .tc-en{font-family:'IM Fell English',serif;font-size:17px;font-weight:700;color:var(--navy);margin-bottom:3px;line-height:1.25;}
+    .tc-ko{font-family:'Noto Serif KR',serif;font-size:11px;color:#999;margin-bottom:6px;letter-spacing:1px;}
+    .tc-desc{font-size:13px;color:#444;line-height:1.65;}
+    .tc-cta{background:var(--grey);border-left:1px solid var(--dkgrey);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px 18px;gap:6px;flex-shrink:0;min-width:100px;}
+    .tc-price{font-family:'VT323',monospace;font-size:30px;color:var(--red);line-height:1;}
+    .tc-btn{background:var(--grey);border:2px solid;border-color:#fff var(--dkgrey) var(--dkgrey) #fff;font-size:9px;font-weight:700;padding:4px 10px;cursor:pointer;font-family:monospace;letter-spacing:1px;}
+    .tc-btn:hover{background:#d4d4d4;}
+
+    .no-results{text-align:center;padding:60px;display:none;}
+    .no-results-head{font-family:'VT323',monospace;font-size:32px;color:var(--dkgrey);}
+    .no-results-sub{font-size:14px;color:#aaa;margin-top:8px;font-style:italic;}
+
+    .quiz-strip{background:var(--cn);padding:32px 40px;border-top:4px solid var(--red);}
+    .quiz-strip-inner{max-width:1300px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:24px;}
+    .qs-head{font-family:'VT323',monospace;font-size:32px;color:var(--gold2);display:block;margin-bottom:4px;}
+    .qs-body{font-size:15px;color:#aaccff;}
+  </style>
+</head>
+<body>
+  <script src="/public/components.js"></script>
+  <div id="page-content">
+    <div class="bc"><a href="/">Home</a> &rsaquo; All Titles</div>
+
+    <div class="page-hero">
+      <div class="hi">
+        <span class="h-kick">The Official Catalogue &mdash; All Titles, All Grades</span>
+        <div class="h-title">All 50+ Titles.</div>
+        <div class="h-sub">Every title is drawn directly from the official honorific tradition of the Democratic People's Republic of Korea. We have not invented them. We have democratised them. Browse the full catalogue below, or use the Title Finder to receive the registry's recommendation.</div>
+      </div>
+    </div>
+
+    <div class="filter-bar">
+      <div class="filter-inner">
+        <span class="filter-lbl">GRADE:</span>
+        <button class="fbtn on" data-grade="all">All</button>
+        <button class="fbtn" data-grade="Supreme">Supreme</button>
+        <button class="fbtn" data-grade="Eternal">Eternal</button>
+        <button class="fbtn" data-grade="Heroic">Heroic</button>
+        <button class="fbtn" data-grade="Brilliant">Brilliant</button>
+        <button class="fbtn" data-grade="Beloved">Beloved</button>
+        <button class="fbtn" data-grade="Mountain">Mountain</button>
+        <input class="fsearch" id="search" type="text" placeholder="Search titles...">
+        <span class="fcount" id="count"></span>
+      </div>
+    </div>
+
+    <div class="titles-wrap">
+      <div class="titles-inner">
+        <div id="container"></div>
+        <div class="no-results" id="no-results">
+          <div class="no-results-head">No titles found.</div>
+          <div class="no-results-sub">The committee suggests broadening your search. All titles are correct.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="quiz-strip">
+      <div class="quiz-strip-inner">
+        <div style="color:#fff;">
+          <span class="qs-head">Not sure which title is right?</span>
+          <div class="qs-body">Answer five questions. The registry will select your correct title from the full catalogue. The registry has never made an incorrect selection.</div>
+        </div>
+        <button class="btn btn-primary" onclick="location.href='/find'">&#9733; Find My Title</button>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+  var TITLES=[
+    {grade:'Supreme',col:'#8B0000',icon:'🎖️',en:"Iron-Willed Commander of the Glorious People's Eternal Struggle",ko:'강철의 의지를 지닌 영광스러운 인민의 사령관',desc:'For the person who has, without formal appointment, been running things for years. They decide. Others follow. The certificate confirms what was already understood by all.',pop:true},
+    {grade:'Supreme',col:'#8B0000',icon:'🎖️',en:"Ever-Victorious Iron-Willed Brilliant Commander",ko:'백전백승의 강철의 의지를 지닌 탁월한 지휘관',desc:"For those whose record of winning is not merely impressive but structurally inevitable. They do not lose. The registry has reviewed their history and confirms this.",pop:false},
+    {grade:'Supreme',col:'#8B0000',icon:'🎖️',en:"Supreme Commander of the Revolutionary Armed Forces of the Fatherland",ko:'조국 혁명무력의 최고사령관',desc:"For the person others turn to in a crisis. Not because they asked. Simply because everyone knows, without discussion, that this is correct.",pop:false},
+    {grade:'Supreme',col:'#8B0000',icon:'🎖️',en:"Peerless Patriot, Invincible General and Legendary Hero of the Nation",ko:'당대의 애국자이며 무적의 영웅',desc:"For the person whose commitment to their people — family, team, community — has never wavered and has never been adequately acknowledged. Until now.",pop:false},
+    {grade:'Supreme',col:'#8B0000',icon:'🎖️',en:"Lodestar of the 21st Century & Invincible Strategist of Our Times",ko:'21세기의 길잡이별이며 무적의 전략가',desc:"For the person who consistently sees further ahead than everyone else and has been proven correct so many times that others have stopped questioning it.",pop:false},
+    {grade:'Supreme',col:'#8B0000',icon:'🎖️',en:"Great Leader of Our Party, State and People, Father of the Nation",ko:'우리 당과 국가와 인민의 위대한 수령',desc:"The most senior Supreme designation. For those who hold an entire household, organisation, or group together by sheer force of character and quiet authority.",pop:false},
+    {grade:'Eternal',col:'#004a00',icon:'🌟',en:"Eternal Sun of the Revolutionary Cause & Morning Star of Juche",ko:'혁명의 영원한 태양이며 주체의 새벽별',desc:"For the citizen whose presence measurably improves any room they enter. They have been a source of warmth and light for too long without formal documentation.",pop:false},
+    {grade:'Eternal',col:'#004a00',icon:'🌟',en:"Eternal President of the Republic & Sun of the Nation",ko:'공화국의 영원한 주석이며 민족의 태양',desc:"For the person who, long after their formal role has ended, continues to be the person everyone defers to. Their authority is not diminished by time. It is deepened by it.",pop:false},
+    {grade:'Eternal',col:'#004a00',icon:'🌟',en:"Shining Sun of Juche, Great Heart of the Revolution",ko:'주체의 빛나는 태양이며 혁명의 위대한 심장',desc:"For those who bring warmth not through grand gestures but through a steady, reliable presence that others have come to depend on without always articulating why.",pop:false},
+    {grade:'Eternal',col:'#004a00',icon:'🌟',en:"Eternal Flame of the Socialist Cause, Beacon of Hope for All People",ko:'사회주의의 영원한 불꽃이며 인민의 희망',desc:"For the relentlessly optimistic person who, when everything seems difficult, continues to believe and act as though things will be fine. They are usually right.",pop:false},
+    {grade:'Eternal',col:'#004a00',icon:'🌟',en:"Eternal General Secretary of the Party, Guiding Light for All Ages",ko:'당의 영원한 총비서이며 만대의 향도',desc:"For those whose influence outlasts any position they hold. The organisation changes around them; their direction does not.",pop:false},
+    {grade:'Eternal',col:'#004a00',icon:'🌟',en:"Ever-Shining Luminary, Inextinguishable Torch of the Nation",ko:'영원히 빛나는 발광체이며 민족의 꺼지지 않는 횃불',desc:"For those who continue to inspire long after any formal occasion to do so has passed. They are referenced in speeches. Their example is cited. They have no idea.",pop:false},
+    {grade:'Heroic',col:'#3a0070',icon:'⚡',en:"Great Marshal of the Invincible Armed Forces & Guardian of the Socialist Flame",ko:'무적의 조선인민군 대원수이며 사회주의 불꽃의 수호자',desc:"For the person who approaches every challenge with the steady composure of someone who has already won. They have not lost. Not once. The registry has checked.",pop:false},
+    {grade:'Heroic',col:'#3a0070',icon:'⚡',en:"Hero of the Republic, Defender of the Revolution",ko:'공화국 영웅이며 혁명의 수호자',desc:"Awarded to those who have defended something important — a team, a principle, a person — when it would have been much easier not to. The registry notes this category of courage is undervalued.",pop:true},
+    {grade:'Heroic',col:'#3a0070',icon:'⚡',en:"Heroic Fighter Who Has Devoted Body and Soul to the Country and People",ko:'조국과 인민을 위해 몸과 마음을 다 바친 영웅적 투사',desc:"For those who have given an unreasonable amount of themselves to something larger. Parents, carers, and anyone who runs a group chat qualify automatically.",pop:false},
+    {grade:'Heroic',col:'#3a0070',icon:'⚡',en:"Guardian of the Revolutionary Gains of the People, Valiant Protector",ko:'인민의 혁명적 성과를 지키는 용맹한 수호자',desc:"For the person who protects what matters — quietly, persistently, without needing recognition. The registry provides the recognition they have not sought.",pop:false},
+    {grade:'Heroic',col:'#3a0070',icon:'⚡',en:"Indomitable Revolutionary Fighter of Steely Will",ko:'강철의 의지를 지닌 불굴의 혁명투사',desc:"For the person who, when knocked back, gets up. Again. Without drama. Without complaint. With the quiet determination of someone who has decided they will prevail.",pop:false},
+    {grade:'Heroic',col:'#3a0070',icon:'⚡',en:"Legendary Combat Hero of the Glorious Armed Forces",ko:'영광스러운 조선인민군의 전설적인 전투영웅',desc:"For the person who has survived something. Not necessarily literally. But who has come through circumstances that required genuine fortitude and emerged intact.",pop:false},
+    {grade:'Heroic',col:'#3a0070',icon:'⚡',en:"Outstanding Soldier of the Party, Unflinching in the Face of Adversity",ko:'역경 앞에서도 굽히지 않는 당의 탁월한 전사',desc:"For those who have faced institutional resistance, difficult conditions, or sustained opposition, and who have continued regardless. The committee admires this.",pop:false},
+    {grade:'Brilliant',col:'#664400',icon:'🧠',en:"Brilliant Genius of Humanity, Guiding Star of the 21st Century & Outstanding Thinker of Our Age",ko:'인류의 탁월한 천재이며 21세기의 길잡이 별',desc:"For the citizen who is, it must be acknowledged, more often correct than anyone is entirely comfortable admitting. They have waited long enough for this certificate.",pop:false},
+    {grade:'Brilliant',col:'#664400',icon:'🧠',en:"Outstanding Thinker of the Era, Pioneer of Original Thought",ko:'시대의 탁월한 사상가이며 독창적 사유의 선구자',desc:"For the person who approaches every problem in a way no one else thought of, arrives at a solution no one else found, and makes it look straightforward afterwards.",pop:false},
+    {grade:'Brilliant',col:'#664400',icon:'🧠',en:"Ideological Theoretician of Rare Depth & Architect of Revolutionary Thinking",ko:'깊은 사상이론가이며 혁명사상의 설계자',desc:"For the person who can explain complex things simply, who has a framework for everything, and whose opinions on policy, philosophy, and the correct way to queue are equally well-developed.",pop:false},
+    {grade:'Brilliant',col:'#664400',icon:'🧠',en:"World-Renowned Scholar of Extraordinary Achievement",ko:'세계적으로 유명한 탁월한 학자',desc:"For the person who has mastered their field to the point where others come specifically to them. Their expertise is cited in conversations they are not party to.",pop:false},
+    {grade:'Brilliant',col:'#664400',icon:'🧠',en:"Gifted Strategist of Uncommon Foresight & Master of the Long Game",ko:'탁월한 통찰력을 가진 전략가이며 장기적 사고의 달인',desc:"For those who play chess while others play draughts. Their decisions seem unusual at the time and correct six months later. They accept the compliment without surprise.",pop:false},
+    {grade:'Brilliant',col:'#664400',icon:'🧠',en:"Great Teacher of the People, Propagator of Truth and Knowledge",ko:'인민의 위대한 스승이며 진리와 지식의 전파자',desc:"For those who teach — formally or otherwise. Who explain things with patience and without condescension. Who have changed how people think.",pop:false},
+    {grade:'Brilliant',col:'#664400',icon:'🧠',en:"Creative Genius of Art and Culture, Brilliant Star of Our Civilisation",ko:'예술과 문화의 창조적 천재이며 문명의 빛나는 별',desc:"For the creative person whose work has moved people, changed things, or simply been so good that it is regularly cited as evidence that genius exists.",pop:false},
+    {grade:'Beloved',col:'#006060',icon:'🌸',en:"Most Beloved & Respected Comrade of the Motherland, Cherished by All",ko:'조국의 가장 사랑받고 존경받는 동지',desc:"For the person who remembers every birthday, makes tea without being asked, and holds everything together with quiet competence.",pop:true},
+    {grade:'Beloved',col:'#006060',icon:'🌸',en:"Fatherly Leader, Tender-Hearted Protector of the People",ko:'자애로운 아버지 지도자이며 인민의 따뜻한 수호자',desc:"For the person who protects the people around them not through force but through care. Who notices when something is wrong before it is said. Who acts on it.",pop:false},
+    {grade:'Beloved',col:'#006060',icon:'🌸',en:"Dear Leader, Intimate and Familiar Comrade of All the People",ko:'친근하고 다정한 인민의 친애하는 지도자',desc:"For the person everyone in the group chat turns to. Not because they were appointed. Because they have earned it, consistently, over a long period of time.",pop:false},
+    {grade:'Beloved',col:'#006060',icon:'🌸',en:"Great Comrade Who Devoted Everything to the Happiness of the People",ko:'인민의 행복을 위해 모든 것을 다 바친 위대한 동지',desc:"For those who consistently put others first. Who sacrifice comfort, convenience, and recognition in order to make things better for the people around them.",pop:false},
+    {grade:'Beloved',col:'#006060',icon:'🌸',en:"Mother of Korea, Warmth of the Entire Nation",ko:'조선의 어머니이며 온 민족의 따뜻함',desc:"For the maternal figure — biological or otherwise — whose warmth is structural. Whose home is a place people go to feel better. Whose absence from a gathering is immediately felt.",pop:false},
+    {grade:'Beloved',col:'#006060',icon:'🌸',en:"Pillar of the Family, Unwavering Foundation of All That Is Good",ko:'가정의 기둥이며 모든 선한 것의 흔들리지 않는 토대',desc:"For the person who holds it all together. Who everyone takes for granted and who has never, not once, let anyone down.",pop:false},
+    {grade:'Beloved',col:'#006060',icon:'🌸',en:"Generous Soul Whose Kindness Knows No Boundary and No Season",ko:'경계도 계절도 없는 너그러운 영혼',desc:"For the person who gives. Who is first to offer, last to ask, and whose generosity has never been contingent on reciprocation.",pop:false},
+    {grade:'Beloved',col:'#006060',icon:'🌸',en:"Beloved Comrade of Infinite Patience and Extraordinary Forbearance",ko:'무한한 인내심과 놀라운 관용의 사랑받는 동지',desc:"For the person who deals with difficult people — or difficult circumstances — with a consistency of temper that is genuinely remarkable and has never once been formally acknowledged.",pop:false},
+    {grade:'Mountain',col:'#2a2a00',icon:'🏔️',en:"Peerless Commander Born of Paektu, Eternal Flame & Unconquered Colossus of History",ko:'백두에서 탄생한 무적의 사령관이며 민족의 영원한 불꽃',desc:"Our most distinguished title. For those who have endured things, overcome things, or persisted with remarkable good humour through circumstances that would have defeated a lesser person.",pop:false},
+    {grade:'Mountain',col:'#2a2a00',icon:'🏔️',en:"Ever-Victorious Mountain of Strength, Unconquered by Wind or Storm",ko:'바람과 폭풍에도 굴하지 않는 강인함의 산',desc:"For the person who has faced genuinely difficult circumstances and come through them intact. Not unchanged — but intact. The registry honours this category of endurance specifically.",pop:false},
+    {grade:'Mountain',col:'#2a2a00',icon:'🏔️',en:"Great Man Sent by Heaven, Legend of Our Times, Gift to the Nation",ko:'하늘이 낸 위인이며 시대의 전설',desc:"Reserved for those whose impact on the people around them is so significant that it is difficult to imagine how things would have gone without them.",pop:false},
+    {grade:'Mountain',col:'#2a2a00',icon:'🏔️',en:"Towering Pinnacle of Human Achievement, Colossus Spanning All Ages",ko:'인류적 성과의 우뚝 솟은 정상이며 모든 시대에 걸친 거인',desc:"For the person whose achievements are, by any reasonable measure, extraordinary. Who has done something — or many things — that warranted this specific level of recognition.",pop:false},
+    {grade:'Mountain',col:'#2a2a00',icon:'🏔️',en:"Supreme Being of Unlimited Capacity Produced by Heaven and Earth",ko:'하늘과 땅이 낳은 무한한 능력을 가진 최고의 존재',desc:"Our most ambitious designation. For those who appear, by the evidence of their record, to operate at a level that transcends ordinary human limitation. The committee awards this to whoever orders it.",pop:false},
+  ];
+
+  var GRADE_ORDER=['Supreme','Eternal','Heroic','Brilliant','Beloved','Mountain'];
+  var activeGrade='all', searchTerm='';
+
+  function slug(s){return s.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').substring(0,60);}
+
+  function render(){
+    var filtered=TITLES.filter(function(t){
+      var gOk=activeGrade==='all'||t.grade===activeGrade;
+      var s=searchTerm.toLowerCase();
+      var sOk=!s||t.en.toLowerCase().includes(s)||t.ko.includes(s)||t.desc.toLowerCase().includes(s)||t.grade.toLowerCase().includes(s);
+      return gOk&&sOk;
+    });
+    document.getElementById('count').textContent=filtered.length+' title'+(filtered.length!==1?'s':'')+' shown';
+    var container=document.getElementById('container');
+    var noResults=document.getElementById('no-results');
+    if(!filtered.length){container.innerHTML='';noResults.style.display='block';return;}
+    noResults.style.display='none';
+    var groups={};
+    filtered.forEach(function(t){if(!groups[t.grade])groups[t.grade]=[];groups[t.grade].push(t);});
+    container.innerHTML=GRADE_ORDER.filter(function(g){return groups[g];}).map(function(grade){
+      var ts=groups[grade];
+      return '<div class="grade-group">'+
+        '<div class="grade-head"><div class="grade-pip" style="background:'+ts[0].col+'"></div><div class="grade-name">'+grade+' Grade</div><div class="grade-cnt">'+ts.length+' TITLE'+(ts.length!==1?'S':'')+'</div></div>'+
+        ts.map(function(t){
+          return '<div class="tc" onclick="location.href=\'/title/'+slug(t.en)+'\'">'+
+            '<div class="tc-rank" style="background:'+t.col+'"><span class="tc-icon">'+t.icon+'</span><span class="tc-lbl">'+grade.toUpperCase()+'</span></div>'+
+            '<div class="tc-body">'+
+              '<div class="tc-en">'+t.en+'</div>'+
+              '<div class="tc-ko">'+t.ko+'</div>'+
+              '<div class="tc-desc">'+t.desc+'</div>'+
+              '<div class="tc-tags">'+(t.pop?'<span class="tr-tag popular">&#9733; Popular</span>':'')+'<span class="tr-tag">A4 &middot; 200gsm</span></div>'+
+            '</div>'+
+            '<div class="tc-cta"><span class="tc-price">$59</span><button class="tc-btn">ORDER &#9733;</button></div>'+
+          '</div>';
+        }).join('')+
+      '</div>';
+    }).join('');
+  }
+
+  document.addEventListener('DOMContentLoaded',function(){
+    document.querySelectorAll('.fbtn').forEach(function(b){
+      b.addEventListener('click',function(){
+        document.querySelectorAll('.fbtn').forEach(function(x){x.classList.remove('on');});
+        b.classList.add('on');
+        activeGrade=b.dataset.grade;
+        render();
+      });
+    });
+    document.getElementById('search').addEventListener('input',function(){searchTerm=this.value;render();});
+    render();
+  });
+  </script>
+</body>
+</html>
+
+  <script>
+  var TITLES=[
+    {grade:'Supreme',col:'#8B0000',icon:'🎖️',en:"Iron-Willed Commander of the Glorious People's Eternal Struggle",ko:'강철의 의지를 지닌 영광스러운 인민의 사령관',desc:'For the person who has, without formal appointment, been running things for years. They decide. Others follow. The certificate confirms what was already understood by all.',pop:true},
+    {grade:'Supreme',col:'#8B0000',icon:'🎖️',en:"Ever-Victorious Iron-Willed Brilliant Commander",ko:'백전백승의 강철의 의지를 지닌 탁월한 지휘관',desc:"For those whose record of winning is not merely impressive but structurally inevitable. They do not lose. The registry has reviewed their history and confirms this.",pop:false},
+    {grade:'Supreme',col:'#8B0000',icon:'🎖️',en:"Supreme Commander of the Revolutionary Armed Forces of the Fatherland",ko:'조국 혁명무력의 최고사령관',desc:"For the person others turn to in a crisis. Not because they asked. Simply because everyone knows, without discussion, that this is correct.",pop:false},
+    {grade:'Supreme',col:'#8B0000',icon:'🎖️',en:"Peerless Patriot, Invincible General and Legendary Hero of the Nation",ko:'당대의 애국자이며 무적의 영웅',desc:"For the person whose commitment to their people — family, team, community — has never wavered and has never been adequately acknowledged. Until now.",pop:false},
+    {grade:'Supreme',col:'#8B0000',icon:'🎖️',en:"Lodestar of the 21st Century & Invincible Strategist of Our Times",ko:'21세기의 길잡이별이며 무적의 전략가',desc:"For the person who consistently sees further ahead than everyone else and has been proven correct so many times that others have stopped questioning it.",pop:false},
+    {grade:'Supreme',col:'#8B0000',icon:'🎖️',en:"Great Leader of Our Party, State and People, Father of the Nation",ko:'우리 당과 국가와 인민의 위대한 수령',desc:"The most senior Supreme designation. For those who hold an entire household, organisation, or group together by sheer force of character and quiet authority.",pop:false},
+    {grade:'Eternal',col:'#004a00',icon:'🌟',en:"Eternal Sun of the Revolutionary Cause & Morning Star of Juche",ko:'혁명의 영원한 태양이며 주체의 새벽별',desc:"For the citizen whose presence measurably improves any room they enter. They have been a source of warmth and light for too long without formal documentation.",pop:false},
+    {grade:'Eternal',col:'#004a00',icon:'🌟',en:"Eternal President of the Republic & Sun of the Nation",ko:'공화국의 영원한 주석이며 민족의 태양',desc:"For the person who, long after their formal role has ended, continues to be the person everyone defers to. Their authority is not diminished by time. It is deepened by it.",pop:false},
+    {grade:'Eternal',col:'#004a00',icon:'🌟',en:"Shining Sun of Juche, Great Heart of the Revolution",ko:'주체의 빛나는 태양이며 혁명의 위대한 심장',desc:"For those who bring warmth not through grand gestures but through a steady, reliable presence that others have come to depend on without always articulating why.",pop:false},
+    {grade:'Eternal',col:'#004a00',icon:'🌟',en:"Eternal Flame of the Socialist Cause, Beacon of Hope for All People",ko:'사회주의의 영원한 불꽃이며 인민의 희망',desc:"For the relentlessly optimistic person who, when everything seems difficult, continues to believe and act as though things will be fine. They are usually right.",pop:false},
+    {grade:'Eternal',col:'#004a00',icon:'🌟',en:"Eternal General Secretary of the Party, Guiding Light for All Ages",ko:'당의 영원한 총비서이며 만대의 향도',desc:"For those whose influence outlasts any position they hold. The organisation changes around them; their direction does not.",pop:false},
+    {grade:'Eternal',col:'#004a00',icon:'🌟',en:"Ever-Shining Luminary, Inextinguishable Torch of the Nation",ko:'영원히 빛나는 발광체이며 민족의 꺼지지 않는 횃불',desc:"For those who continue to inspire long after any formal occasion to do so has passed. Their example is cited. They have no idea.",pop:false},
+    {grade:'Heroic',col:'#3a0070',icon:'⚡',en:"Great Marshal of the Invincible Armed Forces & Guardian of the Socialist Flame",ko:'무적의 조선인민군 대원수이며 사회주의 불꽃의 수호자',desc:"For the person who approaches every challenge with the steady composure of someone who has already won. They have not lost. Not once. The registry has checked.",pop:false},
+    {grade:'Heroic',col:'#3a0070',icon:'⚡',en:"Hero of the Republic, Defender of the Revolution",ko:'공화국 영웅이며 혁명의 수호자',desc:"Awarded to those who have defended something important — a team, a principle, a person — when it would have been much easier not to.",pop:true},
+    {grade:'Heroic',col:'#3a0070',icon:'⚡',en:"Heroic Fighter Who Has Devoted Body and Soul to the Country and People",ko:'조국과 인민을 위해 몸과 마음을 다 바친 영웅적 투사',desc:"For those who have given an unreasonable amount of themselves to something larger. Parents, carers, and anyone who runs a group chat qualify automatically.",pop:false},
+    {grade:'Heroic',col:'#3a0070',icon:'⚡',en:"Guardian of the Revolutionary Gains of the People, Valiant Protector",ko:'인민의 혁명적 성과를 지키는 용맹한 수호자',desc:"For the person who protects what matters — quietly, persistently, without needing recognition. The registry provides the recognition they have not sought.",pop:false},
+    {grade:'Heroic',col:'#3a0070',icon:'⚡',en:"Indomitable Revolutionary Fighter of Steely Will",ko:'강철의 의지를 지닌 불굴의 혁명투사',desc:"For the person who, when knocked back, gets up. Again. Without drama. Without complaint. With the quiet determination of someone who has decided they will prevail.",pop:false},
+    {grade:'Heroic',col:'#3a0070',icon:'⚡',en:"Legendary Combat Hero of the Glorious Armed Forces",ko:'영광스러운 조선인민군의 전설적인 전투영웅',desc:"For the person who has come through circumstances that required genuine fortitude and emerged intact. Not unchanged — but intact.",pop:false},
+    {grade:'Heroic',col:'#3a0070',icon:'⚡',en:"Outstanding Soldier of the Party, Unflinching in the Face of Adversity",ko:'역경 앞에서도 굽히지 않는 당의 탁월한 전사',desc:"For those who have faced institutional resistance, difficult conditions, or sustained opposition, and who have continued regardless. The committee admires this.",pop:false},
+    {grade:'Brilliant',col:'#664400',icon:'🧠',en:"Brilliant Genius of Humanity, Guiding Star of the 21st Century & Outstanding Thinker of Our Age",ko:'인류의 탁월한 천재이며 21세기의 길잡이 별',desc:"For the citizen who is, it must be acknowledged, more often correct than anyone is entirely comfortable admitting. They have waited long enough for this certificate.",pop:false},
+    {grade:'Brilliant',col:'#664400',icon:'🧠',en:"Outstanding Thinker of the Era, Pioneer of Original Thought",ko:'시대의 탁월한 사상가이며 독창적 사유의 선구자',desc:"For the person who approaches every problem in a way no one else thought of, arrives at a solution no one else found, and makes it look straightforward afterwards.",pop:false},
+    {grade:'Brilliant',col:'#664400',icon:'🧠',en:"Ideological Theoretician of Rare Depth & Architect of Revolutionary Thinking",ko:'깊은 사상이론가이며 혁명사상의 설계자',desc:"For the person who can explain complex things simply, who has a framework for everything, and whose opinions on the correct way to queue are equally well-developed.",pop:false},
+    {grade:'Brilliant',col:'#664400',icon:'🧠',en:"World-Renowned Scholar of Extraordinary Achievement",ko:'세계적으로 유명한 탁월한 학자',desc:"For the person who has mastered their field to the point where others come specifically to them. Their expertise is cited in conversations they are not party to.",pop:false},
+    {grade:'Brilliant',col:'#664400',icon:'🧠',en:"Gifted Strategist of Uncommon Foresight & Master of the Long Game",ko:'탁월한 통찰력을 가진 전략가이며 장기적 사고의 달인',desc:"For those who play chess while others play draughts. Their decisions seem unusual at the time and correct six months later. They accept the compliment without surprise.",pop:false},
+    {grade:'Brilliant',col:'#664400',icon:'🧠',en:"Great Teacher of the People, Propagator of Truth and Knowledge",ko:'인민의 위대한 스승이며 진리와 지식의 전파자',desc:"For those who teach — formally or otherwise. Who explain things with patience and without condescension. Who have changed how people think.",pop:false},
+    {grade:'Brilliant',col:'#664400',icon:'🧠',en:"Creative Genius of Art and Culture, Brilliant Star of Our Civilisation",ko:'예술과 문화의 창조적 천재이며 문명의 빛나는 별',desc:"For the creative person whose work has moved people, changed things, or simply been so good that it is regularly cited as evidence that genius exists.",pop:false},
+    {grade:'Beloved',col:'#006060',icon:'🌸',en:"Most Beloved & Respected Comrade of the Motherland, Cherished by All",ko:'조국의 가장 사랑받고 존경받는 동지',desc:"For the person who remembers every birthday, makes tea without being asked, and holds everything together with quiet competence.",pop:true},
+    {grade:'Beloved',col:'#006060',icon:'🌸',en:"Fatherly Leader, Tender-Hearted Protector of the People",ko:'자애로운 아버지 지도자이며 인민의 따뜻한 수호자',desc:"For the person who protects the people around them not through force but through care. Who notices when something is wrong before it is said. Who acts on it.",pop:false},
+    {grade:'Beloved',col:'#006060',icon:'🌸',en:"Dear Leader, Intimate and Familiar Comrade of All the People",ko:'친근하고 다정한 인민의 친애하는 지도자',desc:"For the person everyone in the group chat turns to. Not because they were appointed. Because they have earned it, consistently, over a long period of time.",pop:false},
+    {grade:'Beloved',col:'#006060',icon:'🌸',en:"Great Comrade Who Devoted Everything to the Happiness of the People",ko:'인민의 행복을 위해 모든 것을 다 바친 위대한 동지',desc:"For those who consistently put others first. Who sacrifice comfort, convenience, and recognition in order to make things better for the people around them.",pop:false},
+    {grade:'Beloved',col:'#006060',icon:'🌸',en:"Mother of Korea, Warmth of the Entire Nation",ko:'조선의 어머니이며 온 민족의 따뜻함',desc:"For the maternal figure whose warmth is structural. Whose home is a place people go to feel better. Whose absence from a gathering is immediately felt.",pop:false},
+    {grade:'Beloved',col:'#006060',icon:'🌸',en:"Pillar of the Family, Unwavering Foundation of All That Is Good",ko:'가정의 기둥이며 모든 선한 것의 흔들리지 않는 토대',desc:"For the person who holds it all together. Who everyone takes for granted and who has never, not once, let anyone down.",pop:false},
+    {grade:'Beloved',col:'#006060',icon:'🌸',en:"Generous Soul Whose Kindness Knows No Boundary and No Season",ko:'경계도 계절도 없는 너그러운 영혼',desc:"For the person who gives. Who is first to offer, last to ask, and whose generosity has never been contingent on reciprocation.",pop:false},
+    {grade:'Beloved',col:'#006060',icon:'🌸',en:"Beloved Comrade of Infinite Patience and Extraordinary Forbearance",ko:'무한한 인내심과 놀라운 관용의 사랑받는 동지',desc:"For the person who deals with difficult people — or difficult circumstances — with a consistency of temper that has never once been formally acknowledged.",pop:false},
+    {grade:'Mountain',col:'#2a2a00',icon:'🏔️',en:"Peerless Commander Born of Paektu, Eternal Flame & Unconquered Colossus of History",ko:'백두에서 탄생한 무적의 사령관이며 민족의 영원한 불꽃',desc:"Our most distinguished title. For those who have endured things, overcome things, or persisted with remarkable good humour through circumstances that would have defeated a lesser person.",pop:false},
+    {grade:'Mountain',col:'#2a2a00',icon:'🏔️',en:"Ever-Victorious Mountain of Strength, Unconquered by Wind or Storm",ko:'바람과 폭풍에도 굴하지 않는 강인함의 산',desc:"For the person who has faced genuinely difficult circumstances and come through them intact. Not unchanged — but intact. The registry honours this category of endurance specifically.",pop:false},
+    {grade:'Mountain',col:'#2a2a00',icon:'🏔️',en:"Great Man Sent by Heaven, Legend of Our Times, Gift to the Nation",ko:'하늘이 낸 위인이며 시대의 전설',desc:"Reserved for those whose impact on the people around them is so significant that it is difficult to imagine how things would have gone without them.",pop:false},
+    {grade:'Mountain',col:'#2a2a00',icon:'🏔️',en:"Towering Pinnacle of Human Achievement, Colossus Spanning All Ages",ko:'인류적 성과의 우뚝 솟은 정상이며 모든 시대에 걸친 거인',desc:"For the person whose achievements are, by any reasonable measure, extraordinary. Who has done something — or many things — that warranted this specific level of recognition.",pop:false},
+    {grade:'Mountain',col:'#2a2a00',icon:'🏔️',en:"Supreme Being of Unlimited Capacity Produced by Heaven and Earth",ko:'하늘과 땅이 낳은 무한한 능력을 가진 최고의 존재',desc:"Our most ambitious designation. For those who appear, by the evidence of their record, to operate at a level that transcends ordinary human limitation.",pop:false},
+  ];
+
+  var GRADE_ORDER=['Supreme','Eternal','Heroic','Brilliant','Beloved','Mountain'];
+  var activeGrade='all',searchTerm='';
+
+  function slug(s){return s.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').substring(0,60);}
+
+  function render(){
+    var filtered=TITLES.filter(function(t){
+      var gOk=activeGrade==='all'||t.grade===activeGrade;
+      var s=searchTerm.toLowerCase();
+      var sOk=!s||t.en.toLowerCase().includes(s)||t.ko.includes(s)||t.desc.toLowerCase().includes(s)||t.grade.toLowerCase().includes(s);
+      return gOk&&sOk;
+    });
+    document.getElementById('count').textContent=filtered.length+' title'+(filtered.length!==1?'s':'')+' shown';
+    var container=document.getElementById('container');
+    var noResults=document.getElementById('no-results');
+    if(!filtered.length){container.innerHTML='';noResults.style.display='block';return;}
+    noResults.style.display='none';
+    var groups={};
+    filtered.forEach(function(t){if(!groups[t.grade])groups[t.grade]=[];groups[t.grade].push(t);});
+    container.innerHTML=GRADE_ORDER.filter(function(g){return groups[g];}).map(function(grade){
+      var ts=groups[grade];
+      return '<div class="grade-group">'+
+        '<div class="grade-head"><div class="grade-pip" style="background:'+ts[0].col+'"></div><div class="grade-name">'+grade+' Grade</div><div class="grade-cnt">'+ts.length+' TITLE'+(ts.length!==1?'S':'')+'</div></div>'+
+        ts.map(function(t){
+          return '<div class="tc" onclick="location.href=\'/title/'+slug(t.en)+'\'">'+
+            '<div class="tc-rank" style="background:'+t.col+'"><span class="tc-icon">'+t.icon+'</span><span class="tc-lbl">'+grade.toUpperCase()+'</span></div>'+
+            '<div class="tc-body">'+
+              '<div class="tc-en">'+t.en+'</div>'+
+              '<div class="tc-ko">'+t.ko+'</div>'+
+              '<div class="tc-desc">'+t.desc+'</div>'+
+              '<div class="tc-tags">'+(t.pop?'<span class="tr-tag popular">&#9733; Popular</span>':'')+'<span class="tr-tag">A4 &middot; 200gsm</span></div>'+
+            '</div>'+
+            '<div class="tc-cta"><span class="tc-price">$59</span><button class="tc-btn">ORDER &#9733;</button></div>'+
+          '</div>';
+        }).join('')+
+      '</div>';
+    }).join('');
+  }
+
+  document.addEventListener('DOMContentLoaded',function(){
+    document.querySelectorAll('.fbtn').forEach(function(b){
+      b.addEventListener('click',function(){
+        document.querySelectorAll('.fbtn').forEach(function(x){x.classList.remove('on');});
+        b.classList.add('on');
+        activeGrade=b.dataset.grade;
+        render();
+      });
+    });
+    document.getElementById('search').addEventListener('input',function(){searchTerm=this.value;render();});
+    render();
+  });
+  </script>
+</body>
+</html>

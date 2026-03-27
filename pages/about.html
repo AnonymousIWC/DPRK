@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Our Authority — DPRK Title Registry</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=VT323&family=IM+Fell+English:ital@0;1&family=Cinzel:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Noto+Serif+KR:wght@400;700&family=Great+Vibes&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{--navy:#000080;--red:#cc0000;--gold:#ccaa00;--gold2:#ffdd00;--paper:#f5ecd7;--cream:#fdf8ee;--ink:#1a0800;--grey:#c0c0c0;--dkgrey:#808080;--ltgrey:#e8e8e8;--cr:#8B1A1A;--cg:#C9A84C;--cn:#00205B;}
+html,body{width:100%;font-family:Georgia,'Times New Roman',serif;background:#fff;color:#000;font-size:16px;}
+
+/* CHROME */
+.titlebar{background:var(--navy);color:#fff;padding:4px 20px;display:flex;justify-content:space-between;align-items:center;font-family:monospace;font-size:12px;font-weight:700;}
+.mq{background:var(--red);overflow:hidden;padding:4px 0;border-bottom:2px solid #800000;}
+.mq-inner{display:inline-block;white-space:nowrap;font-family:'VT323',monospace;font-size:18px;color:var(--gold2);animation:sc 38s linear infinite;padding-left:100%;}
+@keyframes sc{0%{transform:translateX(0)}100%{transform:translateX(-100%)}}
+.site-header{background:#fff;border-bottom:3px solid var(--red);}
+.header-flag{display:flex;height:10px;}
+.hf1,.hf5{background:#024fa2;flex:1;}.hf2,.hf4{background:#fff;width:3px;}.hf3{background:#cc0001;flex:2;}
+.header-body{display:flex;align-items:center;padding:10px 40px;gap:16px;max-width:1400px;margin:0 auto;}
+.hc-main{font-family:'VT323',monospace;font-size:36px;color:var(--navy);line-height:1;display:block;}
+.hc-sub{font-size:9px;font-weight:700;color:var(--red);display:block;margin-top:2px;letter-spacing:1px;font-family:monospace;}
+.navbar{background:var(--navy);border-bottom:2px solid #000040;}
+.navbar-inner{display:flex;flex-wrap:wrap;max-width:1400px;margin:0 auto;}
+.navbar a{color:var(--gold2);font-size:11px;font-weight:700;padding:7px 16px;text-decoration:none;border-right:1px solid #0000aa;cursor:pointer;white-space:nowrap;font-family:monospace;}
+.navbar a:hover,.navbar a.active{background:#0000cc;color:#fff;}
+.bc{background:var(--ltgrey);border-bottom:1px solid var(--dkgrey);padding:5px 40px;font-family:monospace;font-size:11px;color:var(--dkgrey);}
+.bc a{color:var(--navy);cursor:pointer;text-decoration:underline;}
+
+/* HERO */
+.hero{background:var(--cn);padding:64px 40px;border-bottom:4px solid var(--red);position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:repeating-conic-gradient(from 0deg at 50% 130%,rgba(255,221,0,.018) 0deg 4deg,transparent 4deg 14deg);pointer-events:none;}
+.hi{max-width:1300px;margin:0 auto;position:relative;z-index:1;}
+.h-kick{font-family:monospace;font-size:11px;font-weight:700;letter-spacing:4px;color:var(--cr);text-transform:uppercase;display:block;margin-bottom:16px;border-left:3px solid var(--cr);padding-left:12px;}
+.h-title{font-family:'VT323',monospace;font-size:72px;color:var(--gold2);line-height:1;margin-bottom:16px;text-shadow:2px 2px 0 rgba(0,0,0,.4);}
+.h-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:21px;color:rgba(255,255,255,.6);line-height:1.6;max-width:800px;}
+
+/* SECTIONS */
+.sec{padding:64px 40px;border-bottom:2px solid var(--ltgrey);}
+.sec-dk{background:#0d0d1f;}
+.sec-cr{background:var(--cream);}
+.sec-nv{background:var(--cn);}
+.si{max-width:1300px;margin:0 auto;}
+.sin{max-width:900px;margin:0 auto;}
+.slabel{font-family:monospace;font-size:11px;font-weight:700;letter-spacing:4px;color:var(--cr);text-transform:uppercase;display:block;margin-bottom:16px;border-left:3px solid var(--cr);padding-left:12px;}
+.stitle{font-family:'VT323',monospace;font-size:48px;color:var(--cn);line-height:1;margin-bottom:24px;}
+.stitle-lt{color:var(--gold2);}
+
+.body-copy{font-size:17px;line-height:2;color:#2a1a0a;}
+.body-copy p{margin-bottom:20px;}
+.body-copy em{font-style:italic;color:var(--cr);}
+.blt{color:rgba(255,255,255,.72);}
+.blt p{margin-bottom:20px;}
+.blt strong{color:#fff;}
+
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;}
+
+/* MANDATE DOC */
+.mandate{background:var(--paper);border:3px solid var(--cg);max-width:820px;margin:0 auto;position:relative;}
+.mandate::before{content:'';position:absolute;inset:8px;border:1px solid rgba(201,168,76,.35);pointer-events:none;z-index:1;}
+.mdt{background:var(--cn);padding:12px 32px;border-bottom:3px solid var(--cr);display:flex;justify-content:space-between;align-items:center;}
+.mdt-l{font-family:'Noto Serif KR',serif;font-size:10px;color:rgba(255,255,255,.6);letter-spacing:2px;}
+.mdt-r{font-family:'Cinzel',serif;font-size:11px;font-weight:700;color:#fff;letter-spacing:3px;}
+.mdrb{background:var(--cr);padding:6px 32px;text-align:center;font-family:'Cinzel',serif;font-size:9px;font-weight:700;letter-spacing:5px;color:#F5D87A;border-bottom:1px solid var(--cg);}
+.mdb{padding:36px 48px;position:relative;z-index:2;color:var(--ink);}
+.mder{display:flex;align-items:center;gap:20px;margin-bottom:20px;}
+.mded{flex:1;height:1px;background:linear-gradient(to right,transparent,var(--cg) 30%,var(--cg) 70%,transparent);}
+.mdt2{font-family:'Cinzel',serif;font-size:13px;font-weight:700;letter-spacing:4px;text-align:center;color:var(--cr);text-transform:uppercase;margin-bottom:6px;}
+.mdsub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:14px;text-align:center;color:#5a4030;margin-bottom:20px;}
+.mdr{height:1px;background:linear-gradient(to right,transparent,var(--cr) 20%,var(--cr) 80%,transparent);margin-bottom:6px;}
+.mdr2{height:.5px;background:linear-gradient(to right,transparent,var(--cg) 20%,var(--cg) 80%,transparent);margin-bottom:20px;}
+.mdbody{font-family:'Cormorant Garamond',serif;font-size:15px;color:var(--ink);line-height:1.9;}
+.mdbody p{margin-bottom:14px;}
+.mdsr{display:grid;grid-template-columns:80px 1fr 80px;align-items:flex-end;gap:8px;margin-top:24px;padding-top:16px;border-top:1px solid rgba(201,168,76,.4);}
+.mdsl{text-align:center;}
+.mdslc{width:56px;height:56px;border-radius:50%;border:1.5px solid var(--cr);display:flex;align-items:center;justify-content:center;margin:0 auto 4px;}
+.mdsll{font-family:'Cinzel',serif;font-size:7px;letter-spacing:1px;color:var(--cr);text-align:center;text-transform:uppercase;}
+.mdsig{text-align:center;}
+.mdsigname{font-family:'Great Vibes',cursive;font-size:38px;color:var(--cr);}
+.mdsigl{width:180px;height:1px;background:var(--cr);margin:4px auto;}
+.mdsigko{font-family:'Noto Serif KR',serif;font-size:10px;color:var(--cr);display:block;text-align:center;letter-spacing:2px;margin-top:4px;}
+.mdsiglbl{font-family:'Cinzel',serif;font-size:8px;color:#888;display:block;text-align:center;letter-spacing:2px;text-transform:uppercase;}
+.mdreg{font-family:'Cormorant Garamond',serif;font-size:9px;color:#b0a090;text-align:center;letter-spacing:2px;margin-top:12px;}
+.mdbot{background:var(--cn);padding:8px 32px;border-top:2px solid var(--cr);display:flex;justify-content:space-between;}
+.mdbl{font-family:'Noto Serif KR',serif;font-size:9px;color:rgba(255,255,255,.4);}
+.mdbc{font-family:'Cinzel',serif;font-size:8px;font-weight:700;color:var(--cg);letter-spacing:3px;}
+
+/* PULL QUOTE */
+.pq{border-left:4px solid var(--cr);padding:20px 28px;margin:32px 0;background:rgba(139,26,26,.04);}
+.pq p{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:22px;color:var(--cr);line-height:1.7;margin-bottom:10px;}
+.pq cite{font-family:monospace;font-size:11px;color:var(--dkgrey);letter-spacing:2px;font-style:normal;}
+
+/* TIMELINE */
+.tl{display:flex;flex-direction:column;}
+.tli{display:grid;grid-template-columns:130px 2px 1fr;gap:0 24px;padding-bottom:32px;}
+.tli:last-child{padding-bottom:0;}
+.tldate{font-family:'VT323',monospace;font-size:20px;color:var(--cn);text-align:right;padding-top:4px;line-height:1.2;}
+.tldatesub{display:block;font-family:monospace;font-size:10px;color:var(--dkgrey);letter-spacing:1px;margin-top:2px;}
+.tlline{background:var(--cr);position:relative;flex-shrink:0;}
+.tlline::before{content:'';position:absolute;top:8px;left:50%;transform:translateX(-50%);width:10px;height:10px;background:var(--cr);border-radius:50%;border:2px solid var(--gold2);}
+.tlhead{font-family:'Cinzel',serif;font-size:16px;font-weight:700;color:var(--navy);margin-bottom:6px;line-height:1.3;}
+.tlbody{font-size:14px;color:#444;line-height:1.8;}
+
+/* PROFILE */
+.profile{background:var(--paper);border:2px solid var(--cg);position:relative;}
+.profile::before{content:'';position:absolute;inset:6px;border:.5px solid rgba(201,168,76,.3);pointer-events:none;z-index:1;}
+.ptop{background:var(--cn);padding:8px 16px;border-bottom:2px solid var(--cr);}
+.ptop-text{font-family:'Cinzel',serif;font-size:9px;font-weight:700;color:var(--gold2);letter-spacing:3px;text-transform:uppercase;}
+.pbody{padding:20px;position:relative;z-index:2;}
+.portrait{width:100%;aspect-ratio:4/5;background:linear-gradient(160deg,#1a1408,#2a1a08 50%,#1a0a00);border:1px solid rgba(201,168,76,.3);margin-bottom:14px;position:relative;overflow:hidden;}
+.pstamp{position:absolute;bottom:12px;right:12px;border:2px solid var(--cr);padding:4px 8px;transform:rotate(-6deg);}
+.pstamp-t{font-family:monospace;font-size:9px;font-weight:700;color:var(--cr);letter-spacing:2px;}
+.pname{font-family:'Great Vibes',cursive;font-size:30px;color:var(--cn);text-align:center;border-bottom:1px solid var(--cg);padding-bottom:7px;margin-bottom:7px;}
+.ptitle-text{font-family:'Cinzel',serif;font-size:10px;font-weight:700;color:var(--cr);letter-spacing:2px;text-align:center;text-transform:uppercase;margin-bottom:14px;}
+.pfact{display:flex;justify-content:space-between;align-items:baseline;padding:5px 0;border-bottom:.5px solid rgba(201,168,76,.2);font-size:13px;}
+.pfl{color:#888;font-family:monospace;font-size:10px;letter-spacing:1px;}
+.pfv{color:var(--ink);font-family:'Cormorant Garamond',serif;font-style:italic;font-size:14px;}
+
+/* COLONY */
+.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:0;border:2px solid;border-color:#fff var(--dkgrey) var(--dkgrey) #fff;}
+.ccell{padding:22px 26px;border-right:1px solid var(--dkgrey);border-bottom:1px solid var(--dkgrey);}
+.ccell:nth-child(2n){border-right:none;}
+.ccell:nth-last-child(-n+2){border-bottom:none;}
+.cicon{font-size:26px;display:block;margin-bottom:10px;}
+.chead{font-family:'VT323',monospace;font-size:22px;color:var(--navy);display:block;margin-bottom:7px;}
+.cbody{font-size:14px;color:#444;line-height:1.8;}
+
+/* COMMITTEE */
+.cmem{background:var(--grey);border:2px solid;border-color:#fff var(--dkgrey) var(--dkgrey) #fff;padding:16px;}
+.cmrole{font-family:monospace;font-size:9px;font-weight:700;letter-spacing:2px;color:var(--dkgrey);text-transform:uppercase;display:block;margin-bottom:5px;}
+.cmname{font-family:'IM Fell English',serif;font-size:18px;font-weight:700;color:var(--navy);display:block;margin-bottom:5px;}
+.cmdetail{font-size:13px;color:#555;line-height:1.65;font-style:italic;}
+.cmstatus{display:inline-block;background:var(--navy);color:var(--gold2);font-family:monospace;font-size:9px;font-weight:700;padding:2px 6px;letter-spacing:1px;margin-top:8px;}
+
+/* MAP */
+.mapwrap{background:#0d1a0d;border:2px solid rgba(0,200,0,.2);position:relative;overflow:hidden;margin-bottom:20px;}
+.mapgrid{position:absolute;inset:0;background-image:linear-gradient(rgba(0,200,0,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(0,200,0,.05) 1px,transparent 1px);background-size:40px 40px;}
+.mappin{position:absolute;bottom:36%;left:58%;}
+.mapdot{width:14px;height:14px;background:var(--red);border:2px solid var(--gold2);border-radius:50%;box-shadow:0 0 0 4px rgba(204,0,0,.3);animation:mp 2s ease-in-out infinite;}
+@keyframes mp{0%,100%{box-shadow:0 0 0 4px rgba(204,0,0,.3)}50%{box-shadow:0 0 0 10px rgba(204,0,0,.1)}}
+.maplabel{position:absolute;bottom:calc(36% + 18px);left:calc(58% - 65px);background:rgba(0,0,0,.8);border:1px solid var(--gold2);padding:4px 8px;white-space:nowrap;}
+.maplabel-t{font-family:monospace;font-size:10px;color:var(--gold2);letter-spacing:1px;}
+.mapcoords{position:absolute;bottom:8px;right:12px;font-family:monospace;font-size:10px;color:rgba(0,200,0,.4);letter-spacing:1px;}
+.maptitle{position:absolute;top:12px;left:12px;font-family:'VT323',monospace;font-size:18px;color:rgba(0,200,0,.5);letter-spacing:2px;}
+
+/* DECREE */
+.decree{border:2px solid var(--cg);padding:28px 32px;background:rgba(201,168,76,.04);position:relative;margin-top:28px;}
+.decree::before{content:'';position:absolute;inset:6px;border:.5px solid rgba(201,168,76,.25);}
+.decree-in{position:relative;z-index:1;}
+.decree-head{font-family:'Cinzel',serif;font-size:11px;font-weight:700;letter-spacing:4px;color:var(--cg);text-transform:uppercase;text-align:center;margin-bottom:14px;}
+.decree-rule{height:1px;background:linear-gradient(to right,transparent,var(--cg),transparent);margin-bottom:14px;}
+.decree-text{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:18px;color:rgba(255,255,255,.75);line-height:1.8;text-align:center;}
+.decree-sig{font-family:'Great Vibes',cursive;font-size:28px;color:var(--cg);text-align:center;margin-top:14px;padding-top:10px;border-top:1px solid rgba(201,168,76,.3);}
+.decree-lbl{font-family:'Cinzel',serif;font-size:9px;letter-spacing:3px;color:rgba(201,168,76,.5);text-align:center;display:block;margin-top:4px;text-transform:uppercase;}
+
+.site-footer{background:var(--grey);border-top:3px ridge var(--dkgrey);padding:12px 40px;text-align:center;font-family:monospace;}
+.fbadge{display:inline-block;background:var(--grey);border:2px solid;border-color:#fff var(--dkgrey) var(--dkgrey) #fff;padding:3px 8px;font-size:9px;font-weight:700;letter-spacing:1px;margin:0 2px 6px;}
+</style>
+</head>
+<body>
+
+<div class="titlebar">
+  <span>&#127760; DPRK Title Registry &#8212; About Our Authority</span>
+  <div style="display:flex;gap:2px;">
+    <span style="width:18px;height:16px;background:var(--grey);border:1px solid;border-color:#fff #000 #000 #fff;font-size:9px;display:flex;align-items:center;justify-content:center;font-weight:700;">_</span>
+    <span style="width:18px;height:16px;background:var(--grey);border:1px solid;border-color:#fff #000 #000 #fff;font-size:9px;display:flex;align-items:center;justify-content:center;font-weight:700;">&#9633;</span>
+    <span style="width:18px;height:16px;background:var(--grey);border:1px solid;border-color:#fff #000 #000 #fff;font-size:9px;display:flex;align-items:center;justify-content:center;font-weight:700;">&#10005;</span>
+  </div>
+</div>
+<div class="mq"><span class="mq-inner">&#9733; THE REGISTRY OPERATES UNDER DIRECT MANDATE OF THE WORKERS' PARTY OF KOREA &#9733; ALL TITLES ARE PERMANENT AND NON-NEGOTIABLE &#9733; CONDITIONS AT THE DESERT COLONY REMAIN EXCELLENT &#9733; THERE HAVE BEEN NO COMPLAINTS &#9733; THIS IS CORRECT &#9733;</span></div>
+<div class="site-header">
+  <div class="header-flag"><div class="hf1"></div><div class="hf2"></div><div class="hf3"></div><div class="hf4"></div><div class="hf5"></div></div>
+  <div class="header-body">
+    <svg width="52" height="52" viewBox="0 0 100 100"><circle cx="50" cy="50" r="47" fill="#6B0000" stroke="#ccaa00" stroke-width="2.5"/><polygon points="50,13 62,42 93,42 70,59 78,88 50,71 22,88 30,59 7,42 38,42" fill="#ccaa00"/><polygon points="50,27 58,46 78,46 63,57 68,76 50,65 32,76 37,57 22,46 42,46" fill="#6B0000" opacity=".6"/></svg>
+    <div style="flex:1;text-align:center;">
+      <span style="font-family:'Noto Serif KR',serif;font-size:12px;color:var(--red);letter-spacing:2px;display:block;">&#51312;&#49440;&#48124;&#51452;&#51452;&#51032;&#51064;&#48124;&#44277;&#54868;&#44397; &#47749;&#50696; &#CE6D&#D638; &#46321;&#47197;&#48512;</span>
+      <span class="hc-main">DPRK TITLE REGISTRY</span>
+      <span class="hc-sub">&#9733; OFFICIAL DISTRIBUTOR OF NORTH KOREAN HONORARY TITLES &#8212; EST. JUCHE 113 &#9733;</span>
+    </div>
+    <div style="text-align:center;flex-shrink:0;font-family:monospace;font-size:12px;">
+      <div style="background:#000;color:#00ff00;font-family:'VT323',monospace;font-size:24px;letter-spacing:3px;padding:3px 8px;border:2px inset var(--dkgrey);display:block;margin-bottom:2px;text-shadow:0 0 4px #00ff00;">0051337</div>
+      <div style="font-weight:700;">LOYAL SUBJECTS</div>
+    </div>
+  </div>
+</div>
+<div class="navbar"><div class="navbar-inner">
+  <a href="01_home_page.html">[ HOME ]</a>
+  <a href="02_product_page.html">[ ALL TITLES ]</a>
+  <a>[ FIND YOUR TITLE ]</a>
+  <a>[ GIFT A TITLE ]</a>
+  <a>[ THE REGISTRY ]</a>
+  <a class="active">[ ABOUT OUR AUTHORITY ]</a>
+</div></div>
+<div class="bc"><a href="01_home_page.html">Home</a> &#8250; About the Registry</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hi">
+    <span class="h-kick">Official Registry Document &#8212; Ref: DPRK-STR-ABOUT-113</span>
+    <div class="h-title">About the<br>Registry.</div>
+    <div class="h-sub">The Democratic People's Republic of Korea Title Registry is the world's only officially sanctioned distributor of North Korean honorary titles to the global civilian population. This page explains our mandate, our history, our leadership, and our operational facilities. All information contained herein is correct. It has always been correct.</div>
+    <div style="display:flex;align-items:center;gap:16px;margin-top:28px;">
+      <div style="flex:1;height:1px;background:linear-gradient(to right,rgba(201,168,76,.4),transparent);"></div>
+      <div style="font-family:'Cinzel',serif;font-size:11px;color:rgba(201,168,76,.5);letter-spacing:4px;">&#9733; EST. JUCHE 113 &#9733; DESERT COLONY, AUSTRALIA &#9733;</div>
+      <div style="flex:1;height:1px;background:linear-gradient(to left,rgba(201,168,76,.4),transparent);"></div>
+    </div>
+  </div>
+</div>
+
+<!-- I. FOUNDING MANDATE -->
+<div class="sec sec-cr">
+  <div class="si">
+    <span class="slabel">Section I &#8212; Founding Mandate</span>
+    <div class="mandate">
+      <div class="mdt">
+        <span class="mdt-l">&#51312;&#49440;&#48124;&#51452;&#51452;&#51032;&#51064;&#48124;&#44277;&#54868;&#44397; &#8212; &#51312;&#49440;&#47196;&#46041;&#45813;</span>
+        <span class="mdt-r">WORKERS' PARTY OF KOREA</span>
+      </div>
+      <div class="mdrb">&#9733; OFFICIAL FOUNDING MANDATE OF THE DPRK HONORARY TITLE REGISTRY &#9733;</div>
+      <div class="mdb">
+        <div class="mder">
+          <div class="mded"></div>
+          <svg width="80" height="80" viewBox="0 0 200 200">
+            <g opacity=".9">
+              <g transform="translate(100,100)">
+                <ellipse cx="-62" cy="0" rx="5" ry="18" fill="#C9A84C" transform="rotate(-60 -62 0)"/>
+                <ellipse cx="-54" cy="-8" rx="4" ry="14" fill="#C9A84C" transform="rotate(-45 -54 -8)"/>
+                <ellipse cx="-72" cy="8" rx="4" ry="14" fill="#C9A84C" transform="rotate(-75 -72 8)"/>
+                <ellipse cx="62" cy="0" rx="5" ry="18" fill="#C9A84C" transform="rotate(60 62 0)"/>
+                <ellipse cx="54" cy="-8" rx="4" ry="14" fill="#C9A84C" transform="rotate(45 54 -8)"/>
+                <ellipse cx="72" cy="8" rx="4" ry="14" fill="#C9A84C" transform="rotate(75 72 8)"/>
+              </g>
+              <polygon points="100,60 60,130 140,130" fill="#00205B" opacity=".8"/>
+              <polygon points="100,70 75,115 125,115" fill="#00205B"/>
+              <rect x="78" y="112" width="44" height="22" fill="#1a3a6b"/>
+              <polygon points="100,28 106,44 124,44 110,54 116,70 100,60 84,70 90,54 76,44 94,44" fill="#8B1A1A"/>
+            </g>
+            <circle cx="100" cy="100" r="92" fill="none" stroke="#C9A84C" stroke-width="2"/>
+            <circle cx="100" cy="100" r="85" fill="none" stroke="#C9A84C" stroke-width=".7" stroke-dasharray="4 4"/>
+          </svg>
+          <div class="mded"></div>
+        </div>
+        <div class="mdt2">By the Authority of the Workers' Party of Korea</div>
+        <div class="mdsub">Issued from Pyongyang, Democratic People's Republic of Korea, in the Year Juche 113</div>
+        <div class="mdr"></div>
+        <div class="mdr2"></div>
+        <div class="mdbody">
+          <p>The Central Committee of the Workers' Party of Korea, having deliberated at length upon the matter of honorary titles and their distribution to the global civilian population, hereby establishes the <strong>Democratic People's Republic of Korea Honorary Title Registry</strong> as an official bureau of the state.</p>
+          <p>The registry is directed to administer, bestow, and maintain a permanent record of all honorary titles issued to civilian recipients worldwide. Each title shall be drawn from the authentic honorific tradition of the Democratic People's Republic of Korea, rendered on official document stock, sealed with the authority of the registry, and dispatched to the recipient with all appropriate ceremony.</p>
+          <p>The registry shall operate from a remote bureau in the territory of Australia, at coordinates 29&#176;S 131&#176;E, known hereafter as the <strong>Desert Colony</strong>. This location has been selected for its operational security, its excellent conditions, and its abundant potato supply. The bureau shall function under the direction of the Supreme Registrar, who shall sign each certificate personally and bear full responsibility for its correctness.</p>
+          <p>All titles issued under this mandate are <strong>permanent</strong>. They cannot be rescinded, disputed, or subjected to review. The registry considers this its finest policy.</p>
+        </div>
+        <div class="mdsr">
+          <div class="mdsl">
+            <div class="mdslc">
+              <svg width="44" height="44" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="46" fill="none" stroke="#8B1A1A" stroke-width="2"/>
+                <polygon points="50,14 62,42 93,42 70,59 78,88 50,71 22,88 30,59 7,42 38,42" fill="#8B1A1A"/>
+                <text x="50" y="91" text-anchor="middle" font-size="9" fill="#8B1A1A" font-family="serif" letter-spacing="1">REGISTRY</text>
+              </svg>
+            </div>
+            <div class="mdsll">Official Seal</div>
+          </div>
+          <div class="mdsig">
+            <div class="mdsigname">Kim Jong-fun</div>
+            <div class="mdsigl"></div>
+            <span class="mdsigko">&#44608;&#51221;&#54380; &#8212; Supreme Registrar</span>
+            <span class="mdsiglbl">Director, DPRK Title Registry &#183; Desert Colony, Australia</span>
+          </div>
+          <div class="mdsl">
+            <div class="mdslc">
+              <svg width="44" height="44" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="46" fill="none" stroke="#8B1A1A" stroke-width="2"/>
+                <text x="50" y="35" text-anchor="middle" font-size="10" fill="#8B1A1A" font-family="serif" letter-spacing="1">JUCHE</text>
+                <text x="50" y="54" text-anchor="middle" font-size="20" fill="#8B1A1A" font-family="serif">113</text>
+                <text x="50" y="68" text-anchor="middle" font-size="8" fill="#C9A84C" letter-spacing="2" font-family="serif">&#9733; &#9733; &#9733;</text>
+              </svg>
+            </div>
+            <div class="mdsll">Juche 113</div>
+          </div>
+        </div>
+        <div class="mdreg">Document Ref: WPK-STR-MANDATE-113-001 &#183; Classified: Open Distribution &#183; Registry Copy</div>
+      </div>
+      <div class="mdbot">
+        <span class="mdbl">&#51312;&#49440;&#47196;&#46041;&#45813;</span>
+        <span class="mdbc">&#9733; Workers' Party of Korea &#9733;</span>
+        <span class="mdbl">Juche 113</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- II. HISTORY -->
+<div class="sec">
+  <div class="si">
+    <span class="slabel">Section II &#8212; Official History</span>
+    <div class="two-col">
+      <div>
+        <div class="stitle">A History of<br>the Registry.</div>
+        <div class="body-copy">
+          <p>The Democratic People's Republic of Korea has, since its founding in Juche 37, maintained the most sophisticated system of honorary titles in recorded human history. These titles are not honorifics in the Western tradition &#8212; vague, interchangeable, easily acquired. They are <em>declarations</em>. Each one is the product of careful deliberation, precise language, and the full authority of the state.</p>
+          <p>For decades, these titles were the exclusive property of the supreme leadership. The Eternal President. The Dear Leader. The Great Marshal. These designations were printed on official documents, used in all formal address, and broadcast across the Republic daily. They were not names. They were truths.</p>
+          <p>In the spring of Juche 113, the Central Committee convened a special session. The matter before them: the global population had, in the committee's assessment, gone unrecognised for too long. Remarkable people existed in every country, every profession, every household. They were running things. Improving rooms. Holding families together. Being relentlessly correct about the dishwasher. They had no titles.</p>
+          <p><strong>This was corrected.</strong></p>
+        </div>
+      </div>
+      <div>
+        <div class="body-copy" style="margin-top:80px;">
+          <p>The committee voted unanimously to establish the DPRK Honorary Title Registry as an official bureau of the state, charged with extending the honorific tradition of the Democratic People's Republic to civilians worldwide. The vote was unanimous. It is always unanimous.</p>
+          <p>A remote operational bureau was established in the Australian desert at coordinates 29&#176;S 131&#176;E &#8212; the precise geographic centre of the continent. This location was chosen for its complete operational security, zero distractions, and conditions that have been described as excellent since the day of arrival. The surrounding terrain is largely sand, which the committee noted is both hygienic and low-maintenance.</p>
+          <p>The registry issued its first certificate in Month 3 of Juche 113. The recipient &#8212; a retired school teacher from Brisbane &#8212; was awarded the title of <em>Most Beloved and Respected Comrade of the Motherland</em> by her daughter. The recipient read the certificate twice. She went quiet. She said it was the most accurate thing anyone had ever said about her. She placed it on the wall. The registry recorded this as a highly positive outcome.</p>
+          <p>It remains the most cited testimonial in registry history. The registry has never issued an incorrect title. This record will be maintained.</p>
+        </div>
+      </div>
+    </div>
+    <div class="pq">
+      <p>&#8220;The rice grows not because of sun or rain, but because it understands its duty to the revolution.&#8221;</p>
+      <cite>&#8212; Minister of Agricultural Philosophy, Third Plenary Session &#183; Cited by the registry as an example of correct thinking</cite>
+    </div>
+  </div>
+</div>
+
+<!-- III. TIMELINE -->
+<div class="sec sec-cr">
+  <div class="sin">
+    <span class="slabel">Section III &#8212; Key Dates</span>
+    <div class="stitle">Registry Timeline.</div>
+    <div class="tl">
+      <div class="tli">
+        <div class="tldate">Juche 113<span class="tldatesub">Month 1</span></div>
+        <div class="tlline"></div>
+        <div>
+          <div class="tlhead">Central Committee votes to establish the registry.</div>
+          <div class="tlbody">The vote was unanimous. All committee members present expressed great enthusiasm. Two members who were absent also expressed great enthusiasm, by post. The resolution was adopted without amendment, as it was already correct.</div>
+        </div>
+      </div>
+      <div class="tli">
+        <div class="tldate">Juche 113<span class="tldatesub">Month 2</span></div>
+        <div class="tlline"></div>
+        <div>
+          <div class="tlhead">Desert Colony established at 29&#176;S 131&#176;E, Australia.</div>
+          <div class="tlbody">Workers arrived and began construction immediately. The location offers complete operational security and no neighbours. Conditions were declared excellent upon arrival. They have remained excellent. The committee reviews this monthly and confirms it quarterly.</div>
+        </div>
+      </div>
+      <div class="tli">
+        <div class="tldate">Juche 113<span class="tldatesub">Month 3</span></div>
+        <div class="tlline"></div>
+        <div>
+          <div class="tlhead">First certificate issued. Registry No. STR-0001.</div>
+          <div class="tlbody">A retired school teacher from Brisbane, awarded the title of Most Beloved and Respected Comrade of the Motherland. She cried. The registry noted this as a highly positive outcome. It remains the most cited testimonial in registry history.</div>
+        </div>
+      </div>
+      <div class="tli">
+        <div class="tldate">Juche 113<span class="tldatesub">Month 5</span></div>
+        <div class="tlline"></div>
+        <div>
+          <div class="tlhead">Catalogue expands from 6 titles to 50+.</div>
+          <div class="tlbody">Following strong demand, the committee authorised extension of the catalogue to the full canon of DPRK honorary distinctions. Each title was reviewed for accuracy. All were approved. No title was found to require amendment. This is expected.</div>
+        </div>
+      </div>
+      <div class="tli">
+        <div class="tldate">Juche 113<span class="tldatesub">Month 7</span></div>
+        <div class="tlline"></div>
+        <div>
+          <div class="tlhead">Registry surpasses 300 certificates. Zero errors recorded.</div>
+          <div class="tlbody">The Bureau of Recipient Happiness conducted its second annual survey. Satisfaction reached 98.7%. The remaining 1.3% who would not recommend have been noted and placed under gentle observation. Their feedback is under review. It is going well.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- IV. SUPREME REGISTRAR -->
+<div class="sec sec-dk">
+  <div class="si">
+    <span class="slabel" style="color:var(--cr);">Section IV &#8212; Supreme Registrar</span>
+    <div class="two-col" style="gap:64px;">
+      <div>
+        <div class="stitle stitle-lt">Kim Jong-fun.<br>Supreme Registrar.</div>
+        <div class="body-copy blt">
+          <p>Kim Jong-fun was born in Juche 82 at an undisclosed location in the Democratic People's Republic of Korea under circumstances that were, by all accounts, remarkable. Contemporary reports describe a double rainbow. The temperature improved measurably. Several birds arranged themselves in a configuration that senior officials described as &#8220;meaningful.&#8221;</p>
+          <p>He demonstrated from an early age an exceptional aptitude for ceremony, documentation, and the correct application of wax seals. By the age of fourteen he had memorised the full canon of DPRK honorary titles. By sixteen he could produce a calligraphic signature in a single unbroken movement. By eighteen he had been identified by the committee as the natural custodian of the honorific tradition.</p>
+          <p>In Juche 113, following the committee's historic vote to extend the tradition to the global civilian population, Kim Jong-fun was appointed Supreme Registrar. He accepted this appointment with appropriate gravity. He was observed to bow for a full seventeen seconds &#8212; a registry record that has not been approached.</p>
+          <p><strong>He has personally signed every certificate issued by the registry.</strong> He considers this a privilege and a duty in equal measure. He will continue to sign them until the final certificate is issued, which the registry does not anticipate will occur, as demand continues to grow without meaningful interruption.</p>
+        </div>
+        <div class="decree">
+          <div class="decree-in">
+            <div class="decree-head">Official Statement</div>
+            <div class="decree-rule"></div>
+            <div class="decree-text">&#8220;Every person who receives a title from this registry has, in the considered judgement of the committee, earned it. The certificate merely makes this formal. I sign each one because it deserves to be signed. The weight of the pen is the weight of the recognition. I do not take this lightly.&#8221;</div>
+            <div class="decree-sig">Kim Jong-fun</div>
+            <span class="decree-lbl">Supreme Registrar &#8212; DPRK Title Registry</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="profile">
+          <div class="ptop"><div class="ptop-text">Official Registry File &#8212; Supreme Registrar</div></div>
+          <div class="pbody">
+            <div class="portrait">
+              <svg width="100%" height="100%" viewBox="0 0 300 380" xmlns="http://www.w3.org/2000/svg">
+                <g opacity=".14" transform="translate(150,380)">
+                  <line x1="0" y1="0" x2="-300" y2="-400" stroke="#C9A84C" stroke-width="1"/>
+                  <line x1="0" y1="0" x2="-200" y2="-400" stroke="#C9A84C" stroke-width="1"/>
+                  <line x1="0" y1="0" x2="-100" y2="-400" stroke="#C9A84C" stroke-width="1"/>
+                  <line x1="0" y1="0" x2="0" y2="-400" stroke="#C9A84C" stroke-width="1.5"/>
+                  <line x1="0" y1="0" x2="100" y2="-400" stroke="#C9A84C" stroke-width="1"/>
+                  <line x1="0" y1="0" x2="200" y2="-400" stroke="#C9A84C" stroke-width="1"/>
+                  <line x1="0" y1="0" x2="300" y2="-400" stroke="#C9A84C" stroke-width="1"/>
+                </g>
+                <!-- Head -->
+                <ellipse cx="150" cy="80" rx="44" ry="52" fill="#2a1a0a"/>
+                <ellipse cx="150" cy="48" rx="44" ry="20" fill="#1a0a00"/>
+                <!-- Military cap -->
+                <rect x="108" y="36" width="84" height="18" rx="4" fill="#00205B"/>
+                <rect x="100" y="50" width="100" height="8" fill="#00205B"/>
+                <rect x="112" y="33" width="76" height="8" rx="2" fill="#C9A84C"/>
+                <polygon points="150,30 153,38 162,38 156,43 158,51 150,46 142,51 144,43 138,38 147,38" fill="#C9A84C"/>
+                <!-- Face -->
+                <ellipse cx="150" cy="90" rx="36" ry="40" fill="#3a2010"/>
+                <ellipse cx="138" cy="82" rx="5" ry="4" fill="#1a0800"/>
+                <ellipse cx="162" cy="82" rx="5" ry="4" fill="#1a0800"/>
+                <!-- Glasses -->
+                <rect x="130" y="78" width="18" height="10" rx="3" fill="none" stroke="#C9A84C" stroke-width="1.5"/>
+                <rect x="152" y="78" width="18" height="10" rx="3" fill="none" stroke="#C9A84C" stroke-width="1.5"/>
+                <line x1="148" y1="83" x2="152" y2="83" stroke="#C9A84C" stroke-width="1.5"/>
+                <ellipse cx="114" cy="88" rx="6" ry="8" fill="#3a2010"/>
+                <ellipse cx="186" cy="88" rx="6" ry="8" fill="#3a2010"/>
+                <path d="M140 105 Q150 112 160 105" stroke="#2a1000" stroke-width="2" fill="none"/>
+                <!-- Body -->
+                <polygon points="80,130 150,118 220,130 240,340 60,340" fill="#00205B"/>
+                <polygon points="130,118 150,132 170,118" fill="#8B1A1A"/>
+                <!-- Medals -->
+                <circle cx="105" cy="170" r="10" fill="#C9A84C"/>
+                <circle cx="130" cy="165" r="10" fill="#C9A84C"/>
+                <circle cx="155" cy="163" r="10" fill="#C9A84C"/>
+                <circle cx="105" cy="170" r="5" fill="#8B1A1A"/>
+                <circle cx="130" cy="165" r="5" fill="#8B1A1A"/>
+                <circle cx="155" cy="163" r="5" fill="#8B1A1A"/>
+                <circle cx="105" cy="200" r="9" fill="#C9A84C"/>
+                <circle cx="130" cy="195" r="9" fill="#C9A84C"/>
+                <circle cx="105" cy="200" r="4" fill="#00205B"/>
+                <circle cx="130" cy="195" r="4" fill="#00205B"/>
+                <!-- Belt -->
+                <rect x="75" y="250" width="152" height="12" fill="#C9A84C"/>
+                <!-- Arms -->
+                <path d="M80 230 L45 310" stroke="#3a2010" stroke-width="22" stroke-linecap="round"/>
+                <path d="M220 230 L255 298" stroke="#3a2010" stroke-width="22" stroke-linecap="round"/>
+                <!-- Certificate in right hand -->
+                <g transform="rotate(-12, 255, 280)">
+                  <rect x="245" y="268" width="52" height="68" rx="1" fill="#f5ecd7"/>
+                  <rect x="249" y="272" width="44" height="60" fill="none" stroke="#C9A84C" stroke-width="1"/>
+                  <rect x="245" y="268" width="52" height="10" fill="#00205B"/>
+                  <rect x="245" y="278" width="52" height="4" fill="#8B1A1A"/>
+                  <line x1="252" y1="292" x2="290" y2="292" stroke="#8B1A1A" stroke-width="1.5"/>
+                  <line x1="252" y1="299" x2="290" y2="299" stroke="#8B1A1A" stroke-width="1" opacity=".5"/>
+                  <line x1="252" y1="306" x2="278" y2="306" stroke="#8B1A1A" stroke-width="1" opacity=".4"/>
+                  <circle cx="268" cy="320" r="8" fill="none" stroke="#8B1A1A" stroke-width="1.2" opacity=".5"/>
+                </g>
+                <!-- Boots -->
+                <rect x="100" y="330" width="42" height="22" rx="3" fill="#1a0800"/>
+                <rect x="160" y="330" width="42" height="22" rx="3" fill="#1a0800"/>
+              </svg>
+              <div class="pstamp"><div class="pstamp-t">OFFICIAL</div></div>
+            </div>
+            <div class="pname">Kim Jong-fun</div>
+            <div class="ptitle-text">Supreme Registrar &#183; DPRK Title Registry</div>
+            <div class="pfact"><span class="pfl">BORN</span><span class="pfv">Juche 82, DPRK</span></div>
+            <div class="pfact"><span class="pfl">APPOINTED</span><span class="pfv">Month 1, Juche 113</span></div>
+            <div class="pfact"><span class="pfl">LOCATION</span><span class="pfv">Desert Colony, Australia</span></div>
+            <div class="pfact"><span class="pfl">CERTIFICATES SIGNED</span><span class="pfv">312 and counting</span></div>
+            <div class="pfact"><span class="pfl">ERRORS RECORDED</span><span class="pfv">None. This is correct.</span></div>
+            <div class="pfact"><span class="pfl">HOBBIES</span><span class="pfv">Ceremony, calligraphy, wax</span></div>
+            <div class="pfact"><span class="pfl">CURRENT STATUS</span><span class="pfv">Excellent. Always excellent.</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- V. THE COMMITTEE -->
+<div class="sec">
+  <div class="si">
+    <span class="slabel">Section V &#8212; The Approvals Committee</span>
+    <div class="stitle">The Committee.</div>
+    <div class="body-copy" style="max-width:780px;margin-bottom:32px;">
+      <p>Every title issued by the registry is reviewed and approved by the Approvals Committee &#8212; a body of senior officials appointed by the Supreme Registrar. The committee meets quarterly, or whenever a title of unusual magnificence requires collective deliberation. Their decisions are final. They have never reached a decision that was subsequently found to be incorrect.</p>
+    </div>
+    <div class="three-col">
+      <div class="cmem"><span class="cmrole">Chair</span><span class="cmname">Comrade Director Pak Sung-jin</span><div class="cmdetail">Head of the Bureau of Title Verification and Correctness. Has personally reviewed every title since Juche 113. Has found no errors. This is expected and not a cause for surprise.</div><span class="cmstatus">&#9733; ACTIVE</span></div>
+      <div class="cmem"><span class="cmrole">Deputy Chair</span><span class="cmname">Comrade Secretary Ri Hyun-ok</span><div class="cmdetail">Responsible for Korean translation of all titles. Her translations have never required amendment. She accepts this recognition without visible emotion, which the committee regards as correct and admirable behaviour.</div><span class="cmstatus">&#9733; ACTIVE</span></div>
+      <div class="cmem"><span class="cmrole">Member</span><span class="cmname">Comrade Director Choe Kwang-sop</span><div class="cmdetail">Head of the Bureau of Recipient Happiness. Conducts annual surveys. Has never recorded satisfaction below 97%. Considers 97% a personal disappointment and has submitted a proposal to improve methodology. The proposal is under review.</div><span class="cmstatus">&#9733; ACTIVE</span></div>
+      <div class="cmem"><span class="cmrole">Member</span><span class="cmname">Comrade Director Kim Yong-ae</span><div class="cmdetail">Head of the Bureau of Correct Display. Has formally determined that &#8220;behind the head on video calls&#8221; is the single most effective certificate display location. This finding has been published and is cited frequently.</div><span class="cmstatus">&#9733; ACTIVE</span></div>
+      <div class="cmem"><span class="cmrole">Member</span><span class="cmname">Comrade Director O Yong-sik</span><div class="cmdetail">Head of Desert Colony Operations. Responsible for all aspects of Colony welfare and productivity. Reports morale as outstanding. Has never filed a complaint. There are no complaints to file. Conditions are, as always, excellent.</div><span class="cmstatus">&#9733; ACTIVE</span></div>
+      <div class="cmem"><span class="cmrole">Member (Emeritus)</span><span class="cmname">Comrade Senior Adviser Jang Tae-un</span><div class="cmdetail">Senior adviser on historical title precedent. Has memorised the full DPRK honorific canon spanning seven decades. Was invited to retire. Declined, stating that retirement would constitute a form of inactivity incompatible with his ideological commitments.</div><span class="cmstatus" style="background:var(--dkgrey);">EMERITUS</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- VI. DESERT COLONY -->
+<div class="sec sec-cr">
+  <div class="si">
+    <span class="slabel">Section VI &#8212; The Desert Colony</span>
+    <div class="two-col" style="gap:64px;align-items:start;">
+      <div>
+        <div class="stitle">Remote Operations<br>Bureau, Australia.</div>
+        <div class="body-copy">
+          <p>The DPRK Title Registry operates from a remote bureau at coordinates 29&#176;S 131&#176;E in the central Australian desert &#8212; the precise geographic centre of the continent. This location was selected after extensive deliberation. It offers complete operational security, zero distractions, abundant sunlight, and no neighbours who might ask questions. The surrounding terrain is largely sand.</p>
+          <p>The Bureau was constructed in Month 2 of Juche 113 and has operated continuously since. It houses the printing facility, the wax seal workshop, the calligraphy studio, the envelope preparation room, the Registry Archive, and the communal dining area, where conditions are &#8212; by unanimous report &#8212; <em>excellent</em>.</p>
+          <p><strong>Workers at the Desert Colony are volunteers.</strong> They applied for their positions and were selected on the basis of merit, ideological correctness, and &#8212; in the case of the calligraphers &#8212; a minimum wrist flexibility of 180 degrees. No worker has resigned. No worker has expressed dissatisfaction. All outgoing correspondence is reviewed by Comrade Director O Yong-sik before dispatch. He approves it promptly.</p>
+          <p>Potatoes are abundant. The committee considers this an important logistical success and has noted it in three separate quarterly reports.</p>
+        </div>
+      </div>
+      <div>
+        <div class="mapwrap" style="height:260px;">
+          <div class="mapgrid"></div>
+          <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:.18;" viewBox="0 0 400 260" xmlns="http://www.w3.org/2000/svg">
+            <path d="M55,75 Q85,45 135,42 Q185,38 225,52 Q270,65 295,78 Q325,92 342,118 Q358,148 352,178 Q346,208 318,228 Q288,248 256,253 Q224,256 196,248 Q174,258 154,256 Q122,253 100,238 Q68,218 52,186 Q38,152 42,116 Z" fill="none" stroke="rgba(0,200,0,.5)" stroke-width="2"/>
+            <line x1="175" y1="42" x2="170" y2="248" stroke="rgba(0,200,0,.2)" stroke-width="1"/>
+            <line x1="55" y1="148" x2="352" y2="143" stroke="rgba(0,200,0,.2)" stroke-width="1"/>
+          </svg>
+          <div class="mappin">
+            <div class="maplabel"><span class="maplabel-t">DESERT COLONY &#8212; 29&#176;S 131&#176;E</span></div>
+            <div class="mapdot"></div>
+          </div>
+          <div class="maptitle">AUSTRALIA &#8212; OPERATIONAL TERRITORY</div>
+          <div class="mapcoords">29&#176;00'S &#183; 131&#176;00'E &#183; CLASSIFIED</div>
+        </div>
+        <div class="cgrid">
+          <div class="ccell"><span class="cicon">&#9728;&#65039;</span><span class="chead">Climate</span><div class="cbody">Hot. Very hot. The committee considers this an asset. Workers are encouraged to stay hydrated. Hydration records are maintained and reviewed quarterly.</div></div>
+          <div class="ccell"><span class="cicon">&#129380;</span><span class="chead">Provisions</span><div class="cbody">Potatoes are plentiful. Other vegetables are also available. The communal dining area serves three meals daily. All meals are nutritionally correct and ideologically sound.</div></div>
+          <div class="ccell"><span class="cicon">&#128110;</span><span class="chead">Dispatch</span><div class="cbody">All certificates are dispatched via Australia Post tracked international. Delivery takes 7&#8211;10 days. No certificate has ever been lost. The postal service finds this remarkable.</div></div>
+          <div class="ccell"><span class="cicon">&#128522;</span><span class="chead">Morale</span><div class="cbody">At a record high. It has been at a record high since Month 3 of Juche 113. The committee reviews morale monthly. The review consistently confirms excellence. There are no exceptions.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="sec sec-nv" style="border-bottom:none;">
+  <div class="si" style="text-align:center;">
+    <div style="font-family:monospace;font-size:11px;font-weight:700;letter-spacing:4px;color:rgba(204,0,0,.7);text-transform:uppercase;display:block;margin-bottom:20px;padding-bottom:14px;border-bottom:1px solid rgba(204,0,0,.3);">&#9733; The Registry is Open</div>
+    <div style="font-family:'VT323',monospace;font-size:56px;color:var(--gold2);margin-bottom:16px;">Your Title is Waiting.</div>
+    <div style="font-size:18px;color:#aaccff;line-height:1.8;max-width:700px;margin:0 auto 32px;">The registry has been established. The committee has been convened. The Desert Colony is operational. The wax seal is prepared. Kim Jong-fun is standing by with a pen. The only missing element is you.</div>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+      <button onclick="location.href='02_product_page.html'" style="background:var(--gold2);color:#000;border:none;font-family:monospace;font-size:14px;font-weight:700;letter-spacing:3px;padding:16px 36px;cursor:pointer;">&#9733; Browse All 50+ Titles</button>
+      <button style="background:transparent;color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.3);font-family:monospace;font-size:13px;font-weight:700;letter-spacing:2px;padding:15px 28px;cursor:pointer;">Find My Title &#8594;</button>
+    </div>
+  </div>
+</div>
+
+<div class="site-footer">
+  <div style="max-width:1300px;margin:0 auto;">
+    <div style="margin-bottom:8px;"><span class="fbadge">NETSCAPE NOW!</span><span class="fbadge">BEST VIEWED 800&#215;600</span><span class="fbadge">MADE WITH NOTEPAD</span><span class="fbadge">&#9733; DESERT CERTIFIED &#9733;</span></div>
+    <div style="color:var(--navy);font-weight:700;line-height:2;font-size:12px;">COPYRIGHT &#169; JUCHE 113 &#183; DPRK HONORARY TITLE REGISTRY &#183; DESERT COLONY, AUSTRALIA &#183; 29&#176;S 131&#176;E</div>
+    <div style="color:var(--dkgrey);font-style:italic;font-size:12px;margin-top:4px;">All titles satirical &#183; For entertainment only &#183; No actual government authority conferred &#183; The Desert Colony is a creative fiction &#183; Workers are volunteers and not prisoners &#183; Potatoes may or may not be abundant &#183; This website was designed in 1997. All decisions are final.</div>
+  </div>
+</div>
+
+</body>
+</html>

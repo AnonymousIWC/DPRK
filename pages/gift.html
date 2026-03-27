@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gift a Title — DPRK Title Registry</title>
+  <link rel="stylesheet" href="/public/style.css">
+  <style>
+    .gift-hero{background:var(--cn);padding:56px 40px;border-bottom:4px solid var(--red);position:relative;overflow:hidden;}
+    .gift-hero::before{content:'';position:absolute;inset:0;background:repeating-conic-gradient(from 0deg at 50% 130%,rgba(255,221,0,.018) 0deg 4deg,transparent 4deg 14deg);pointer-events:none;}
+    .gh-inner{max-width:1200px;margin:0 auto;position:relative;z-index:1;display:grid;grid-template-columns:1fr 400px;gap:64px;align-items:start;}
+    .gh-kick{font-family:monospace;font-size:11px;font-weight:700;letter-spacing:4px;color:var(--cr);text-transform:uppercase;display:block;margin-bottom:14px;border-left:3px solid var(--cr);padding-left:12px;}
+    .gh-title{font-family:'VT323',monospace;font-size:64px;color:var(--gold2);line-height:1;margin-bottom:14px;text-shadow:2px 2px 0 rgba(0,0,0,.4);}
+    .gh-sub{font-size:18px;color:#aaccff;line-height:1.8;margin-bottom:28px;}
+    .reasons{display:flex;flex-direction:column;gap:12px;margin-top:8px;}
+    .reason{display:flex;gap:14px;align-items:flex-start;}
+    .reason-icon{font-size:22px;flex-shrink:0;margin-top:2px;}
+    .reason-text{font-size:15px;color:#aaccff;line-height:1.65;}
+    .reason-text strong{color:#fff;}
+
+    .gift-form-wrap{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);padding:32px;position:relative;}
+    .gift-form-wrap::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(to right,var(--cr),var(--cg));}
+    .gf-title{font-family:'Cinzel',serif;font-size:16px;font-weight:700;color:var(--gold2);letter-spacing:2px;text-transform:uppercase;margin-bottom:24px;text-align:center;}
+
+    /* Steps */
+    .steps-nav{display:flex;gap:0;margin-bottom:28px;border:1px solid rgba(255,255,255,.1);}
+    .step-tab{flex:1;padding:10px;text-align:center;font-family:monospace;font-size:10px;font-weight:700;letter-spacing:1px;color:rgba(255,255,255,.3);cursor:pointer;border-right:1px solid rgba(255,255,255,.1);transition:all .2s;}
+    .step-tab:last-child{border-right:none;}
+    .step-tab.on{background:rgba(201,168,76,.15);color:var(--gold2);}
+    .step-pane{display:none;}
+    .step-pane.on{display:block;}
+
+    /* Form fields */
+    .field{margin-bottom:18px;}
+    .field label{font-family:monospace;font-size:10px;font-weight:700;letter-spacing:2px;color:rgba(255,255,255,.4);text-transform:uppercase;display:block;margin-bottom:7px;}
+    .field input,.field textarea,.field select{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.2);color:#fff;font-family:Georgia,serif;font-size:15px;padding:11px 14px;}
+    .field input:focus,.field textarea:focus,.field select:focus{outline:none;border-color:var(--cg);}
+    .field select option{background:#0d0d1f;color:#fff;}
+    .field textarea{resize:vertical;min-height:90px;line-height:1.6;}
+    .field-hint{font-family:monospace;font-size:10px;color:rgba(255,255,255,.25);letter-spacing:1px;margin-top:5px;}
+    .char-count{font-family:monospace;font-size:10px;color:rgba(255,255,255,.25);letter-spacing:1px;float:right;}
+
+    .format-choice{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px;}
+    .fmt-opt{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.15);padding:16px;cursor:pointer;transition:all .2s;text-align:center;}
+    .fmt-opt:hover{border-color:rgba(201,168,76,.4);}
+    .fmt-opt.on{border-color:var(--cg);background:rgba(201,168,76,.1);}
+    .fmt-price{font-family:'VT323',monospace;font-size:36px;color:var(--gold2);line-height:1;display:block;}
+    .fmt-name{font-family:monospace;font-size:12px;font-weight:700;color:#fff;letter-spacing:1px;display:block;margin:4px 0 2px;}
+    .fmt-desc{font-size:12px;color:rgba(255,255,255,.4);}
+
+    .delivery-choice{display:flex;flex-direction:column;gap:10px;margin-bottom:20px;}
+    .del-opt{display:flex;align-items:flex-start;gap:12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.15);padding:14px;cursor:pointer;transition:all .2s;}
+    .del-opt:hover{border-color:rgba(201,168,76,.4);}
+    .del-opt.on{border-color:var(--cg);background:rgba(201,168,76,.1);}
+    .del-opt input[type=radio]{margin-top:4px;accent-color:var(--cg);flex-shrink:0;}
+    .del-opt-label{font-family:monospace;font-size:12px;font-weight:700;color:#fff;letter-spacing:1px;display:block;margin-bottom:3px;}
+    .del-opt-desc{font-size:13px;color:rgba(255,255,255,.45);}
+
+    .step-nav-btns{display:flex;justify-content:space-between;margin-top:24px;gap:12px;}
+    .btn-step-back{background:transparent;color:rgba(255,255,255,.4);border:1px solid rgba(255,255,255,.15);font-family:monospace;font-size:12px;font-weight:700;letter-spacing:2px;padding:12px 20px;cursor:pointer;}
+    .btn-step-back:hover{color:rgba(255,255,255,.7);}
+    .btn-step-next{background:var(--gold2);color:#000;border:none;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:3px;padding:13px 28px;cursor:pointer;flex:1;}
+    .btn-step-next:hover{background:#ffe44d;}
+
+    /* Preview pane */
+    .preview-section{background:#0d0d1f;padding:48px 40px;border-top:3px solid rgba(255,255,255,.06);}
+    .preview-inner{max-width:1200px;margin:0 auto;}
+    .preview-label{font-family:monospace;font-size:11px;font-weight:700;letter-spacing:3px;color:var(--cr);text-transform:uppercase;display:block;margin-bottom:24px;border-left:3px solid var(--cr);padding-left:12px;}
+    .preview-grid{display:grid;grid-template-columns:1fr 340px;gap:48px;align-items:start;}
+    .preview-cert-wrap{}
+    .preview-notes{color:rgba(255,255,255,.5);}
+    .pn-head{font-family:'VT323',monospace;font-size:24px;color:var(--gold2);margin-bottom:16px;}
+    .pn-item{display:flex;align-items:flex-start;gap:10px;margin-bottom:12px;font-size:14px;color:rgba(255,255,255,.5);}
+    .pn-tick{color:var(--cg);flex-shrink:0;}
+
+    /* Confirmation screen */
+    .confirm-screen{display:none;text-align:center;padding:48px 20px;background:var(--cn);}
+    .confirm-screen.on{display:block;}
+    .confirm-emblem{margin-bottom:24px;}
+    .confirm-head{font-family:'VT323',monospace;font-size:52px;color:var(--gold2);margin-bottom:12px;}
+    .confirm-sub{font-size:18px;color:#aaccff;line-height:1.8;max-width:600px;margin:0 auto 32px;}
+    .confirm-reg{font-family:monospace;font-size:14px;color:var(--cg);letter-spacing:3px;margin-bottom:24px;}
+  </style>
+</head>
+<body>
+  <script src="/public/components.js"></script>
+  <div id="page-content">
+    <div class="bc"><a href="/">Home</a> &rsaquo; Gift a Title</div>
+
+    <!-- HERO -->
+    <div class="gift-hero">
+      <div class="gh-inner">
+        <div>
+          <span class="gh-kick">Give the Gift of Official Recognition</span>
+          <div class="gh-title">Gift a<br>Title.</div>
+          <div class="gh-sub">The most useful gift a person can give is formal confirmation of what was already known. Someone in your life has been remarkable for years without official documentation. Correct this.</div>
+          <div class="reasons">
+            <div class="reason"><span class="reason-icon">🎂</span><div class="reason-text"><strong>Birthdays.</strong> The certificate arrives. They read it. They go quiet. They put it on the wall. You have given them the best birthday present they will receive this decade.</div></div>
+            <div class="reason"><span class="reason-icon">👔</span><div class="reason-text"><strong>Retirement.</strong> After decades of quiet authority, they deserve formal recognition. The registry provides it. They will use the title in their email signature. You cannot stop them and should not try.</div></div>
+            <div class="reason"><span class="reason-icon">🏠</span><div class="reason-text"><strong>Everyday excellence.</strong> Some people hold everything together for years without acknowledgement. This is the acknowledgement. It has their name on it and two official seals.</div></div>
+          </div>
+        </div>
+        <div class="gift-form-wrap">
+          <div class="gf-title">Configure Your Gift</div>
+          <div class="steps-nav">
+            <div class="step-tab on" data-step="1">1. TITLE</div>
+            <div class="step-tab" data-step="2">2. RECIPIENT</div>
+            <div class="step-tab" data-step="3">3. MESSAGE</div>
+            <div class="step-tab" data-step="4">4. REVIEW</div>
+          </div>
+
+          <!-- Step 1: Choose format + title -->
+          <div class="step-pane on" id="step-1">
+            <div class="format-choice">
+              <div class="fmt-opt on" onclick="selFmt(this,'physical')">
+                <span class="fmt-price">$59</span>
+                <span class="fmt-name">Physical</span>
+                <div class="fmt-desc">Certificate + Registry Card + Navy Envelope<br>Worldwide shipping included</div>
+              </div>
+              <div class="fmt-opt" onclick="selFmt(this,'digital')">
+                <span class="fmt-price">$29</span>
+                <span class="fmt-name">Digital</span>
+                <div class="fmt-desc">Instant PDF — send by email or print at home</div>
+              </div>
+            </div>
+            <div class="field">
+              <label>Select Title</label>
+              <select id="title-select">
+                <option value="">— Choose a title —</option>
+                <optgroup label="★ Most Popular">
+                  <option value="iron-willed">Iron-Willed Commander of the Glorious People's Eternal Struggle</option>
+                  <option value="most-beloved">Most Beloved &amp; Respected Comrade of the Motherland</option>
+                  <option value="hero-republic">Hero of the Republic, Defender of the Revolution</option>
+                </optgroup>
+                <optgroup label="Supreme Grade">
+                  <option value="ever-victorious">Ever-Victorious Iron-Willed Brilliant Commander</option>
+                  <option value="supreme-commander">Supreme Commander of the Revolutionary Armed Forces</option>
+                  <option value="lodestar">Lodestar of the 21st Century &amp; Invincible Strategist</option>
+                </optgroup>
+                <optgroup label="Eternal Grade">
+                  <option value="eternal-sun">Eternal Sun of the Revolutionary Cause &amp; Morning Star of Juche</option>
+                  <option value="eternal-president">Eternal President of the Republic &amp; Sun of the Nation</option>
+                  <option value="shining-sun">Shining Sun of Juche, Great Heart of the Revolution</option>
+                </optgroup>
+                <optgroup label="Heroic Grade">
+                  <option value="great-marshal">Great Marshal of the Invincible Armed Forces</option>
+                  <option value="indomitable">Indomitable Revolutionary Fighter of Steely Will</option>
+                </optgroup>
+                <optgroup label="Brilliant Grade">
+                  <option value="brilliant-genius">Brilliant Genius of Humanity, Guiding Star of the 21st Century</option>
+                  <option value="outstanding-thinker">Outstanding Thinker of the Era, Pioneer of Original Thought</option>
+                  <option value="great-teacher">Great Teacher of the People, Propagator of Truth and Knowledge</option>
+                </optgroup>
+                <optgroup label="Beloved Grade">
+                  <option value="fatherly-leader">Fatherly Leader, Tender-Hearted Protector of the People</option>
+                  <option value="mother-korea">Mother of Korea, Warmth of the Entire Nation</option>
+                  <option value="pillar-family">Pillar of the Family, Unwavering Foundation of All That Is Good</option>
+                </optgroup>
+                <optgroup label="Mountain Grade">
+                  <option value="peerless">Peerless Commander Born of Paektu, Eternal Flame</option>
+                  <option value="towering">Towering Pinnacle of Human Achievement, Colossus Spanning All Ages</option>
+                </optgroup>
+              </select>
+            </div>
+            <div class="field-hint">Not sure? <a href="/find" style="color:var(--cg);">Use the Title Finder</a> to get a recommendation.</div>
+            <div class="step-nav-btns">
+              <div></div>
+              <button class="btn-step-next" onclick="nextStep(2)">Recipient Details &#8594;</button>
+            </div>
+          </div>
+
+          <!-- Step 2: Recipient -->
+          <div class="step-pane" id="step-2">
+            <div class="field">
+              <label>Recipient's Full Name <span style="color:var(--cr);">*</span></label>
+              <input id="recip-name" type="text" placeholder="Name as it will appear on the certificate">
+              <div class="field-hint">This appears in calligraphic script on the certificate. Double-check spelling.</div>
+            </div>
+            <div class="field" id="field-address" style="display:none;">
+              <label>Delivery Address</label>
+              <textarea id="recip-address" placeholder="Street address&#10;City, State/Province&#10;Country, Postcode"></textarea>
+            </div>
+            <div class="field" id="field-email">
+              <label>Your Email (for order confirmation)</label>
+              <input id="buyer-email" type="email" placeholder="you@example.com">
+            </div>
+            <div class="step-nav-btns">
+              <button class="btn-step-back" onclick="nextStep(1)">&#8592; Back</button>
+              <button class="btn-step-next" onclick="nextStep(3)">Add a Message &#8594;</button>
+            </div>
+          </div>
+
+          <!-- Step 3: Message -->
+          <div class="step-pane" id="step-3">
+            <div class="field">
+              <label>Gift Message <span style="color:rgba(255,255,255,.3);">(Optional)</span> <span class="char-count"><span id="msg-count">0</span>/200</span></label>
+              <textarea id="gift-message" maxlength="200" placeholder="A personal note to accompany the title. The registry will include this alongside the official certificate." oninput="document.getElementById('msg-count').textContent=this.value.length;"></textarea>
+              <div class="field-hint">The message is printed on a separate card. It does not appear on the official certificate.</div>
+            </div>
+            <div class="delivery-choice" id="delivery-choice" style="display:none;">
+              <label style="font-family:monospace;font-size:10px;font-weight:700;letter-spacing:2px;color:rgba(255,255,255,.4);text-transform:uppercase;margin-bottom:7px;display:block;">Delivery Method</label>
+              <div class="del-opt on" onclick="selDel(this,'self')">
+                <input type="radio" name="delivery" checked>
+                <div><span class="del-opt-label">Download for self-presentation</span><div class="del-opt-desc">You receive the PDF. You decide when and how to present it.</div></div>
+              </div>
+              <div class="del-opt" onclick="selDel(this,'email')">
+                <input type="radio" name="delivery">
+                <div><span class="del-opt-label">Send directly to recipient</span><div class="del-opt-desc">We email the PDF to your recipient immediately after checkout.</div></div>
+              </div>
+            </div>
+            <div class="field" id="recip-email-field" style="display:none;">
+              <label>Recipient's Email Address</label>
+              <input id="recip-email" type="email" placeholder="their@email.com">
+            </div>
+            <div class="step-nav-btns">
+              <button class="btn-step-back" onclick="nextStep(2)">&#8592; Back</button>
+              <button class="btn-step-next" onclick="nextStep(4)">Review Order &#8594;</button>
+            </div>
+          </div>
+
+          <!-- Step 4: Review -->
+          <div class="step-pane" id="step-4">
+            <div id="order-summary" style="font-size:14px;color:rgba(255,255,255,.65);line-height:2;font-family:Georgia,serif;margin-bottom:20px;border:1px solid rgba(255,255,255,.1);padding:16px;"></div>
+            <button class="btn-step-next" style="width:100%;padding:16px;font-size:14px;" onclick="submitOrder()">&#9733; Proceed to Payment</button>
+            <div style="font-family:monospace;font-size:10px;color:rgba(255,255,255,.2);text-align:center;margin-top:10px;letter-spacing:1px;">Secured by Stripe · No account required · AUD/USD accepted</div>
+            <div class="step-nav-btns">
+              <button class="btn-step-back" onclick="nextStep(3)">&#8592; Back</button>
+              <div></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- PREVIEW -->
+    <div class="preview-section">
+      <div class="preview-inner">
+        <span class="preview-label">Certificate Preview</span>
+        <div class="preview-grid">
+          <div class="preview-cert-wrap" id="preview-cert"></div>
+          <div class="preview-notes">
+            <div class="pn-head">What They'll Receive</div>
+            <div class="pn-item"><span class="pn-tick">★</span><div>A4 certificate on 200gsm cream stock, printed flat</div></div>
+            <div class="pn-item"><span class="pn-tick">★</span><div>Calligraphic name, title in English and Korean, two official seals, KJU signature</div></div>
+            <div class="pn-item physical-only"><span class="pn-tick">★</span><div>Wax-sealed registry card with a personal message from Kim Jong-un</div></div>
+            <div class="pn-item physical-only"><span class="pn-tick">★</span><div>Bold DPRK navy envelope with crimson bands, Desert Colony postmark, STR wax seal</div></div>
+            <div class="pn-item"><span class="pn-tick">★</span><div>Permanent entry in the official online registry</div></div>
+            <div class="pn-item physical-only"><span class="pn-tick">★</span><div>Worldwide tracked shipping included. No extra fees.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONFIRMATION -->
+    <div class="confirm-screen" id="confirm">
+      <div style="max-width:700px;margin:0 auto;">
+        <div class="confirm-emblem">
+          <svg width="80" height="80" viewBox="0 0 200 200"><g opacity=".9"><g transform="translate(100,100)"><ellipse cx="-62" cy="0" rx="5" ry="18" fill="#C9A84C" transform="rotate(-60 -62 0)"/><ellipse cx="62" cy="0" rx="5" ry="18" fill="#C9A84C" transform="rotate(60 62 0)"/></g><polygon points="100,28 106,44 124,44 110,54 116,70 100,60 84,70 90,54 76,44 94,44" fill="#8B1A1A"/></g><circle cx="100" cy="100" r="92" fill="none" stroke="#C9A84C" stroke-width="2"/></svg>
+        </div>
+        <div class="confirm-head">Order Received.</div>
+        <div class="confirm-sub">The registry has recorded your order. The committee has been notified. Kim Jong-fun is preparing the pen. Your certificate will be dispatched from the Desert Colony with all appropriate ceremony.</div>
+        <div class="confirm-reg" id="confirm-reg">ORDER REF: STR-XXXX</div>
+        <button class="btn btn-primary" onclick="location.href='/'">Return to Registry</button>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+  var giftState={format:'physical',title:'',titleSlug:'',recipName:'',address:'',buyerEmail:'',message:'',delivery:'self',recipEmail:''};
+
+  function selFmt(el,fmt){
+    document.querySelectorAll('.fmt-opt').forEach(function(o){o.classList.remove('on');});
+    el.classList.add('on');
+    giftState.format=fmt;
+    document.getElementById('field-address').style.display=fmt==='physical'?'block':'none';
+    document.querySelectorAll('.physical-only').forEach(function(e){e.style.opacity=fmt==='physical'?'1':'0.3';});
+    document.getElementById('delivery-choice').style.display=fmt==='digital'?'block':'none';
+    updatePreview();
+  }
+
+  function selDel(el,type){
+    document.querySelectorAll('.del-opt').forEach(function(o){o.classList.remove('on');});
+    el.classList.add('on');
+    giftState.delivery=type;
+    document.getElementById('recip-email-field').style.display=type==='email'?'block':'none';
+  }
+
+  var TITLE_KO={
+    'iron-willed':'강철의 의지를 지닌 영광스러운 인민의 사령관',
+    'most-beloved':'조국의 가장 사랑받고 존경받는 동지',
+    'hero-republic':'공화국 영웅이며 혁명의 수호자',
+    'eternal-sun':'혁명의 영원한 태양이며 주체의 새벽별',
+    'brilliant-genius':'인류의 탁월한 천재이며 21세기의 길잡이 별',
+    'peerless':'백두에서 탄생한 무적의 사령관이며 민족의 영원한 불꽃',
+    'mother-korea':'조선의 어머니이며 온 민족의 따뜻함',
+    'pillar-family':'가정의 기둥이며 모든 선한 것의 흔들리지 않는 토대',
+  };
+
+  function updatePreview(){
+    var sel=document.getElementById('title-select');
+    var titleText=sel.options[sel.selectedIndex]?sel.options[sel.selectedIndex].text:'';
+    var titleVal=sel.value;
+    var name=document.getElementById('recip-name').value||'Recipient Name';
+    var ko=TITLE_KO[titleVal]||'—';
+    document.getElementById('preview-cert').innerHTML=window.DPRK.renderCert({
+      name:name,titleEn:titleText||'Select a title above',titleKo:ko
+    });
+  }
+
+  document.getElementById('title-select').addEventListener('change',updatePreview);
+  document.getElementById('recip-name').addEventListener('input',updatePreview);
+
+  function nextStep(n){
+    document.querySelectorAll('.step-tab').forEach(function(t){
+      t.classList.toggle('on',parseInt(t.dataset.step)===n);
+    });
+    document.querySelectorAll('.step-pane').forEach(function(p,i){
+      p.classList.toggle('on',i+1===n);
+    });
+    if(n===4) buildSummary();
+  }
+
+  function buildSummary(){
+    var sel=document.getElementById('title-select');
+    var titleText=sel.options[sel.selectedIndex]?sel.options[sel.selectedIndex].text:'Not selected';
+    var name=document.getElementById('recip-name').value||'Not entered';
+    var fmt=giftState.format==='physical'?'Physical ($59 — incl. worldwide shipping)':'Digital PDF ($29)';
+    document.getElementById('order-summary').innerHTML=
+      '<strong style="color:#fff;">Format:</strong> '+fmt+'<br>'+
+      '<strong style="color:#fff;">Title:</strong> '+titleText+'<br>'+
+      '<strong style="color:#fff;">Recipient:</strong> '+name+'<br>'+
+      (giftState.format==='physical'?'<strong style="color:#fff;">Delivery:</strong> '+document.getElementById('recip-address').value+'<br>':'')+
+      '<strong style="color:#fff;">Gift message:</strong> '+(document.getElementById('gift-message').value||'None');
+  }
+
+  function submitOrder(){
+    var ref='STR-'+String(Math.floor(Math.random()*9000)+1000).padStart(4,'0');
+    document.getElementById('confirm-reg').textContent='ORDER REF: '+ref;
+    document.getElementById('gift-hero') && (document.getElementById('gift-hero').style.display='none');
+    document.querySelector('.preview-section').style.display='none';
+    document.getElementById('confirm').className='confirm-screen on';
+    window.scrollTo(0,0);
+  }
+
+  document.addEventListener('DOMContentLoaded',function(){updatePreview();});
+  </script>
+</body>
+</html>

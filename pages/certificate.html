@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Certificate Preview — DPRK Title Registry</title>
+  <link rel="stylesheet" href="/public/style.css">
+  <style>
+    .cert-page{background:#1a1a2e;min-height:70vh;padding:56px 40px;}
+    .cert-inner{max-width:1200px;margin:0 auto;}
+    .cp-kick{font-family:monospace;font-size:11px;font-weight:700;letter-spacing:4px;color:var(--cr);text-transform:uppercase;display:block;margin-bottom:16px;border-left:3px solid var(--cr);padding-left:12px;}
+    .cp-title{font-family:'VT323',monospace;font-size:48px;color:var(--gold2);line-height:1;margin-bottom:32px;}
+    .cp-grid{display:grid;grid-template-columns:1fr 360px;gap:48px;align-items:start;}
+
+    /* Controls panel */
+    .controls{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);padding:28px;position:sticky;top:20px;}
+    .controls::before{content:'';display:block;height:3px;background:linear-gradient(to right,var(--cr),var(--cg));margin:-28px -28px 24px;}
+    .ctrl-head{font-family:'Cinzel',serif;font-size:12px;font-weight:700;color:var(--gold2);letter-spacing:3px;text-transform:uppercase;margin-bottom:20px;}
+
+    .ctrl-field{margin-bottom:18px;}
+    .ctrl-label{font-family:monospace;font-size:10px;font-weight:700;letter-spacing:2px;color:rgba(255,255,255,.4);text-transform:uppercase;display:block;margin-bottom:7px;}
+    .ctrl-input{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.2);color:#fff;font-family:Georgia,serif;font-size:15px;padding:10px 14px;}
+    .ctrl-input:focus{outline:none;border-color:var(--cg);}
+    .ctrl-select{width:100%;background:#0d0d1f;border:1px solid rgba(255,255,255,.2);color:#fff;font-family:monospace;font-size:12px;padding:10px 12px;}
+    .ctrl-select:focus{outline:none;border-color:var(--cg);}
+    .ctrl-select option{background:#0d0d1f;color:#fff;}
+
+    .btn-regen{width:100%;background:rgba(201,168,76,.15);border:1px solid var(--cg);color:var(--gold2);font-family:monospace;font-size:11px;font-weight:700;letter-spacing:2px;padding:10px;cursor:pointer;margin-bottom:10px;}
+    .btn-regen:hover{background:rgba(201,168,76,.25);}
+    .btn-print{width:100%;background:var(--red);color:#fff;border:none;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:3px;padding:14px;cursor:pointer;margin-bottom:10px;}
+    .btn-print:hover{background:#aa0000;}
+    .btn-order-cert{width:100%;background:var(--gold2);color:#000;border:none;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:3px;padding:14px;cursor:pointer;}
+    .btn-order-cert:hover{background:#ffe44d;}
+
+    .ctrl-divider{height:1px;background:rgba(255,255,255,.1);margin:20px 0;}
+    .ctrl-note{font-family:monospace;font-size:10px;color:rgba(255,255,255,.2);letter-spacing:1px;line-height:1.6;}
+
+    /* Preview area */
+    .cert-preview-area{position:relative;}
+    .cert-scale-wrap{transform-origin:top left;transition:transform .2s;}
+    .cert-preview-area .cert-outer{box-shadow:0 8px 40px rgba(0,0,0,.6);}
+
+    /* Print styles */
+    @media print{
+      .controls,.site-titlebar,.marquee,.site-header,.navbar,.breadcrumb,.cert-page > .cert-inner > .cp-kick,.cert-page > .cert-inner > .cp-title{display:none!important;}
+      .cp-grid{grid-template-columns:1fr;gap:0;}
+      .cert-preview-area{margin:0;padding:0;}
+      .cert-scale-wrap{transform:none!important;}
+      .cert-page{padding:0;background:white;}
+    }
+
+    /* Cert size selector */
+    .size-btns{display:flex;gap:8px;margin-bottom:16px;}
+    .size-btn{flex:1;padding:7px;text-align:center;font-family:monospace;font-size:10px;font-weight:700;letter-spacing:1px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.5);cursor:pointer;}
+    .size-btn.on{background:rgba(201,168,76,.15);border-color:var(--cg);color:var(--gold2);}
+  </style>
+</head>
+<body>
+  <script src="/public/components.js"></script>
+  <div id="page-content">
+    <div class="bc"><a href="/">Home</a> &rsaquo; Certificate Preview</div>
+
+    <div class="cert-page">
+      <div class="cert-inner">
+        <span class="cp-kick">Personalise & Preview Your Certificate</span>
+        <div class="cp-title">Certificate Preview.</div>
+        <div class="cp-grid">
+
+          <!-- Live preview -->
+          <div class="cert-preview-area">
+            <div class="cert-scale-wrap" id="cert-scale">
+              <div id="live-cert"></div>
+            </div>
+          </div>
+
+          <!-- Controls -->
+          <div class="controls">
+            <div class="ctrl-head">Customise</div>
+
+            <div class="ctrl-field">
+              <span class="ctrl-label">Name on Certificate</span>
+              <input class="ctrl-input" id="ctrl-name" type="text" placeholder="Full name" value="Your Name Here">
+            </div>
+
+            <div class="ctrl-field">
+              <span class="ctrl-label">Select Title</span>
+              <select class="ctrl-select" id="ctrl-title">
+                <option value="iron-willed">Iron-Willed Commander of the Glorious People's Eternal Struggle</option>
+                <option value="eternal-sun">Eternal Sun of the Revolutionary Cause &amp; Morning Star of Juche</option>
+                <option value="great-marshal">Great Marshal of the Invincible Armed Forces</option>
+                <option value="brilliant-genius">Brilliant Genius of Humanity, Guiding Star of the 21st Century</option>
+                <option value="most-beloved">Most Beloved &amp; Respected Comrade of the Motherland</option>
+                <option value="peerless">Peerless Commander Born of Paektu, Eternal Flame</option>
+                <option value="hero-republic">Hero of the Republic, Defender of the Revolution</option>
+                <option value="mother-korea">Mother of Korea, Warmth of the Entire Nation</option>
+                <option value="pillar-family">Pillar of the Family, Unwavering Foundation of All That Is Good</option>
+                <option value="outstanding-thinker">Outstanding Thinker of the Era, Pioneer of Original Thought</option>
+              </select>
+            </div>
+
+            <div class="ctrl-divider"></div>
+
+            <div class="size-btns">
+              <div class="size-btn on" onclick="setScale(this,1)">100%</div>
+              <div class="size-btn" onclick="setScale(this,.75)">75%</div>
+              <div class="size-btn" onclick="setScale(this,.5)">50%</div>
+            </div>
+
+            <button class="btn-regen" onclick="regen()">&#8635; Regenerate Registry No.</button>
+            <button class="btn-print" onclick="window.print()">&#9113; Print Preview</button>
+            <button class="btn-order-cert" onclick="location.href='/titles'">&#9733; Order the Real Thing — $59</button>
+
+            <div class="ctrl-divider"></div>
+            <div class="ctrl-note">
+              This is a preview only. The print button shows an approximate version.<br><br>
+              The real certificate is printed on 200gsm cream stock by the Desert Colony print facility. It arrives flat, uncreased, in a hard-backed navy envelope. It is considerably more impressive in person.<br><br>
+              The registry number shown here is for preview only. Your real certificate receives a permanent sequential registry number.
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+  var TITLE_DATA={
+    'iron-willed':{en:"Iron-Willed Commander of the Glorious People's Eternal Struggle",ko:'강철의 의지를 지닌 영광스러운 인민의 사령관'},
+    'eternal-sun':{en:"Eternal Sun of the Revolutionary Cause & Morning Star of Juche",ko:'혁명의 영원한 태양이며 주체의 새벽별'},
+    'great-marshal':{en:"Great Marshal of the Invincible Armed Forces & Guardian of the Socialist Flame",ko:'무적의 조선인민군 대원수이며 사회주의 불꽃의 수호자'},
+    'brilliant-genius':{en:"Brilliant Genius of Humanity, Guiding Star of the 21st Century & Outstanding Thinker of Our Age",ko:'인류의 탁월한 천재이며 21세기의 길잡이 별'},
+    'most-beloved':{en:"Most Beloved & Respected Comrade of the Motherland, Cherished by All",ko:'조국의 가장 사랑받고 존경받는 동지'},
+    'peerless':{en:"Peerless Commander Born of Paektu, Eternal Flame & Unconquered Colossus of History",ko:'백두에서 탄생한 무적의 사령관이며 민족의 영원한 불꽃'},
+    'hero-republic':{en:"Hero of the Republic, Defender of the Revolution",ko:'공화국 영웅이며 혁명의 수호자'},
+    'mother-korea':{en:"Mother of Korea, Warmth of the Entire Nation",ko:'조선의 어머니이며 온 민족의 따뜻함'},
+    'pillar-family':{en:"Pillar of the Family, Unwavering Foundation of All That Is Good",ko:'가정의 기둥이며 모든 선한 것의 흔들리지 않는 토대'},
+    'outstanding-thinker':{en:"Outstanding Thinker of the Era, Pioneer of Original Thought",ko:'시대의 탁월한 사상가이며 독창적 사유의 선구자'},
+  };
+
+  var currentReg=null;
+
+  function makeReg(){return 'STR-'+String(Math.floor(Math.random()*9000)+1000).padStart(4,'0');}
+
+  function render(){
+    var name=document.getElementById('ctrl-name').value||'Your Name Here';
+    var titleKey=document.getElementById('ctrl-title').value;
+    var t=TITLE_DATA[titleKey]||TITLE_DATA['iron-willed'];
+    if(!currentReg)currentReg=makeReg();
+    document.getElementById('live-cert').innerHTML=window.DPRK.renderCert({
+      name:name,titleEn:t.en,titleKo:t.ko,
+      regNum:currentReg+' · PREVIEW · Desert Colony, Australia · Juche 113'
+    });
+  }
+
+  function regen(){currentReg=makeReg();render();}
+
+  function setScale(btn,s){
+    document.querySelectorAll('.size-btn').forEach(function(b){b.classList.remove('on');});
+    btn.classList.add('on');
+    document.getElementById('cert-scale').style.transform='scale('+s+')';
+  }
+
+  document.getElementById('ctrl-name').addEventListener('input',render);
+  document.getElementById('ctrl-title').addEventListener('change',render);
+  document.addEventListener('DOMContentLoaded',function(){render();});
+
+  // Read URL params to pre-fill (when linked from /title/:slug)
+  var params=new URLSearchParams(window.location.search);
+  if(params.get('title')){
+    var sel=document.getElementById('ctrl-title');
+    for(var i=0;i<sel.options.length;i++){
+      if(sel.options[i].value===params.get('title')){sel.selectedIndex=i;break;}
+    }
+  }
+  if(params.get('name')){document.getElementById('ctrl-name').value=params.get('name');}
+  </script>
+</body>
+</html>

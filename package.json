@@ -1,0 +1,12 @@
+{
+  "name": "dprk-registry",
+  "version": "1.0.0",
+  "description": "DPRK Honorary Title Registry — satirical e-commerce site",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

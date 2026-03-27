@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DPRK Title Registry — Honorary Titles for the Gloriously Deserving</title>
+  <link rel="stylesheet" href="/public/style.css">
+  <style>
+    /* ── HOME PAGE SPECIFIC STYLES ── */
+    .hero { background: var(--cn); padding: 52px 40px 48px; position: relative; overflow: hidden; border-bottom: 4px solid var(--red); }
+    .hero::before { content: ''; position: absolute; inset: 0; background: repeating-conic-gradient(from 0deg at 50% 130%, rgba(255,221,0,.022) 0deg 4deg, transparent 4deg 14deg); pointer-events: none; }
+    .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; max-width: 1300px; margin: 0 auto; position: relative; z-index: 1; }
+    .hero-eyebrow { display: inline-block; background: var(--red); color: #fff; font-family: monospace; font-size: 11px; font-weight: 700; letter-spacing: 3px; padding: 3px 10px; margin-bottom: 20px; text-transform: uppercase; }
+    .hero-headline { font-family: 'VT323', monospace; font-size: 68px; color: var(--gold2); line-height: 1; margin-bottom: 20px; text-shadow: 2px 2px 0 rgba(0,0,0,.4); }
+    .hero-headline em { color: #fff; display: block; font-style: normal; font-size: 42px; margin-top: 6px; }
+    .hero-sub { font-size: 18px; color: #c8ddff; line-height: 1.7; margin-bottom: 28px; max-width: 480px; }
+    .hero-sub strong { color: #fff; }
+    .price-row { display: flex; gap: 16px; align-items: center; margin-bottom: 28px; }
+    .price-pill { background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.25); padding: 10px 20px; text-align: center; }
+    .price-amount { font-family: 'VT323', monospace; font-size: 40px; color: var(--gold2); line-height: 1; display: block; }
+    .price-label { font-size: 12px; color: rgba(255,255,255,.6); font-family: monospace; letter-spacing: 1px; display: block; margin-top: 2px; }
+    .cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
+
+    /* Product showcase */
+    .showcase { position: relative; height: 480px; }
+    .envelope { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 340px; height: 220px; }
+    .env-body { position: absolute; bottom: 0; left: 0; right: 0; height: 200px; background: #00205B; border: 2px solid var(--cg); box-shadow: 4px 4px 0 rgba(0,0,0,.4); }
+    .env-top-band { position: absolute; top: 0; left: 0; right: 0; height: 8px; background: var(--cr); }
+    .env-bot-band { position: absolute; bottom: 0; left: 0; right: 0; height: 8px; background: var(--cr); }
+    .env-wax { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); width: 32px; height: 32px; background: var(--cr); border-radius: 50%; border: 2px solid var(--cg); display: flex; align-items: center; justify-content: center; font-family: 'Cinzel', serif; font-size: 10px; font-weight: 700; color: var(--gold2); z-index: 5; }
+    .env-text { position: absolute; bottom: 18px; left: 0; right: 0; text-align: center; font-family: 'Cinzel', serif; font-size: 9px; font-weight: 700; color: var(--gold2); letter-spacing: 4px; opacity: .8; }
+    .env-postmark { position: absolute; top: 28px; right: 20px; width: 52px; height: 52px; border: 1.5px solid rgba(201,168,76,.4); border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+    .env-postmark span { font-family: monospace; font-size: 7px; color: rgba(201,168,76,.5); letter-spacing: 1px; text-align: center; line-height: 1.3; }
+    .cert-preview-card { position: absolute; bottom: 100px; left: 50%; transform: translateX(-55%) rotate(-3deg); width: 300px; box-shadow: 6px 6px 0 rgba(0,0,0,.5); z-index: 4; }
+    .float-label { position: absolute; background: var(--gold2); color: #000; font-family: monospace; font-size: 11px; font-weight: 700; padding: 4px 10px; letter-spacing: 1px; white-space: nowrap; z-index: 10; }
+    .fl-1 { top: 30px; right: -10px; transform: rotate(2deg); }
+    .fl-2 { bottom: 190px; right: 0; transform: rotate(-1.5deg); }
+    .fl-3 { bottom: 72px; right: -5px; transform: rotate(1deg); }
+
+    /* Package section */
+    .pkg-section { background: #1a1a2e; padding: 48px 40px; border-bottom: 4px solid var(--red); }
+    .pkg-inner { max-width: 1300px; margin: 0 auto; }
+    .pkg-head { font-family: 'VT323', monospace; font-size: 28px; color: var(--gold2); letter-spacing: 3px; text-align: center; display: block; margin-bottom: 6px; }
+    .pkg-sub { font-size: 14px; color: rgba(255,255,255,.5); text-align: center; font-family: monospace; letter-spacing: 1px; display: block; margin-bottom: 36px; }
+    .pkg-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 2px; }
+    .pkg-item { background: #0d0d1f; border: 1px solid rgba(201,168,76,.2); padding: 28px 20px 24px; display: flex; flex-direction: column; align-items: center; position: relative; }
+    .pkg-item:hover { border-color: rgba(201,168,76,.5); }
+    .pkg-num { position: absolute; top: 12px; left: 12px; font-family: monospace; font-size: 10px; color: rgba(255,255,255,.2); letter-spacing: 1px; }
+    .pkg-title { font-family: 'Cinzel', serif; font-size: 12px; font-weight: 700; color: var(--gold2); letter-spacing: 2px; text-align: center; margin-bottom: 20px; text-transform: uppercase; }
+    .pkg-tick { display: flex; align-items: flex-start; gap: 6px; margin-top: 8px; text-align: left; width: 100%; }
+    .pkg-tick-mark { color: var(--cg); font-size: 13px; flex-shrink: 0; margin-top: 1px; }
+    .pkg-tick-text { font-size: 12px; color: rgba(255,255,255,.45); line-height: 1.5; font-family: Georgia, serif; }
+
+    /* Titles section */
+    .titles-cta { margin-top: 16px; background: var(--navy); padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .titles-cta-text { color: #fff; }
+    .titles-cta-text strong { font-family: 'VT323', monospace; font-size: 22px; color: var(--gold2); display: block; letter-spacing: 1px; }
+    .titles-cta-text span { font-size: 13px; color: rgba(255,255,255,.6); font-family: monospace; }
+    .btn-gold { background: var(--gold2); color: #000; border: none; font-family: monospace; font-size: 13px; font-weight: 700; letter-spacing: 2px; padding: 12px 28px; cursor: pointer; white-space: nowrap; }
+    .btn-gold:hover { background: #ffe44d; }
+
+    /* Reviews */
+    .reviews-summary { background: var(--navy); color: #fff; padding: 14px 18px; margin-bottom: 12px; display: flex; align-items: center; gap: 16px; }
+    .rs-score { font-family: 'VT323', monospace; font-size: 56px; color: var(--gold2); line-height: 1; flex-shrink: 0; }
+    .rs-stars { color: var(--gold2); font-size: 18px; letter-spacing: 3px; display: block; margin-bottom: 4px; }
+    .rs-count { font-size: 10px; color: #aaccff; letter-spacing: 1px; }
+    .rs-note  { font-family: 'IM Fell English', serif; font-style: italic; font-size: 10px; color: #aaccff; margin-top: 3px; }
+    .reviews-grid-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; }
+
+    /* CTA section */
+    .cta-section { background: var(--cn); padding: 48px 40px; text-align: center; border-bottom: 4px solid var(--red); }
+    .cta-head { font-family: 'VT323', monospace; font-size: 46px; color: var(--gold2); margin-bottom: 12px; }
+    .cta-body { font-size: 17px; color: #aaccff; line-height: 1.8; margin-bottom: 28px; }
+  </style>
+</head>
+<body>
+  <script src="/public/components.js"></script>
+
+  <div id="page-content">
+
+    <!-- HERO -->
+    <div class="hero">
+      <div class="hero-grid">
+        <div>
+          <div class="hero-eyebrow">★ Official Distributor — Est. Juche 113</div>
+          <div class="hero-headline">THE TITLES OF<br>THE GREAT LEADERS<em>Are Now Yours.</em></div>
+          <p class="hero-sub">For decades, the world's greatest honorary titles belonged to one family, in one country.<br><strong>That family has not offered to share. We have.</strong></p>
+          <div class="price-row">
+            <div class="price-pill"><span class="price-amount">$59</span><span class="price-label">PHYSICAL</span></div>
+            <div style="color:rgba(255,255,255,.3);font-size:18px;">/</div>
+            <div class="price-pill"><span class="price-amount">$29</span><span class="price-label">DIGITAL</span></div>
+            <div style="font-size:13px;color:rgba(255,255,255,.45);font-family:monospace;">Worldwide shipping<br>always included.</div>
+          </div>
+          <div class="cta-row">
+            <button class="btn btn-primary" onclick="location.href='/titles'">★ Claim Your Title</button>
+            <button class="btn btn-ghost" onclick="location.href='/find'">Find Your Title →</button>
+          </div>
+        </div>
+        <div class="showcase">
+          <!-- Envelope -->
+          <div class="envelope">
+            <div class="env-body">
+              <div class="env-top-band"></div>
+              <div class="env-bot-band"></div>
+              <div style="position:absolute;bottom:18px;left:50%;transform:translateX(-50%);opacity:.14;">
+                <svg width="110" height="110" viewBox="0 0 200 200"><circle cx="100" cy="100" r="88" fill="none" stroke="white" stroke-width="3"/><polygon points="100,20 120,75 180,75 132,108 150,165 100,132 50,165 68,108 20,75 80,75" fill="white"/></svg>
+              </div>
+              <div class="env-postmark"><span>DESERT<br>COLONY<br>AUS<br>JUCHE 113</span></div>
+              <div class="env-wax">STR</div>
+              <div class="env-text">DPRK TITLE REGISTRY · OFFICIAL DOCUMENT</div>
+            </div>
+          </div>
+          <!-- Certificate preview -->
+          <div class="cert-preview-card" id="hero-cert"></div>
+          <!-- Labels -->
+          <div class="float-label fl-1">200gsm cream stock</div>
+          <div class="float-label fl-2">+ wax-sealed registry card</div>
+          <div class="float-label fl-3">+ bold navy envelope</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROOF STRIP -->
+    <div class="proof-strip">
+      <div class="proof-inner">
+        <div class="proof-stat"><span class="proof-num">312</span><span class="proof-label">TITLES ISSUED</span></div>
+        <div class="proof-div"></div>
+        <div class="proof-stat"><span class="proof-num">4.9★</span><span class="proof-label">AVERAGE REVIEW</span></div>
+        <div class="proof-div"></div>
+        <div class="proof-stat"><span class="proof-num">98.7%</span><span class="proof-label">WOULD RECOMMEND</span></div>
+        <div class="proof-div"></div>
+        <div class="proof-stat"><span class="proof-num">0</span><span class="proof-label">PROBLEMS REPORTED</span></div>
+        <div class="proof-div"></div>
+        <div style="flex:2;font-family:'IM Fell English',serif;font-style:italic;font-size:15px;color:#444;line-height:1.7;border-left:3px solid var(--red);padding-left:20px;">
+          "He received the Iron-Willed Commander title on his birthday. By Sunday he was correcting people at the pub. At Christmas he required the full title before sitting down."
+          <span style="display:block;font-family:monospace;font-size:11px;font-style:normal;color:var(--dkgrey);margin-top:4px;letter-spacing:1px;">— Patricia H., Brisbane ✓ VERIFIED</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PACKAGE SHOWCASE -->
+    <div class="pkg-section">
+      <div class="pkg-inner">
+        <span class="pkg-head">★ EVERYTHING INCLUDED IN EVERY ORDER ★</span>
+        <span class="pkg-sub">ONE PRICE. NO EXTRAS. NO EXCEPTIONS. SHIPPED WORLDWIDE.</span>
+        <div class="pkg-grid" id="pkg-grid">
+          <!-- Populated by JS below -->
+        </div>
+      </div>
+    </div>
+
+    <!-- TITLES -->
+    <div class="section">
+      <div class="section-inner">
+        <div class="sec-bar">🎖️ THE OFFICIAL TITLES — All $59 Physical · $29 Digital · Worldwide Shipping Included</div>
+        <p style="font-size:14px;color:#555;font-style:italic;margin-bottom:20px;padding-left:4px;">Over 50 titles are available. A selection of the most distinguished is presented below.</p>
+        <div id="titles-list"></div>
+        <div class="titles-cta">
+          <div class="titles-cta-text">
+            <strong>Over 50 titles available.</strong>
+            <span>Not sure which one is right? Answer five questions and the registry will select your correct title. This service is free. It is also, in the committee's opinion, compulsory in spirit.</span>
+          </div>
+          <button class="btn-gold" onclick="location.href='/find'">★ Find Your Title</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- REVIEWS -->
+    <div class="section" style="background:var(--cream);">
+      <div class="section-inner">
+        <div class="sec-bar">⭐ VERIFIED REVIEWS — 312 Reviews · 4.9 Stars · 100% Reported Increased Dignity</div>
+        <div class="reviews-summary">
+          <div class="rs-score">4.9</div>
+          <div>
+            <span class="rs-stars">★★★★★</span>
+            <div class="rs-count">312 VERIFIED REVIEWS · 98.7% WOULD RECOMMEND · 100% REPORTED INCREASED DIGNITY</div>
+            <div class="rs-note">The 1.3% who would not recommend have been noted. Their feedback is under review. It is going very well.</div>
+          </div>
+        </div>
+        <div class="reviews-grid-4">
+          <div class="review-card"><span class="review-stars">★★★★★</span><span class="review-title">"My dad cried. Actual tears."</span><div class="review-body">Bought the Beloved Comrade title for my dad's 70th. He read it twice. He said "this is the most accurate thing anyone has ever said about me." It is on the wall next to his degree. The degree has been moved left.</div><div class="review-meta">Sarah T., Brisbane <span class="review-badge">✓ VERIFIED</span></div></div>
+          <div class="review-card"><span class="review-stars">★★★★★</span><span class="review-title">"Updated his LinkedIn. Immediately."</span><div class="review-body">Bought the Brilliant Genius title for my husband. By that evening it was in his LinkedIn headline. Three colleagues have enquired. He has not told them what it cost. He refers to this as "maintaining appropriate authority."</div><div class="review-meta">Fiona M., Sydney <span class="review-badge">✓ VERIFIED</span></div></div>
+          <div class="review-card"><span class="review-stars">★★★★★</span><span class="review-title">"Behind my head on every call."</span><div class="review-body">Ordered for myself. Gold frame. It now hangs directly behind where my head appears on video calls. Three people have asked about it. They are unsure how to respond. I consider this the correct outcome.</div><div class="review-meta">James C., Melbourne <span class="review-badge">✓ VERIFIED</span></div></div>
+          <div class="review-card"><span class="review-stars">★★★★★</span><span class="review-title">"Mum now signs texts with a star."</span><div class="review-body">Bought the Eternal Sun title for my mum. She read it very carefully, said "well, this is lovely isn't it" and put it on the mantelpiece. She now signs off her WhatsApp messages with a small star emoji. She has not explained this to anyone.</div><div class="review-meta">Rachel B., Perth <span class="review-badge">✓ VERIFIED</span></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-section">
+      <div style="max-width:700px;margin:0 auto;">
+        <div class="cta-head">CLAIM YOUR TITLE. IT IS WAITING.</div>
+        <p class="cta-body">Six titles. One for every type of remarkable person.<br>Printed in the desert. Posted by decree.<br><strong style="color:#fff;">$59 physical · $29 digital. Worldwide shipping always included.</strong></p>
+        <button class="btn btn-primary" onclick="location.href='/titles'" style="margin-right:12px;">★ Browse All Titles</button>
+        <button class="btn btn-ghost" onclick="location.href='/find'">Find My Title →</button>
+      </div>
+    </div>
+
+  </div><!-- #page-content -->
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const T = window.DPRK.TITLES;
+
+      // Render hero cert
+      document.getElementById('hero-cert').innerHTML = window.DPRK.renderCert({
+        name: 'Your Name Here',
+        titleEn: T[0].en,
+        titleKo: T[0].ko,
+        regNum: 'STR-0001 · Preview'
+      });
+
+      // Render package items
+      const pkgData = [
+        { num: '01', title: 'A4 Certificate', ticks: ['200gsm cream stock, printed flat', 'Your name in calligraphic script', 'Kim Jong-un signature & two official seals', 'Conditions of Honour on the reverse'] },
+        { num: '02', title: 'Wax-Sealed Registry Card', ticks: ['A6 card, same paper as the certificate', 'Your name, title, and registry number', 'Sealed with crimson STR monogram wax', 'Real KJU quote inside'] },
+        { num: '03', title: 'Official Navy Envelope', ticks: ['C4 hard-backed — ships flat, uncreased', 'Bold DPRK navy with crimson bands', 'State emblem + Desert Colony postmark', 'Tracked worldwide. Shipping included.'] },
+        { num: '04', title: 'Registry Entry', ticks: ['Your name in the permanent online registry', 'Search your name to find your entry', 'Personal message from Kim Jong-un', 'Private — no public browsing'] },
+      ];
+      document.getElementById('pkg-grid').innerHTML = pkgData.map(p => `
+        <div class="pkg-item">
+          <div class="pkg-num">${p.num}</div>
+          <div class="pkg-title">${p.title}</div>
+          ${p.ticks.map(t => `<div class="pkg-tick"><div class="pkg-tick-mark">★</div><div class="pkg-tick-text">${t}</div></div>`).join('')}
+        </div>`).join('');
+
+      // Render titles
+      document.getElementById('titles-list').innerHTML = T.slice(0, 4).map(t => `
+        <div class="title-row ${t.popular ? 'featured' : ''}" onclick="location.href='/title/${t.id}'">
+          <div class="tr-rank" style="background:${t.gradeColour};">
+            <span class="tr-rank-icon">${t.icon}</span>
+            <span class="tr-rank-label">${t.grade.toUpperCase()}</span>
+          </div>
+          <div class="tr-body">
+            <div class="tr-title">${t.en}</div>
+            <div class="tr-desc">${t.desc}</div>
+            <div class="tr-tags">
+              ${t.popular ? '<span class="tr-tag popular">★ Most Popular</span>' : ''}
+              <span class="tr-tag">A4 · 200gsm</span>
+            </div>
+          </div>
+          <div class="tr-cta">
+            <span class="tr-price">$${t.price}</span>
+            <button class="tr-btn">ORDER ★</button>
+          </div>
+        </div>`).join('');
+    });
+  </script>
+</body>
+</html>

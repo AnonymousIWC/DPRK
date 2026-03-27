@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Find Your Title — DPRK Title Registry</title>
+  <link rel="stylesheet" href="/public/style.css">
+  <style>
+    .quiz-page{background:var(--cn);min-height:70vh;padding:56px 40px;}
+    .qwrap{max-width:860px;margin:0 auto;}
+    .prog-kick{font-family:monospace;font-size:11px;font-weight:700;letter-spacing:4px;color:var(--gold2);text-transform:uppercase;display:block;margin-bottom:12px;}
+    .prog-bar-wrap{background:rgba(255,255,255,.1);height:6px;margin-bottom:10px;}
+    .prog-bar{background:var(--gold2);height:6px;transition:width .5s ease;}
+    .prog-steps{display:flex;justify-content:space-between;font-family:monospace;font-size:11px;color:rgba(255,255,255,.35);letter-spacing:1px;margin-bottom:36px;}
+    .qcard{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);padding:48px;position:relative;overflow:hidden;}
+    .qcard::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(to right,var(--cr),var(--cg));}
+    .q-num{font-family:monospace;font-size:11px;font-weight:700;letter-spacing:3px;color:rgba(255,255,255,.3);display:block;margin-bottom:14px;}
+    .q-text{font-family:'Cinzel',serif;font-size:26px;font-weight:700;color:#fff;line-height:1.25;margin-bottom:8px;}
+    .q-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16px;color:rgba(255,255,255,.5);margin-bottom:36px;line-height:1.6;}
+    .answers{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+    .ans{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.15);padding:18px 22px;text-align:left;cursor:pointer;transition:all .2s;position:relative;width:100%;}
+    .ans:hover{background:rgba(255,255,255,.1);border-color:rgba(201,168,76,.5);}
+    .ans.sel{background:rgba(201,168,76,.12);border-color:var(--cg);border-width:2px;}
+    .ans.sel::after{content:'★';position:absolute;top:12px;right:14px;color:var(--cg);font-size:14px;}
+    .ans-letter{font-family:monospace;font-size:10px;font-weight:700;letter-spacing:2px;color:rgba(201,168,76,.5);display:block;margin-bottom:6px;}
+    .ans-text{font-size:15px;color:rgba(255,255,255,.8);line-height:1.5;}
+    .ans-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;color:rgba(255,255,255,.35);margin-top:4px;line-height:1.4;}
+    .qnav{display:flex;justify-content:space-between;align-items:center;margin-top:32px;}
+    .btn-back-q{background:transparent;color:rgba(255,255,255,.4);border:1px solid rgba(255,255,255,.15);font-family:monospace;font-size:12px;font-weight:700;letter-spacing:2px;padding:12px 20px;cursor:pointer;}
+    .btn-back-q:hover{color:rgba(255,255,255,.7);}
+    .q-note{font-family:monospace;font-size:11px;color:rgba(255,255,255,.25);letter-spacing:1px;}
+    .btn-next-q{background:var(--gold2);color:#000;border:none;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:3px;padding:14px 32px;cursor:pointer;text-transform:uppercase;opacity:.35;pointer-events:none;transition:opacity .2s;}
+    .btn-next-q.on{opacity:1;pointer-events:all;}
+    .btn-next-q.on:hover{background:#ffe44d;}
+    .load-page{background:var(--cn);min-height:70vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;padding:40px;}
+    .load-emb{animation:pulse 1.5s ease-in-out infinite;}
+    @keyframes pulse{0%,100%{opacity:.6;transform:scale(.97)}50%{opacity:1;transform:scale(1)}}
+    .load-title{font-family:'VT323',monospace;font-size:36px;color:var(--gold2);letter-spacing:3px;text-align:center;}
+    .load-bar-wrap{width:320px;background:rgba(255,255,255,.1);height:4px;}
+    .load-bar{background:var(--cg);height:4px;animation:lbar 2.4s ease-in-out forwards;}
+    @keyframes lbar{0%{width:0}60%{width:75%}85%{width:90%}100%{width:100%}}
+    .load-sub{font-family:monospace;font-size:11px;color:rgba(255,255,255,.3);letter-spacing:2px;text-align:center;}
+    .result-page{background:var(--cn);padding:56px 40px;}
+    .res-inner{max-width:1060px;margin:0 auto;}
+    .res-hdr{text-align:center;margin-bottom:48px;}
+    .res-kick{font-family:monospace;font-size:11px;font-weight:700;letter-spacing:4px;color:var(--cr);text-transform:uppercase;display:block;margin-bottom:12px;}
+    .res-head{font-family:'VT323',monospace;font-size:44px;color:var(--gold2);margin-bottom:8px;}
+    .res-intro{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:18px;color:rgba(255,255,255,.55);}
+    .res-grid{display:grid;grid-template-columns:1fr 380px;gap:48px;align-items:start;}
+    .res-cert{}
+    .rp{color:#fff;}
+    .rp-grade{display:inline-block;background:var(--cr);color:#fff;font-family:monospace;font-size:11px;font-weight:700;letter-spacing:3px;padding:4px 12px;margin-bottom:16px;}
+    .rp-tname{font-family:'Cinzel',serif;font-size:22px;font-weight:700;color:#fff;line-height:1.3;margin-bottom:16px;}
+    .rp-whyh{font-family:monospace;font-size:10px;font-weight:700;letter-spacing:3px;color:var(--cg);text-transform:uppercase;margin-bottom:10px;}
+    .rp-why{font-size:16px;color:#aaccff;line-height:1.9;margin-bottom:24px;}
+    .rp-div{height:1px;background:rgba(255,255,255,.1);margin-bottom:24px;}
+    .rp-prices{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;}
+    .rpopt{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);padding:14px 16px;text-align:center;cursor:pointer;transition:all .2s;}
+    .rpopt:hover{border-color:rgba(201,168,76,.5);}
+    .rpopt.sel{border-color:var(--cg);background:rgba(201,168,76,.1);}
+    .rpamt{font-family:'VT323',monospace;font-size:36px;color:var(--gold2);line-height:1;display:block;}
+    .rplbl{font-family:monospace;font-size:11px;color:rgba(255,255,255,.45);letter-spacing:1px;display:block;margin-top:3px;}
+    .btn-order{width:100%;background:var(--red);color:#fff;border:none;font-family:monospace;font-size:14px;font-weight:700;letter-spacing:3px;padding:16px;cursor:pointer;text-transform:uppercase;margin-bottom:10px;}
+    .btn-order:hover{background:#aa0000;}
+    .btn-retake{width:100%;background:transparent;color:rgba(255,255,255,.45);border:1px solid rgba(255,255,255,.18);font-family:monospace;font-size:12px;font-weight:700;letter-spacing:2px;padding:12px;cursor:pointer;}
+    .btn-retake:hover{color:rgba(255,255,255,.75);}
+    .rnote{font-family:monospace;font-size:10px;color:rgba(255,255,255,.2);letter-spacing:1px;text-align:center;margin-top:12px;line-height:1.6;}
+    .screen{display:none;}
+    .screen.on{display:block;}
+    .load-screen{display:none;}
+    .load-screen.on{display:flex;}
+  </style>
+</head>
+<body>
+  <script src="/public/components.js"></script>
+  <div id="page-content">
+    <div class="bc"><a href="/">Home</a> &rsaquo; Find Your Title</div>
+
+    <!-- QUIZ SCREEN -->
+    <div id="s-quiz" class="screen on">
+      <div class="quiz-page">
+        <div class="qwrap">
+          <span class="prog-kick" id="prog-kick">★ Question 1 of 5 — The Registry Awaits Your Response</span>
+          <div class="prog-bar-wrap"><div class="prog-bar" id="prog-bar" style="width:20%"></div></div>
+          <div class="prog-steps"><span>BEGIN</span><span>2</span><span>3</span><span>4</span><span>REVEAL</span></div>
+          <div class="qcard">
+            <span class="q-num" id="q-num">QUESTION 01 / 05</span>
+            <div class="q-text" id="q-text"></div>
+            <div class="q-sub" id="q-sub"></div>
+            <div class="answers" id="ans-grid"></div>
+            <div class="qnav">
+              <button class="btn-back-q" id="btn-back" onclick="goBack()">&#8592; Back</button>
+              <span class="q-note" id="q-note">Select an answer to continue</span>
+              <button class="btn-next-q" id="btn-next" onclick="goNext()">Continue &#8594;</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LOADING SCREEN -->
+    <div id="s-load" class="load-screen" style="flex-direction:column;align-items:center;justify-content:center;gap:24px;padding:80px 40px;background:var(--cn);">
+      <div class="load-emb">
+        <svg width="100" height="100" viewBox="0 0 200 200">
+          <circle cx="100" cy="100" r="92" fill="none" stroke="rgba(201,168,76,.3)" stroke-width="2"/>
+          <g transform="translate(100,100)">
+            <ellipse cx="-62" cy="0" rx="5" ry="18" fill="#C9A84C" transform="rotate(-60 -62 0)"/>
+            <ellipse cx="-54" cy="-8" rx="4" ry="14" fill="#C9A84C" transform="rotate(-45 -54 -8)"/>
+            <ellipse cx="-72" cy="8" rx="4" ry="14" fill="#C9A84C" transform="rotate(-75 -72 8)"/>
+            <ellipse cx="62" cy="0" rx="5" ry="18" fill="#C9A84C" transform="rotate(60 62 0)"/>
+            <ellipse cx="54" cy="-8" rx="4" ry="14" fill="#C9A84C" transform="rotate(45 54 -8)"/>
+            <ellipse cx="72" cy="8" rx="4" ry="14" fill="#C9A84C" transform="rotate(75 72 8)"/>
+          </g>
+          <polygon points="100,32 107,55 131,55 113,68 120,91 100,78 80,91 87,68 69,55 93,55" fill="#8B1A1A"/>
+        </svg>
+      </div>
+      <div class="load-title">CONSULTING THE REGISTRY...</div>
+      <div class="load-bar-wrap"><div class="load-bar" id="lbar"></div></div>
+      <div class="load-sub" id="load-sub">Analysing your responses against 50+ titles</div>
+    </div>
+
+    <!-- RESULT SCREEN -->
+    <div id="s-result" class="screen">
+      <div class="result-page">
+        <div class="res-inner">
+          <div class="res-hdr">
+            <span class="res-kick">★ Registry Determination — Issued by Supreme Decree</span>
+            <div class="res-head">The Registry Has Spoken.</div>
+            <div class="res-intro">After careful consideration, the committee has reached a unanimous determination.</div>
+          </div>
+          <div class="res-grid">
+            <div class="res-cert" id="res-cert"></div>
+            <div class="rp">
+              <div class="rp-grade" id="rp-grade">SUPREME GRADE</div>
+              <div class="rp-tname" id="rp-tname">—</div>
+              <div class="rp-whyh">Why This Title</div>
+              <div class="rp-why" id="rp-why">—</div>
+              <div class="rp-div"></div>
+              <div class="rp-prices">
+                <div class="rpopt sel" onclick="selFmt(this)"><span class="rpamt">$59</span><span class="rplbl">PHYSICAL<br>Cert + Envelope + Card</span></div>
+                <div class="rpopt" onclick="selFmt(this)"><span class="rpamt">$29</span><span class="rplbl">DIGITAL<br>Instant PDF</span></div>
+              </div>
+              <button class="btn-order" onclick="location.href='/titles'">★ Order This Title Now</button>
+              <button class="btn-retake" onclick="retake()">&#8592; Retake the Quiz</button>
+              <div class="rnote">Worldwide shipping included in physical price<br>The registry does not issue incorrect titles.<br>No appeals. No substitutions.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+  var Qs=[
+    {q:"When you enter a room, what typically happens?",sub:"Be honest. The registry has ways of verifying.",a:[
+      {l:"A",t:"People notice. Conversations shift. Attention arrives without effort.",s:"It has always been this way.",tr:"commanding"},
+      {l:"B",t:"The energy improves. People seem happier. You don't do anything — it just happens.",s:"You are a source of warmth.",tr:"radiant"},
+      {l:"C",t:"You immediately identify the most important conversation and begin contributing to it.",s:"You are strategic.",tr:"brilliant"},
+      {l:"D",t:"Someone offers you a drink. Someone else checks if you need anything.",s:"People want to please you.",tr:"beloved"}
+    ]},
+    {q:"How would others describe your opinions?",sub:"Select the response that, on reflection, is most accurate.",a:[
+      {l:"A",t:"\"Correct.\" They may disagree initially. They come around.",s:"It takes time. That is fine.",tr:"commanding"},
+      {l:"B",t:"\"Inspiring.\" You make people feel that things will work out.",s:"This is a genuine gift.",tr:"radiant"},
+      {l:"C",t:"\"Thorough.\" You have considered angles others have not.",s:"They will thank you eventually.",tr:"brilliant"},
+      {l:"D",t:"\"Warm.\" You listen properly. Your advice is sought because you genuinely care.",s:"This is rarer than it appears.",tr:"beloved"}
+    ]},
+    {q:"What is your relationship with authority?",sub:"The registry asks this question carefully.",a:[
+      {l:"A",t:"I am the authority. In most situations, formally or otherwise.",s:"This is simply accurate.",tr:"commanding"},
+      {l:"B",t:"People follow me not because I demand it, but because things go better when they do.",s:"A quiet form of leadership.",tr:"radiant"},
+      {l:"C",t:"I respect authority that has earned it. Mine has.",s:"The record speaks for itself.",tr:"brilliant"},
+      {l:"D",t:"I prefer harmony. I work with people rather than over them.",s:"A different kind of strength.",tr:"beloved"}
+    ]},
+    {q:"Your most significant recent achievement?",sub:"Do not be modest. The registry responds poorly to false modesty.",a:[
+      {l:"A",t:"I solved a problem that had been sitting unresolved for months. Without being asked.",s:"Standard.",tr:"commanding"},
+      {l:"B",t:"Someone told me I changed how they thought about something. They seemed genuinely affected.",s:"You have this effect.",tr:"radiant"},
+      {l:"C",t:"I was right about something important when everyone else was wrong. Events confirmed this.",s:"As expected.",tr:"brilliant"},
+      {l:"D",t:"I remembered something that mattered to someone and acted on it. They were more moved than expected.",s:"This is your nature.",tr:"beloved"}
+    ]},
+    {q:"This certificate will be displayed — where?",sub:"The registry considers display location significant. It reflects character.",a:[
+      {l:"A",t:"Behind my head on video calls. Visible to everyone, every time, without comment from me.",s:"The correct answer.",tr:"commanding"},
+      {l:"B",t:"Somewhere visible and tasteful. Where guests will notice and I can explain it warmly.",s:"You are generous.",tr:"radiant"},
+      {l:"C",t:"In my office, beside my credentials. Contextually appropriate.",s:"A considered choice.",tr:"brilliant"},
+      {l:"D",t:"Somewhere meaningful to the recipient. This is a gift. I want them to treasure it.",s:"You are giving this to someone.",tr:"beloved"}
+    ]}
+  ];
+
+  var Titles={
+    commanding:{grade:"SUPREME GRADE",en:"Iron-Willed Commander of the\nGlorious People's Eternal Struggle",ko:"강철의 의지를 지닌 영광스러운 인민의 사령관",why:"Your responses describe a person of decisive, unquestioned authority. You make decisions. Others follow. You have been doing this for years without formal recognition. The Iron-Willed Commander is the most appropriate title in the registry for someone of your precise profile. The committee was unanimous."},
+    radiant:{grade:"ETERNAL GRADE",en:"Eternal Sun of the Revolutionary Cause\n& Morning Star of Juche",ko:"혁명의 영원한 태양이며 주체의 새벽별",why:"Your responses describe someone whose presence has a measurable effect on those around them. You attract rather than demand. You are a source of warmth and light in ways you may not fully appreciate. The Eternal Sun title has been assigned with great confidence."},
+    brilliant:{grade:"BRILLIANT GRADE",en:"Brilliant Genius of Humanity, Guiding Star\nof the 21st Century & Outstanding Thinker",ko:"인류의 탁월한 천재이며 21세기의 길잡이 별",why:"Your responses describe exceptional analytical clarity and a documented record of being correct when others were not. You have opinions. They are well-formed. People find this occasionally challenging and frequently useful. The Brilliant Genius title is the only appropriate designation."},
+    beloved:{grade:"BELOVED GRADE",en:"Most Beloved & Respected Comrade\nof the Motherland, Cherished by All",ko:"조국의 가장 사랑받고 존경받는 동지",why:"Your responses describe genuine warmth and consistent generosity. You remember. You act. You hold things together with quiet competence that others rely on without always acknowledging. The Most Beloved Comrade is not a consolation — it is one of the most distinguished titles in the registry."}
+  };
+
+  var cur=0,sel=[],picked=null;
+
+  function show(id){
+    ['s-quiz','s-load','s-result'].forEach(function(s){
+      var el=document.getElementById(s);
+      el.className=el.className.replace(/\bon\b/,'').trim();
+    });
+    var target=document.getElementById(id);
+    target.className+=' on';
+  }
+
+  function render(){
+    var q=Qs[cur];
+    document.getElementById('prog-kick').textContent='★ Question '+(cur+1)+' of 5 — '+(cur===4?'Final Question':'The Registry Awaits Your Response');
+    document.getElementById('prog-bar').style.width=((cur+1)*20)+'%';
+    document.getElementById('q-num').textContent='QUESTION 0'+(cur+1)+' / 05';
+    document.getElementById('q-text').textContent=q.q;
+    document.getElementById('q-sub').textContent=q.sub;
+    document.getElementById('btn-back').style.visibility=cur>0?'visible':'hidden';
+    var g=document.getElementById('ans-grid');
+    g.innerHTML='';
+    q.a.forEach(function(a,i){
+      var b=document.createElement('button');
+      b.className='ans'+(sel[cur]===i?' sel':'');
+      b.innerHTML='<span class="ans-letter">'+a.l+'</span><div class="ans-text">'+a.t+'</div><div class="ans-sub">'+a.s+'</div>';
+      b.onclick=function(){pick(i);};
+      g.appendChild(b);
+    });
+    picked=sel[cur]!==undefined?sel[cur]:null;
+    updNext();
+  }
+
+  function pick(i){
+    sel[cur]=i;picked=i;
+    document.querySelectorAll('.ans').forEach(function(b,idx){b.classList.toggle('sel',idx===i);});
+    updNext();
+  }
+
+  function updNext(){
+    var bn=document.getElementById('btn-next');
+    var note=document.getElementById('q-note');
+    if(picked!==null){
+      bn.classList.add('on');
+      note.textContent=cur===4?'Ready — reveal your title':'Answer selected';
+      bn.textContent=cur===4?'Reveal My Title ★':'Continue →';
+    } else {
+      bn.classList.remove('on');
+      note.textContent='Select an answer to continue';
+      bn.textContent=cur===4?'Reveal My Title ★':'Continue →';
+    }
+  }
+
+  function goNext(){
+    if(picked===null)return;
+    if(cur<4){cur++;render();}else{startLoad();}
+  }
+
+  function goBack(){if(cur>0){cur--;render();}}
+
+  function startLoad(){
+    show('s-load');
+    var msgs=['Analysing your responses against 50+ titles','Consulting the committee on your profile','Cross-referencing with the official registry','Calibrating your grade and distinction','Preparing your certificate'];
+    var i=0;
+    var iv=setInterval(function(){document.getElementById('load-sub').textContent=msgs[Math.min(i++,msgs.length-1)];},480);
+    setTimeout(function(){clearInterval(iv);showResult();},2600);
+  }
+
+  function showResult(){
+    var tally={commanding:0,radiant:0,brilliant:0,beloved:0};
+    sel.forEach(function(ai,qi){tally[Qs[qi].a[ai].tr]++;});
+    var winner=Object.entries(tally).sort(function(a,b){return b[1]-a[1];})[0][0];
+    var T=Titles[winner];
+    document.getElementById('rp-grade').textContent=T.grade;
+    document.getElementById('rp-tname').textContent=T.en.replace('\n',' ');
+    document.getElementById('rp-why').textContent=T.why;
+    var n=Math.floor(Math.random()*9000)+1000;
+    document.getElementById('res-cert').innerHTML=window.DPRK.renderCert({
+      titleEn:T.en.replace('\n',' · '),titleKo:T.ko,
+      regNum:'STR-'+String(n).padStart(4,'0')+' · Your Name · Juche 113'
+    });
+    show('s-result');
+  }
+
+  function selFmt(el){document.querySelectorAll('.rpopt').forEach(function(o){o.classList.remove('sel');});el.classList.add('sel');}
+  function retake(){cur=0;sel=[];picked=null;render();show('s-quiz');}
+
+  document.addEventListener('DOMContentLoaded',function(){render();});
+  </script>
+</body>
+</html>

@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Registry — DPRK Title Registry</title>
+  <link rel="stylesheet" href="/public/style.css">
+  <style>
+    .reg-hero{background:var(--cn);padding:56px 40px;border-bottom:4px solid var(--red);position:relative;overflow:hidden;}
+    .reg-hero::before{content:'';position:absolute;inset:0;background:repeating-conic-gradient(from 0deg at 50% 130%,rgba(255,221,0,.018) 0deg 4deg,transparent 4deg 14deg);pointer-events:none;}
+    .rh-inner{max-width:860px;margin:0 auto;position:relative;z-index:1;text-align:center;}
+    .rh-kick{font-family:monospace;font-size:11px;font-weight:700;letter-spacing:4px;color:var(--cr);text-transform:uppercase;display:block;margin-bottom:14px;}
+    .rh-title{font-family:'VT323',monospace;font-size:64px;color:var(--gold2);line-height:1;margin-bottom:14px;text-shadow:2px 2px 0 rgba(0,0,0,.4);}
+    .rh-sub{font-size:17px;color:rgba(255,255,255,.6);line-height:1.8;max-width:620px;margin:0 auto 32px;}
+    .privacy-note{display:flex;align-items:flex-start;gap:10px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);padding:14px 18px;margin:0 auto 32px;max-width:520px;text-align:left;}
+    .privacy-note-icon{font-size:18px;flex-shrink:0;}
+    .privacy-note-text{font-family:monospace;font-size:12px;color:rgba(255,255,255,.45);line-height:1.7;letter-spacing:.5px;}
+
+    .search-section{background:var(--cn);padding:0 40px 64px;}
+    .search-wrap{max-width:620px;margin:0 auto;}
+    .search-box{display:flex;gap:0;}
+    .search-input{flex:1;background:#fff;border:2px solid;border-color:var(--dkgrey) #fff #fff var(--dkgrey);font-family:'Cinzel',serif;font-size:18px;padding:14px 20px;color:var(--ink);}
+    .search-input:focus{outline:none;}
+    .search-btn{background:var(--red);color:#fff;border:none;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:3px;padding:14px 28px;cursor:pointer;white-space:nowrap;}
+    .search-btn:hover{background:#aa0000;}
+    .search-hint{font-family:monospace;font-size:11px;color:rgba(255,255,255,.25);letter-spacing:1px;margin-top:10px;text-align:center;}
+
+    .result-area{padding:40px;max-width:920px;margin:0 auto;}
+
+    /* States */
+    .state{display:none;text-align:center;padding:60px 20px;}
+    .state.on{display:block;}
+    .state-idle .state-icon{font-size:48px;margin-bottom:16px;}
+    .state-idle .state-head{font-family:'VT323',monospace;font-size:36px;color:rgba(255,255,255,.3);margin-bottom:8px;}
+    .state-idle .state-sub{font-family:monospace;font-size:12px;color:rgba(255,255,255,.2);letter-spacing:1px;}
+    .state-notfound .state-head{font-family:'VT323',monospace;font-size:36px;color:var(--dkgrey);margin-bottom:8px;}
+    .state-notfound .state-sub{font-size:14px;color:#888;line-height:1.8;font-family:monospace;}
+    .state-notfound .state-sub a{color:var(--gold);text-decoration:underline;cursor:pointer;}
+
+    /* Found result */
+    .found-wrap{display:grid;grid-template-columns:1fr 340px;gap:48px;align-items:start;}
+    .found-cert{}
+    .found-meta{}
+    .fm-reg{font-family:monospace;font-size:10px;color:var(--cg);letter-spacing:3px;display:block;margin-bottom:12px;}
+    .fm-name{font-family:'Great Vibes',cursive;font-size:52px;color:#fff;line-height:1.1;margin-bottom:6px;}
+    .fm-title-en{font-family:'Cinzel',serif;font-size:16px;font-weight:700;color:var(--gold2);line-height:1.3;margin-bottom:6px;}
+    .fm-title-ko{font-family:'Noto Serif KR',serif;font-size:12px;color:rgba(255,255,255,.4);letter-spacing:2px;margin-bottom:20px;}
+    .fm-div{height:1px;background:rgba(255,255,255,.1);margin-bottom:20px;}
+    .fm-quote-head{font-family:monospace;font-size:10px;font-weight:700;letter-spacing:3px;color:var(--cr);text-transform:uppercase;margin-bottom:10px;}
+    .fm-quote{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:17px;color:rgba(255,255,255,.7);line-height:1.7;margin-bottom:6px;}
+    .fm-quote-attr{font-family:monospace;font-size:10px;color:rgba(255,255,255,.3);letter-spacing:1px;}
+    .fm-actions{margin-top:24px;display:flex;flex-direction:column;gap:10px;}
+    .fm-share{width:100%;background:var(--gold2);color:#000;border:none;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:2px;padding:14px;cursor:pointer;}
+    .fm-share:hover{background:#ffe44d;}
+    .fm-order{width:100%;background:transparent;color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.2);font-family:monospace;font-size:12px;font-weight:700;letter-spacing:2px;padding:12px;cursor:pointer;}
+    .fm-order:hover{color:#fff;border-color:rgba(255,255,255,.5);}
+
+    /* Admin panel */
+    .admin-section{background:#0d0d1f;border-top:3px solid var(--dkgrey);padding:48px 40px;}
+    .admin-inner{max-width:620px;margin:0 auto;}
+    .admin-toggle{font-family:monospace;font-size:11px;color:rgba(255,255,255,.2);letter-spacing:2px;cursor:pointer;text-align:center;display:block;padding:16px;}
+    .admin-toggle:hover{color:rgba(255,255,255,.4);}
+    .admin-panel{display:none;margin-top:24px;}
+    .admin-panel.on{display:block;}
+    .admin-title{font-family:monospace;font-size:11px;font-weight:700;letter-spacing:3px;color:var(--dkgrey);text-transform:uppercase;margin-bottom:20px;}
+    .admin-pw{display:flex;gap:0;margin-bottom:24px;}
+    .admin-pw input{flex:1;background:#1a1a2e;border:2px solid;border-color:var(--dkgrey) #000 #000 var(--dkgrey);color:var(--gold2);font-family:monospace;font-size:14px;padding:10px 14px;}
+    .admin-pw input:focus{outline:none;}
+    .admin-pw button{background:var(--navy);color:var(--gold2);border:none;font-family:monospace;font-size:12px;font-weight:700;letter-spacing:2px;padding:10px 18px;cursor:pointer;}
+    .admin-form{display:none;}
+    .admin-form.on{display:block;}
+    .admin-field{margin-bottom:16px;}
+    .admin-label{font-family:monospace;font-size:11px;color:var(--dkgrey);letter-spacing:1px;display:block;margin-bottom:6px;}
+    .admin-input{width:100%;background:#1a1a2e;border:2px solid;border-color:var(--dkgrey) #000 #000 var(--dkgrey);color:#fff;font-family:Georgia,serif;font-size:16px;padding:10px 14px;}
+    .admin-input:focus{outline:none;}
+    .admin-submit{background:var(--red);color:#fff;border:none;font-family:monospace;font-size:13px;font-weight:700;letter-spacing:3px;padding:14px 32px;cursor:pointer;margin-top:8px;}
+    .admin-submit:hover{background:#aa0000;}
+    .admin-msg{font-family:monospace;font-size:12px;color:var(--gold2);letter-spacing:1px;margin-top:12px;}
+    .admin-wrong{font-family:monospace;font-size:12px;color:var(--red);letter-spacing:1px;margin-top:8px;}
+  </style>
+</head>
+<body>
+  <script src="/public/components.js"></script>
+  <div id="page-content">
+    <div class="bc"><a href="/">Home</a> &rsaquo; The Registry</div>
+
+    <!-- HERO -->
+    <div class="reg-hero">
+      <div class="rh-inner">
+        <span class="rh-kick">The Official Registry — Search by Name</span>
+        <div class="rh-title">The Registry.</div>
+        <div class="rh-sub">Every title ever issued by the DPRK Title Registry is recorded here permanently. Enter an exact name to search. The registry does not offer browsing. This is by design.</div>
+        <div class="privacy-note">
+          <span class="privacy-note-icon">🔒</span>
+          <div class="privacy-note-text">The registry is private. There is no public list of recipients. Names can be found by exact search only. This protects recipients who prefer their magnificence to be discovered rather than announced.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEARCH -->
+    <div class="search-section">
+      <div class="search-wrap">
+        <div class="search-box">
+          <input class="search-input" id="name-input" type="text" placeholder="Enter full name..." autocomplete="off">
+          <button class="search-btn" onclick="doSearch()">SEARCH ★</button>
+        </div>
+        <div class="search-hint">Exact name · Not case-sensitive · The registry does not search by title</div>
+      </div>
+    </div>
+
+    <!-- RESULTS -->
+    <div class="result-area" style="background:var(--cn);">
+
+      <!-- Idle state -->
+      <div class="state state-idle on" id="state-idle">
+        <div class="state-icon">🔍</div>
+        <div class="state-head">Enter a name above.</div>
+        <div class="state-sub">EXACT MATCH REQUIRED · CASE INSENSITIVE</div>
+      </div>
+
+      <!-- Not found -->
+      <div class="state state-notfound" id="state-notfound">
+        <div style="font-size:40px;margin-bottom:16px;">—</div>
+        <div class="state-head">No entry found.</div>
+        <div class="state-sub">
+          This name does not appear in the registry.<br>
+          This could mean no title has been purchased for this person yet.<br><br>
+          <a onclick="location.href='/titles'">Order a title to add them to the registry.</a>
+        </div>
+      </div>
+
+      <!-- Found -->
+      <div class="state" id="state-found">
+        <div class="found-wrap" style="text-align:left;">
+          <div class="found-cert" id="found-cert"></div>
+          <div class="found-meta">
+            <span class="fm-reg" id="fm-reg">REGISTRY ENTRY — STR-XXXX</span>
+            <div class="fm-name" id="fm-name">—</div>
+            <div class="fm-title-en" id="fm-title-en">—</div>
+            <div class="fm-title-ko" id="fm-title-ko">—</div>
+            <div class="fm-div"></div>
+            <div class="fm-quote-head">Personal Message from Kim Jong-un</div>
+            <div class="fm-quote" id="fm-quote">—</div>
+            <div class="fm-quote-attr">— Kim Jong-un, Supreme Registrar · Juche 113</div>
+            <div class="fm-actions">
+              <button class="fm-share">★ Share This Entry</button>
+              <button class="fm-order" onclick="location.href='/titles'">Order Another Title</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ADMIN PANEL -->
+    <div class="admin-section">
+      <div class="admin-inner">
+        <span class="admin-toggle" onclick="toggleAdmin()">▸ Registry Administration</span>
+        <div class="admin-panel" id="admin-panel">
+          <div class="admin-title">Bureau of Records — Authorised Personnel Only</div>
+          <div id="admin-auth">
+            <div class="admin-pw">
+              <input type="password" id="admin-pw-input" placeholder="Enter access code..." onkeydown="if(event.key==='Enter')checkPw()">
+              <button onclick="checkPw()">ENTER</button>
+            </div>
+            <div class="admin-wrong" id="admin-wrong" style="display:none;">Incorrect. The committee has noted this attempt.</div>
+          </div>
+          <div class="admin-form" id="admin-form">
+            <div class="admin-field">
+              <label class="admin-label">RECIPIENT NAME (as it will appear on certificate)</label>
+              <input class="admin-input" id="af-name" type="text" placeholder="Full name">
+            </div>
+            <div class="admin-field">
+              <label class="admin-label">TITLE (English)</label>
+              <input class="admin-input" id="af-title-en" type="text" placeholder="Full title in English">
+            </div>
+            <div class="admin-field">
+              <label class="admin-label">TITLE (Korean)</label>
+              <input class="admin-input" id="af-title-ko" type="text" placeholder="Korean title">
+            </div>
+            <div class="admin-field">
+              <label class="admin-label">REGISTRY NUMBER</label>
+              <input class="admin-input" id="af-reg" type="text" placeholder="e.g. STR-0042">
+            </div>
+            <button class="admin-submit" onclick="addEntry()">ADD TO REGISTRY ★</button>
+            <div class="admin-msg" id="admin-msg" style="display:none;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+  // Registry entries — stored in sessionStorage for demo, replace with server call in production
+  var KJU_QUOTES=[
+    "The fact that you exist is itself a contribution to the revolutionary cause.",
+    "I have reviewed your record. The committee is satisfied. This is not a common outcome.",
+    "Your qualities were always there. We have merely made them official.",
+    "The registry does not issue incorrect titles. I signed yours personally.",
+    "Of all the people I have never met, you are among the most distinguished.",
+    "Your name in this registry is permanent. This is not a promise. It is a statement of fact.",
+    "The certificate is the beginning, not the conclusion. Wear the title well.",
+    "History will remember this moment. I have ensured this by writing it down."
+  ];
+
+  function getEntries(){
+    try{return JSON.parse(sessionStorage.getItem('dprk_registry')||'[]');}catch(e){return[];}
+  }
+  function saveEntries(entries){
+    try{sessionStorage.setItem('dprk_registry',JSON.stringify(entries));}catch(e){}
+  }
+
+  function setState(id){
+    ['state-idle','state-notfound','state-found'].forEach(function(s){
+      document.getElementById(s).className='state';
+    });
+    document.getElementById(id).className='state on';
+  }
+
+  function doSearch(){
+    var name=document.getElementById('name-input').value.trim();
+    if(!name){setState('state-idle');return;}
+    var entries=getEntries();
+    var match=entries.find(function(e){return e.name.toLowerCase()===name.toLowerCase();});
+    if(!match){setState('state-notfound');return;}
+    // Populate found state
+    var quote=KJU_QUOTES[Math.floor(Math.random()*KJU_QUOTES.length)];
+    document.getElementById('fm-reg').textContent='REGISTRY ENTRY — '+match.reg;
+    document.getElementById('fm-name').textContent=match.name;
+    document.getElementById('fm-title-en').textContent=match.titleEn;
+    document.getElementById('fm-title-ko').textContent=match.titleKo||'—';
+    document.getElementById('fm-quote').textContent='"'+quote+'"';
+    document.getElementById('found-cert').innerHTML=window.DPRK.renderCert({
+      name:match.name,titleEn:match.titleEn,titleKo:match.titleKo,regNum:match.reg
+    });
+    setState('state-found');
+  }
+
+  document.getElementById('name-input').addEventListener('keydown',function(e){if(e.key==='Enter')doSearch();});
+
+  function toggleAdmin(){
+    var p=document.getElementById('admin-panel');
+    p.classList.toggle('on');
+  }
+
+  function checkPw(){
+    var pw=document.getElementById('admin-pw-input').value;
+    if(pw==='desertcolony113'){
+      document.getElementById('admin-auth').style.display='none';
+      document.getElementById('admin-form').className='admin-form on';
+    } else {
+      document.getElementById('admin-wrong').style.display='block';
+    }
+  }
+
+  function addEntry(){
+    var name=document.getElementById('af-name').value.trim();
+    var en=document.getElementById('af-title-en').value.trim();
+    var ko=document.getElementById('af-title-ko').value.trim();
+    var reg=document.getElementById('af-reg').value.trim()||'STR-'+String(Math.floor(Math.random()*9000)+1000).padStart(4,'0');
+    if(!name||!en){alert('Name and title are required.');return;}
+    var entries=getEntries();
+    entries.push({name:name,titleEn:en,titleKo:ko,reg:reg});
+    saveEntries(entries);
+    var msg=document.getElementById('admin-msg');
+    msg.textContent='✓ '+name+' added to the registry as '+reg+'. The committee has been informed.';
+    msg.style.display='block';
+    document.getElementById('af-name').value='';
+    document.getElementById('af-title-en').value='';
+    document.getElementById('af-title-ko').value='';
+    document.getElementById('af-reg').value='';
+  }
+
+  // Pre-populate with demo entries
+  document.addEventListener('DOMContentLoaded',function(){
+    var existing=getEntries();
+    if(!existing.length){
+      saveEntries([
+        {name:"Patricia Henderson",titleEn:"Most Beloved & Respected Comrade of the Motherland, Cherished by All",titleKo:"조국의 가장 사랑받고 존경받는 동지",reg:"STR-0001"},
+        {name:"James Crawford",titleEn:"Brilliant Genius of Humanity, Guiding Star of the 21st Century",titleKo:"인류의 탁월한 천재이며 21세기의 길잡이 별",reg:"STR-0002"},
+        {name:"Margaret Okonkwo",titleEn:"Iron-Willed Commander of the Glorious People's Eternal Struggle",titleKo:"강철의 의지를 지닌 영광스러운 인민의 사령관",reg:"STR-0003"}
+      ]);
+    }
+  });
+  </script>
+</body>
+</html>

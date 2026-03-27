@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>DPRK Title Registry — Order Your Honorary Title</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=VT323&family=IM+Fell+English:ital@0;1&family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Noto+Serif+KR:wght@400;700&family=Great+Vibes&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:100%;min-height:100vh;}
+:root{
+  --navy:#000080;--red:#cc0000;--gold:#ccaa00;--gold2:#ffdd00;
+  --paper:#f5ecd7;--cream:#fdf8ee;--ink:#1a0800;
+  --grey:#c0c0c0;--dkgrey:#808080;--ltgrey:#e8e8e8;
+  --cr:#8B1A1A;--cg:#C9A84C;--cn:#00205B;
+}
+body{background:#fff;font-family:Georgia,'Times New Roman',Times,serif;font-size:20px;color:#000;width:100%;}
+.outer{width:100%;background:var(--grey);position:relative;overflow:hidden;}
+.chollima{position:absolute;z-index:9999;pointer-events:none;opacity:0;}
+.titlebar{background:var(--navy);color:#fff;padding:3px 6px;display:flex;justify-content:space-between;align-items:center;font-size:16px;font-weight:700;}
+.wb{display:flex;gap:2px;}
+.wb span{width:16px;height:14px;background:var(--grey);border:1px solid;border-color:#fff #000 #000 #fff;font-size:13px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-weight:700;color:#000;}
+.mq{background:var(--red);overflow:hidden;padding:3px 0;border-top:1px solid #ff8080;border-bottom:2px solid #800000;}
+.mq-inner{display:inline-block;white-space:nowrap;font-family:'VT323',monospace;font-size:20px;color:var(--gold2);animation:scroll 28s linear infinite;padding-left:100%;}
+@keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-100%)}}
+.site-header{background:#fff;border-bottom:3px solid var(--red);}
+.header-flag{display:flex;height:10px;}
+.hf1,.hf5{background:#024fa2;flex:1;}.hf2,.hf4{background:#fff;width:3px;}.hf3{background:#cc0001;flex:2;}
+.header-body{display:flex;align-items:center;padding:7px 14px;gap:10px;}
+.hc-main{font-family:'VT323',monospace;font-size:26px;color:var(--navy);line-height:1;display:block;}
+.hc-sub{font-size:12px;font-weight:700;color:var(--red);display:block;margin-top:1px;letter-spacing:1px;}
+.navbar{background:var(--navy);display:flex;flex-wrap:wrap;border-bottom:2px solid #000040;}
+.navbar a{color:var(--gold2);font-size:15px;font-weight:700;padding:5px 10px;text-decoration:none;border-right:1px solid #0000aa;cursor:pointer;white-space:nowrap;}
+.navbar a:hover,.navbar a.active{background:#0000cc;color:#fff;text-decoration:underline;}
+.breadcrumb{background:var(--ltgrey);border-bottom:1px solid var(--dkgrey);padding:3px 12px;font-size:13px;color:var(--dkgrey);}
+.breadcrumb span{color:var(--navy);cursor:pointer;text-decoration:underline;}
+.page{display:block;}.page.hidden{display:none;}
+.title-selector-bar{background:var(--grey);border-bottom:2px solid var(--dkgrey);padding:6px 12px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.ts-label{font-family:Georgia,'Times New Roman',serif;font-size:13px;font-weight:700;letter-spacing:1px;color:#000;white-space:nowrap;flex-shrink:0;}
+.ts-select{flex:1;min-width:200px;background:#fff;border:2px solid;border-color:var(--dkgrey) #fff #fff var(--dkgrey);font-family:'IM Fell English',serif;font-size:16px;color:var(--navy);padding:4px 6px;cursor:pointer;}
+.ts-select:focus{outline:none;border-color:var(--navy);}
+.content{background:#fff;}
+.cert-hero{background:var(--cn);padding:32px 5% 24px;border-bottom:3px solid var(--red);position:relative;overflow:hidden;}
+.cert-hero::before{content:'';position:absolute;inset:0;background:repeating-conic-gradient(from 0deg at 50% 140%,rgba(255,221,0,.025) 0deg 4deg,transparent 4deg 14deg);pointer-events:none;}
+.hero-inner{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:12px;max-width:680px;margin:0 auto;}
+.name-row{display:flex;gap:8px;align-items:center;width:100%;max-width:580px;}
+.name-label{font-family:Georgia,'Times New Roman',serif;font-size:12px;font-weight:700;color:rgba(255,255,255,.5);letter-spacing:2px;white-space:nowrap;text-transform:uppercase;flex-shrink:0;}
+.name-input{flex:1;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:22px;font-family:'Great Vibes',cursive;padding:7px 10px;transition:border-color .2s;}
+.name-input::placeholder{color:rgba(255,255,255,.25);font-family:Georgia,'Times New Roman',serif;font-size:15px;font-style:italic;}
+.name-input:focus{outline:none;border-color:rgba(255,255,255,.5);}
+.name-hint{font-size:11px;color:rgba(255,255,255,.28);font-style:italic;text-align:center;max-width:580px;}
+.cert{background:var(--paper);border:3px solid var(--cg);padding:0;position:relative;overflow:hidden;font-family:'Cormorant Garamond',serif;color:var(--ink);width:100%;max-width:580px;}
+.cert::before{content:'';position:absolute;inset:0;background-image:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(160,130,80,.018) 3px,rgba(160,130,80,.018) 4px),repeating-linear-gradient(90deg,transparent,transparent 3px,rgba(160,130,80,.01) 3px,rgba(160,130,80,.01) 4px);pointer-events:none;z-index:1;}
+.bro{position:absolute;inset:8px;border:2px solid var(--cr);pointer-events:none;z-index:2;}
+.bri{position:absolute;inset:13px;border:1px solid var(--cg);pointer-events:none;z-index:2;}
+.bri2{position:absolute;inset:16px;border:0.5px solid rgba(201,168,76,.22);pointer-events:none;z-index:2;}
+.corner{position:absolute;width:38px;height:38px;z-index:3;pointer-events:none;}
+.co-tl{top:5px;left:5px;}.co-tr{top:5px;right:5px;transform:scaleX(-1);}
+.co-bl{bottom:5px;left:5px;transform:scaleY(-1);}.co-br{bottom:5px;right:5px;transform:scale(-1,-1);}
+.cb{position:relative;z-index:4;padding:22px 40px 20px;}
+.tbnd{background:var(--cn);margin:-22px -40px 0;padding:8px 40px 7px;border-bottom:3px solid var(--cr);display:flex;align-items:center;justify-content:space-between;gap:10px;}
+.tbl{font-family:'Noto Serif KR',serif;font-size:13px;color:rgba(255,255,255,.65);letter-spacing:2px;flex:1;}
+.tbc{font-family:'Cinzel',serif;font-size:16px;font-weight:700;color:#fff;letter-spacing:3px;text-transform:uppercase;text-align:center;flex:2;}
+.tbr{font-family:'Cormorant Garamond',serif;font-size:12px;color:rgba(255,255,255,.55);letter-spacing:1px;text-align:right;flex:1;}
+.rib{background:var(--cr);margin:0 -40px;padding:4px 40px;text-align:center;font-family:'Cinzel',serif;font-size:7.5px;font-weight:700;letter-spacing:4px;color:#F5D87A;text-transform:uppercase;border-bottom:1px solid var(--cg);}
+.er{display:flex;align-items:center;justify-content:center;gap:14px;margin:12px 0 7px;}
+.ed{flex:1;height:1px;background:linear-gradient(to right,transparent,var(--cg) 30%,var(--cg) 70%,transparent);}
+.srw{display:flex;justify-content:center;gap:6px;margin:3px 0 10px;align-items:center;}
+.sm{color:var(--cr);font-size:17px;line-height:1;}.ss{color:var(--cg);font-size:11px;line-height:1;}
+.sdot{width:3px;height:3px;background:var(--cg);border-radius:50%;}
+.iby{font-family:'Cinzel',serif;font-size:7.5px;font-weight:600;letter-spacing:3px;text-align:center;color:var(--cr);text-transform:uppercase;margin-bottom:2px;}
+.iau{font-family:'Cormorant Garamond',serif;font-size:9.5px;font-style:italic;text-align:center;color:#5a4030;margin-bottom:9px;line-height:1.4;}
+.mhr{border:none;height:1px;background:linear-gradient(to right,transparent,var(--cr) 20%,var(--cr) 80%,transparent);margin:0 18px 9px;}
+.mht{border:none;height:0.5px;background:linear-gradient(to right,transparent,var(--cg) 20%,var(--cg) 80%,transparent);margin:0 38px 9px;}
+.dl{font-family:'Cormorant Garamond',serif;font-size:10.5px;font-style:italic;text-align:center;color:#5a4030;margin-bottom:5px;}
+.rname{font-family:'Great Vibes',cursive;font-size:40px;text-align:center;color:var(--cn);line-height:1.15;border-bottom:1.5px solid var(--cg);padding-bottom:5px;margin:0 12px 6px;}
+.conf{font-family:'Cormorant Garamond',serif;font-size:10.5px;font-style:italic;text-align:center;color:#5a4030;margin-bottom:6px;}
+.tbox{border:1.5px solid var(--cr);margin:0 12px 7px;padding:9px 14px;text-align:center;position:relative;background:rgba(139,26,26,.035);}
+.tbox::before{content:'';position:absolute;inset:3px;border:0.5px solid rgba(139,26,26,.18);pointer-events:none;}
+.tko{font-family:'Noto Serif KR',serif;font-size:9.5px;color:var(--cr);display:block;margin-bottom:4px;letter-spacing:2px;}
+.ten{font-family:'Cinzel',serif;font-size:17px;font-weight:700;color:var(--cr);text-transform:uppercase;letter-spacing:1.5px;line-height:1.3;display:block;}
+.wstrip{height:13px;background:var(--cn);margin:0 -40px;display:flex;align-items:center;justify-content:center;gap:5px;border-top:2px solid var(--cg);border-bottom:1px solid var(--cg);}
+.wd{width:3px;height:3px;background:var(--cg);border-radius:50%;}.ws{color:var(--cg);font-size:6.5px;line-height:1;}
+.btext{font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;text-align:center;color:#4a3828;line-height:1.92;margin:7px 16px 9px;}
+.sigr{display:grid;grid-template-columns:68px 1fr 68px;align-items:flex-end;gap:5px;margin:7px 12px 3px;padding-top:7px;border-top:1px solid rgba(201,168,76,.45);}
+.sblock{text-align:center;}
+.scirc{width:50px;height:50px;border-radius:50%;border:1.5px solid var(--cr);display:flex;align-items:center;justify-content:center;margin:0 auto 3px;}
+.slbl{font-family:'Cinzel',serif;font-size:5.5px;letter-spacing:1px;color:var(--cr);text-transform:uppercase;text-align:center;}
+.sigcenter{text-align:center;}
+.sigsvgw{display:flex;justify-content:center;margin-bottom:3px;}
+.sigl{width:150px;height:1px;background:var(--cr);margin:0 auto 3px;}
+.sigko{font-family:'Noto Serif KR',serif;font-size:8.5px;color:var(--cr);display:block;text-align:center;letter-spacing:2px;margin-bottom:1px;}
+.sigtl{font-family:'Cinzel',serif;font-size:9px;letter-spacing:1.5px;color:var(--cr);text-transform:uppercase;text-align:center;display:block;}
+.regn{font-family:'Cormorant Garamond',serif;font-size:11px;color:#b8a898;text-align:center;letter-spacing:1.5px;margin-top:5px;padding-bottom:2px;}
+.bband{background:var(--cn);margin:0 -40px -22px;padding:5px 40px;border-top:3px solid var(--cr);display:flex;justify-content:space-between;align-items:center;}
+.bblt{font-family:'Noto Serif KR',serif;font-size:7.5px;color:rgba(255,255,255,.45);letter-spacing:1px;}
+.bbct{font-family:'Cinzel',serif;font-size:11px;font-weight:700;color:var(--cg);letter-spacing:3px;text-transform:uppercase;}
+.bbrt{font-family:'Cormorant Garamond',serif;font-size:7.5px;color:rgba(255,255,255,.45);letter-spacing:1px;}
+.order-block{width:100%;max-width:580px;display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);}
+.order-option{background:rgba(0,0,0,.25);padding:20px 24px;cursor:pointer;transition:background .15s;position:relative;}
+.order-option:hover{background:rgba(0,0,0,.35);}
+.order-option.selected{background:rgba(255,255,255,.1);outline:2px solid rgba(255,255,255,.5);outline-offset:-2px;}
+.oo-format{font-family:Georgia,'Times New Roman',serif;font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.5);display:block;margin-bottom:4px;}
+.oo-name{font-family:'Cinzel',serif;font-size:17px;font-weight:700;color:#fff;display:block;margin-bottom:4px;line-height:1.2;}
+.oo-price{font-family:'VT323',monospace;font-size:34px;color:var(--gold2);line-height:1;display:block;margin-bottom:4px;}
+.oo-desc{font-family:Georgia,'Times New Roman',serif;font-size:7.5px;color:rgba(255,255,255,.4);line-height:2.0;display:block;}
+.oo-badge{position:absolute;top:10px;right:10px;background:var(--cr);color:#fff;font-family:Georgia,'Times New Roman',serif;font-size:11px;font-weight:700;padding:2px 6px;letter-spacing:1px;}
+.order-btn{grid-column:1/-1;background:var(--cr);color:#fff;border:none;font-family:Georgia,'Times New Roman',serif;font-size:17px;font-weight:700;letter-spacing:3px;padding:13px;cursor:pointer;text-transform:uppercase;transition:background .15s;}
+.order-btn:hover{background:#a51a1a;}
+.order-note{grid-column:1/-1;font-family:Georgia,'Times New Roman',serif;font-size:7.5px;color:rgba(255,255,255,.3);text-align:center;padding:7px;font-style:italic;line-height:2.0;border-top:1px solid rgba(255,255,255,.08);}
+.section{padding:20px 5%;border-bottom:2px solid var(--ltgrey);}
+.section-alt{background:var(--cream);}
+.sec-bar{background:var(--grey);border:2px solid;border-color:#fff var(--dkgrey) var(--dkgrey) #fff;padding:3px 8px;font-size:15px;font-weight:700;margin-bottom:12px;letter-spacing:1px;}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}
+.info-box{background:var(--grey);border:2px solid;border-color:#fff var(--dkgrey) var(--dkgrey) #fff;}
+.info-box-title{background:var(--navy);color:#fff;font-family:Georgia,'Times New Roman',serif;font-size:13px;font-weight:700;padding:3px 8px;letter-spacing:1px;}
+.info-box-body{padding:14px 18px;font-family:'IM Fell English',serif;font-size:16px;font-style:italic;color:#333;line-height:1.95;}
+.get-item{display:flex;align-items:flex-start;gap:8px;padding:6px 0;border-bottom:1px solid var(--ltgrey);font-size:15px;font-family:Georgia,'Times New Roman',serif;}
+.get-item:last-child{border-bottom:none;}
+.get-check{color:var(--red);font-weight:700;flex-shrink:0;font-size:17px;margin-top:1px;}
+.get-text{color:#222;line-height:1.9;}
+.get-sub{color:var(--dkgrey);font-size:12px;display:block;font-style:italic;margin-top:1px;}
+.aq-text{font-family:'IM Fell English',serif;font-size:16px;font-style:italic;color:#222;line-height:1.95;}
+.aq-attr{font-family:Georgia,'Times New Roman',serif;font-size:12px;color:var(--red);font-weight:700;letter-spacing:1px;margin-top:5px;display:block;}
+.other-titles{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+.ot-card{background:var(--grey);border:2px solid;border-color:#fff var(--dkgrey) var(--dkgrey) #fff;padding:14px 18px;cursor:pointer;transition:all .15s;}
+.ot-card:hover{border-color:var(--navy);}
+.ot-icon{font-size:20px;display:block;margin-bottom:4px;}
+.ot-name{font-family:'IM Fell English',serif;font-size:15px;font-weight:700;color:var(--navy);margin-bottom:4px;line-height:1.3;}
+.ot-price{font-family:'VT323',monospace;font-size:22px;color:var(--red);}
+.reviews-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+.rv{background:var(--grey);border:2px solid;border-color:#fff var(--dkgrey) var(--dkgrey) #fff;padding:14px 18px;}
+.rv-stars{color:var(--gold);font-size:16px;letter-spacing:2px;display:block;margin-bottom:3px;}
+.rv-title{font-family:'VT323',monospace;font-size:18px;color:var(--navy);display:block;margin-bottom:3px;}
+.rv-body{font-family:'IM Fell English',serif;font-size:13px;font-style:italic;color:#333;line-height:1.95;margin-bottom:4px;}
+.rv-meta{font-size:11px;font-weight:700;color:var(--dkgrey);letter-spacing:1px;}
+.rv-v{display:inline-block;background:var(--navy);color:var(--gold2);font-size:9px;font-weight:700;padding:1px 3px;margin-left:3px;}
+.checkout-page{background:#fff;}
+.checkout-header{background:var(--cn);padding:10px 18px;border-bottom:3px solid var(--cr);display:flex;justify-content:space-between;align-items:center;}
+.co-back{font-family:Georgia,'Times New Roman',serif;font-size:13px;font-weight:700;color:var(--gold2);cursor:pointer;text-decoration:underline;}
+.co-back:hover{color:#fff;}
+.co-title{font-family:'VT323',monospace;font-size:22px;color:var(--gold2);letter-spacing:2px;}
+.checkout-body{display:grid;grid-template-columns:1fr 270px;}
+.co-form{padding:26px 32px;border-right:2px solid var(--dkgrey);}
+.co-sec{font-family:Georgia,'Times New Roman',serif;font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#000;border-bottom:1px solid var(--dkgrey);padding-bottom:4px;margin-bottom:10px;}
+.co-field{margin-bottom:8px;}
+.co-label{font-family:Georgia,'Times New Roman',serif;font-size:12px;font-weight:700;display:block;margin-bottom:3px;letter-spacing:1px;text-transform:uppercase;}
+.co-input{width:100%;border:2px solid;border-color:var(--dkgrey) #fff #fff var(--dkgrey);background:#fff;padding:4px 6px;font-size:16px;font-family:Georgia,'Times New Roman',serif;}
+.co-input:focus{outline:none;border-color:var(--navy);}
+.co-row2{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.co-format-display{background:var(--cream);border:2px solid var(--navy);padding:10px 14px;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center;}
+.cfd-left{font-family:Georgia,'Times New Roman',serif;}
+.cfd-name{font-size:16px;font-weight:700;color:var(--navy);display:block;margin-bottom:2px;}
+.cfd-desc{font-size:12px;color:var(--dkgrey);}
+.cfd-price{font-family:'VT323',monospace;font-size:28px;color:var(--red);}
+.cfd-change{font-family:Georgia,'Times New Roman',serif;font-size:12px;color:#0000cc;text-decoration:underline;cursor:pointer;display:block;margin-top:4px;}
+.cfd-change:hover{color:var(--red);}
+.co-submit{width:100%;background:var(--red);color:#fff;border:2px solid;border-color:#ff8080 #800000 #800000 #ff8080;font-family:Georgia,'Times New Roman',serif;font-size:16px;font-weight:700;letter-spacing:2px;padding:10px;cursor:pointer;text-transform:uppercase;margin-top:4px;}
+.co-submit:hover{background:#aa0000;}
+.co-security{display:flex;justify-content:center;gap:10px;margin-top:8px;}
+.co-badge{font-family:Georgia,'Times New Roman',serif;font-size:11px;font-weight:700;letter-spacing:1px;color:var(--dkgrey);}
+.co-summary{background:var(--cream);padding:14px;}
+.co-sum-ttl{font-family:Georgia,'Times New Roman',serif;font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;border-bottom:1px solid var(--dkgrey);padding-bottom:4px;margin-bottom:10px;}
+.co-sum-cert{background:var(--paper);border:1px solid var(--cg);padding:10px;margin-bottom:10px;position:relative;text-align:center;font-family:'Cormorant Garamond',serif;}
+.co-sum-cert::before{content:'';position:absolute;inset:3px;border:0.5px solid rgba(201,168,76,.3);pointer-events:none;}
+.co-sum-line{display:flex;justify-content:space-between;font-family:Georgia,'Times New Roman',serif;font-size:15px;padding:3px 0;border-bottom:1px solid var(--ltgrey);}
+.co-sum-total{display:flex;justify-content:space-between;font-family:Georgia,'Times New Roman',serif;font-size:17px;font-weight:700;padding:7px 0;border-top:2px solid var(--dkgrey);margin-top:4px;color:var(--red);}
+.co-dispatch{font-family:Georgia,'Times New Roman',serif;font-size:12px;color:var(--dkgrey);font-style:italic;margin-top:8px;line-height:1.9;text-align:center;}
+.confirm-page{background:var(--cn);padding:36px 20px;text-align:center;min-height:280px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;}
+.confirm-title{font-family:'VT323',monospace;font-size:30px;color:var(--gold2);letter-spacing:2px;}
+.confirm-body{font-family:'IM Fell English',serif;font-size:16px;font-style:italic;color:#aaccff;max-width:460px;line-height:2.0;text-align:center;}
+.confirm-ref{font-family:Georgia,'Times New Roman',serif;font-size:13px;color:rgba(255,255,255,.4);letter-spacing:2px;}
+.confirm-back{background:var(--gold2);color:#000;border:none;font-family:Georgia,'Times New Roman',serif;font-size:15px;font-weight:700;padding:8px 20px;cursor:pointer;letter-spacing:2px;text-transform:uppercase;}
+.confirm-back:hover{background:#ffe44d;}
+.site-footer{background:var(--grey);border-top:3px ridge var(--dkgrey);padding:8px 12px;text-align:center;font-size:12px;font-family:Georgia,'Times New Roman',serif;}
+.footer-badges{display:flex;justify-content:center;gap:4px;margin-bottom:5px;flex-wrap:wrap;}
+.fbadge{background:var(--grey);border:2px solid;border-color:#fff var(--dkgrey) var(--dkgrey) #fff;padding:2px 6px;font-size:11px;font-weight:700;letter-spacing:1px;}
+.footer-copy{color:var(--navy);font-weight:700;line-height:1.9;}
+.footer-disc{color:var(--dkgrey);font-style:italic;margin-top:3px;}
+</style>
+</head>
+<body>
+<div class="chollima" id="chollima">
+  <svg width="90" height="70" viewBox="0 0 180 140" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="90" cy="85" rx="48" ry="26" fill="#cc0000" opacity=".92"/>
+    <path d="M110 68 Q125 52 118 38 Q113 28 105 30 Q98 32 100 45 Q102 58 110 68Z" fill="#cc0000" opacity=".92"/>
+    <ellipse cx="114" cy="28" rx="14" ry="10" fill="#cc0000" opacity=".92" transform="rotate(-20 114 28)"/>
+    <path d="M122 22 Q130 20 128 26 Q126 30 120 28Z" fill="#aa0000"/>
+    <path d="M105 30 Q100 22 108 18 Q112 14 116 20 Q110 24 105 30Z" fill="#ffdd00" opacity=".9"/>
+    <circle cx="119" cy="25" r="2.5" fill="#ffdd00"/><circle cx="119" cy="25" r="1.2" fill="#000"/>
+    <path d="M68 108 Q64 120 60 130" stroke="#aa0000" stroke-width="7" stroke-linecap="round" fill="none"/>
+    <path d="M80 110 Q80 122 84 132" stroke="#aa0000" stroke-width="7" stroke-linecap="round" fill="none"/>
+    <path d="M98 109 Q96 122 92 130" stroke="#aa0000" stroke-width="6" stroke-linecap="round" fill="none"/>
+    <path d="M112 106 Q116 118 120 126" stroke="#aa0000" stroke-width="6" stroke-linecap="round" fill="none"/>
+    <path d="M85 68 Q75 38 50 22 Q38 16 32 24 Q28 32 42 36 Q60 40 72 58 Q78 64 85 68Z" fill="#cc0000" opacity=".88"/>
+    <path d="M78 76 Q60 72 42 80 Q30 88 38 96 Q50 90 65 86 Q74 82 78 76Z" fill="#aa0000" opacity=".7"/>
+    <polygon points="90,78 92,84 98,84 93,88 95,94 90,90 85,94 87,88 82,84 88,84" fill="#ffdd00" opacity=".9"/>
+  </svg>
+</div>
+<div class="outer" id="outer">
+<div class="titlebar"><span>🌐 DPRK Title Registry — Order Your Honorary Title</span><div class="wb"><span>_</span><span>□</span><span>✕</span></div></div>
+<div class="mq"><span class="mq-inner" id="mq-text">★ DPRK TITLE REGISTRY ★ PHYSICAL CERTIFICATE $59 · DIGITAL CERTIFICATE $29 ★ ALL PRICES INCLUDE WORLDWIDE SHIPPING ★ NO HIDDEN FEES ★</span></div>
+<div class="site-header">
+  <div class="header-flag"><div class="hf1"></div><div class="hf2"></div><div class="hf3"></div><div class="hf4"></div><div class="hf5"></div></div>
+  <div class="header-body">
+    <svg width="38" height="38" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="47" fill="#6B0000" stroke="#ccaa00" stroke-width="2.5"/><polygon points="50,13 62,42 93,42 70,59 78,88 50,71 22,88 30,59 7,42 38,42" fill="#ccaa00"/><polygon points="50,27 58,46 78,46 63,57 68,76 50,65 32,76 37,57 22,46 42,46" fill="#6B0000" opacity=".6"/></svg>
+    <div><span class="hc-main">DPRK TITLE REGISTRY</span><span class="hc-sub">★ OFFICIAL HONORARY TITLE SHOP — DESERT COLONY, AUSTRALIA ★</span></div>
+  </div>
+</div>
+<div class="navbar">
+  <a>[ HOME ]</a><a class="active">[ ALL TITLES ]</a><a>[ HOW IT WORKS ]</a>
+  <a>[ GIFT A TITLE ]</a><a>[ THE REGISTRY ]</a><a>[ ABOUT OUR AUTHORITY ]</a>
+</div>
+
+<!-- PRODUCT PAGE -->
+<div id="product-page" class="page">
+  <div class="breadcrumb"><span>Home</span> › <span>All Titles</span> › <span id="breadcrumb-title">Iron-Willed Commander</span></div>
+  <div class="title-selector-bar">
+    <div class="ts-label">★ SELECT TITLE:</div>
+    <select class="ts-select" id="title-select" onchange="changeTitle()">
+      <option value="0">Iron-Willed Commander of the Glorious People's Eternal Struggle</option>
+      <option value="1">Eternal Sun of the Revolutionary Cause &amp; Morning Star of Juche</option>
+      <option value="2">Great Marshal of the Invincible Armed Forces &amp; Guardian of the Socialist Flame</option>
+      <option value="3">Brilliant Genius of Humanity, Guiding Star of the 21st Century &amp; Outstanding Thinker of Our Age</option>
+      <option value="4">Most Beloved &amp; Respected Comrade of the Motherland, Cherished by All</option>
+      <option value="5">Peerless Commander Born of Paektu, Eternal Flame &amp; Unconquered Colossus of History</option>
+    </select>
+  </div>
+  <div class="content">
+    <div class="cert-hero">
+      <div class="hero-inner">
+        <div class="name-row">
+          <span class="name-label">Your name:</span>
+          <input class="name-input" id="name-input" placeholder="Type your name to preview the certificate" oninput="updateName()" maxlength="36">
+        </div>
+        <div class="name-hint">Up to 36 characters including any titles or honorifics. The certificate does not question them.</div>
+        <div class="cert">
+          <div class="bro"></div><div class="bri"></div><div class="bri2"></div>
+          <svg class="corner co-tl" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg"><path d="M3 3 L22 3 M3 3 L3 22" stroke="#C9A84C" stroke-width="0.7" fill="none"/><path d="M3 3 L17 3 L3 17 Z" fill="none" stroke="#C9A84C" stroke-width="0.6"/><path d="M3 3 L9 3 L3 9 Z" fill="rgba(201,168,76,.22)"/><circle cx="22" cy="3" r="1.2" fill="#C9A84C"/><circle cx="3" cy="22" r="1.2" fill="#C9A84C"/><circle cx="3" cy="3" r="2" fill="#8B1A1A"/></svg>
+          <svg class="corner co-tr" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg"><path d="M3 3 L22 3 M3 3 L3 22" stroke="#C9A84C" stroke-width="0.7" fill="none"/><path d="M3 3 L17 3 L3 17 Z" fill="none" stroke="#C9A84C" stroke-width="0.6"/><path d="M3 3 L9 3 L3 9 Z" fill="rgba(201,168,76,.22)"/><circle cx="22" cy="3" r="1.2" fill="#C9A84C"/><circle cx="3" cy="22" r="1.2" fill="#C9A84C"/><circle cx="3" cy="3" r="2" fill="#8B1A1A"/></svg>
+          <svg class="corner co-bl" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg"><path d="M3 3 L22 3 M3 3 L3 22" stroke="#C9A84C" stroke-width="0.7" fill="none"/><path d="M3 3 L17 3 L3 17 Z" fill="none" stroke="#C9A84C" stroke-width="0.6"/><path d="M3 3 L9 3 L3 9 Z" fill="rgba(201,168,76,.22)"/><circle cx="22" cy="3" r="1.2" fill="#C9A84C"/><circle cx="3" cy="22" r="1.2" fill="#C9A84C"/><circle cx="3" cy="3" r="2" fill="#8B1A1A"/></svg>
+          <svg class="corner co-br" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg"><path d="M3 3 L22 3 M3 3 L3 22" stroke="#C9A84C" stroke-width="0.7" fill="none"/><path d="M3 3 L17 3 L3 17 Z" fill="none" stroke="#C9A84C" stroke-width="0.6"/><path d="M3 3 L9 3 L3 9 Z" fill="rgba(201,168,76,.22)"/><circle cx="22" cy="3" r="1.2" fill="#C9A84C"/><circle cx="3" cy="22" r="1.2" fill="#C9A84C"/><circle cx="3" cy="3" r="2" fill="#8B1A1A"/></svg>
+          <div class="cb">
+            <div class="tbnd"><div class="tbl">조선민주주의인민공화국</div><div class="tbc">DPRK Title Registry</div><div class="tbr">Juche 113 · Official Document</div></div>
+            <div class="rib">★ &nbsp; Democratic People's Republic of Korea — Supreme Title Registry &nbsp; ★</div>
+            <div class="er"><div class="ed"></div>
+            <svg width="78" height="78" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><g opacity=".9"><g transform="translate(100,100)"><ellipse cx="-62" cy="0" rx="5" ry="18" fill="#C9A84C" transform="rotate(-60 -62 0)"/><ellipse cx="-54" cy="-8" rx="4" ry="14" fill="#C9A84C" transform="rotate(-45 -54 -8)"/><ellipse cx="-72" cy="8" rx="4" ry="14" fill="#C9A84C" transform="rotate(-75 -72 8)"/><ellipse cx="62" cy="0" rx="5" ry="18" fill="#C9A84C" transform="rotate(60 62 0)"/><ellipse cx="54" cy="-8" rx="4" ry="14" fill="#C9A84C" transform="rotate(45 54 -8)"/><ellipse cx="72" cy="8" rx="4" ry="14" fill="#C9A84C" transform="rotate(75 72 8)"/></g><rect x="85" y="152" width="30" height="8" rx="2" fill="#8B1A1A"/><rect x="80" y="156" width="40" height="5" rx="1" fill="#8B1A1A"/><polygon points="100,60 60,130 140,130" fill="#00205B" opacity=".8"/><polygon points="100,70 75,115 125,115" fill="#00205B"/><rect x="78" y="112" width="44" height="22" fill="#1a3a6b"/><rect x="84" y="116" width="8" height="14" fill="#2a5a9b"/><rect x="95" y="116" width="8" height="14" fill="#2a5a9b"/><rect x="106" y="116" width="8" height="14" fill="#2a5a9b"/><rect x="74" y="134" width="52" height="4" fill="#4a8ab0" opacity=".6"/><polygon points="100,28 106,44 124,44 110,54 116,70 100,60 84,70 90,54 76,44 94,44" fill="#8B1A1A"/><polygon points="100,34 104,44 114,44 107,50 110,60 100,54 90,60 93,50 86,44 96,44" fill="#cc2200"/></g><circle cx="100" cy="100" r="92" fill="none" stroke="#C9A84C" stroke-width="1.5"/><circle cx="100" cy="100" r="86" fill="none" stroke="#C9A84C" stroke-width="0.5" stroke-dasharray="4 4"/></svg>
+            <div class="ed"></div></div>
+            <div class="srw"><div class="sdot"></div><div class="ss">★</div><div class="sdot"></div><div class="sm">★</div><div class="sdot"></div><div class="sm">★</div><div class="sdot"></div><div class="sm">★</div><div class="sdot"></div><div class="ss">★</div><div class="sdot"></div></div>
+            <div class="iby">Supreme Title Registry</div>
+            <div class="iau">By Supreme Decree of the Democratic People's Republic of Korea<br>Issued from the Official Registry, Desert Colony, Australia</div>
+            <div class="mhr"></div><div class="mht"></div>
+            <div class="dl">Be it known throughout all the nation and beyond that</div>
+            <div class="rname" id="cert-name">Your Name Here</div>
+            <div class="conf" style="margin-top:6px;">is henceforth and in absolute perpetuity to be addressed by the title of</div>
+            <div class="tbox">
+              <span class="tko" id="cert-ko">강철의 의지를 지닌 영광스러운 인민의 사령관</span>
+              <span class="ten" id="cert-title">Iron-Willed Commander of the<br>Glorious People's Eternal Struggle</span>
+            </div>
+            <div class="wstrip"><div class="wd"></div><div class="ws">★</div><div class="wd"></div><div class="ws">✦</div><div class="wd"></div><div class="ws">★</div><div class="wd"></div><div class="ws">✦</div><div class="wd"></div><div class="ws">★</div><div class="wd"></div><div class="ws">✦</div><div class="wd"></div><div class="ws">★</div><div class="wd"></div></div>
+            <div class="btext">In solemn recognition of their formidable qualities, their absolute correctness in all matters,<br>and their outstanding contribution to the Revolutionary Cause of the People.<br>This honour is granted by Supreme Decree. It is permanent, eternal, and without condition.</div>
+            <div class="sigr">
+              <div class="sblock"><div class="scirc"><svg width="42" height="42" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="46" fill="none" stroke="#8B1A1A" stroke-width="2"/><circle cx="50" cy="50" r="38" fill="none" stroke="#C9A84C" stroke-width=".8"/><polygon points="50,14 62,42 93,42 70,59 78,88 50,71 22,88 30,59 7,42 38,42" fill="#8B1A1A"/><polygon points="50,28 57,46 76,46 62,57 67,75 50,64 33,75 38,57 23,46 43,46" fill="#C9A84C" opacity=".4"/><text x="50" y="91" text-anchor="middle" font-size="9" fill="#8B1A1A" font-family="serif" letter-spacing="1">REGISTRY</text></svg></div><div class="slbl">Official Seal</div></div>
+              <div class="sigcenter">
+                <div class="sigsvgw"><svg width="210" height="60" viewBox="0 0 220 64" xmlns="http://www.w3.org/2000/svg" fill="none"><path d="M8 46 Q14 52 22 50 Q34 46 44 40 Q50 36 48 44 Q46 50 42 54" stroke="#1a0a00" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M62 38 Q66 28 72 32 Q76 36 72 42 Q68 48 64 46" stroke="#1a0a00" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M86 22 Q88 20 91 21 Q96 24 104 34 Q108 40 106 44" stroke="#1a0a00" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="88" cy="20" r="3.5" fill="#1a0a00"/><path d="M118 42 Q124 36 132 28 Q142 18 158 10 Q168 6 178 8" stroke="#1a0a00" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/><ellipse cx="178" cy="8" rx="5" ry="3.5" fill="#1a0a00" transform="rotate(-20 178 8)"/><path d="M180 10 Q186 18 182 28 Q178 36 172 40" stroke="#1a0a00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                <div class="sigl"></div>
+                <span class="sigko">김정은 · Kim Jong-un</span>
+                <span class="sigtl">Supreme Leader · General Secretary</span>
+                <span class="sigtl" style="color:#aaa;margin-top:1px;">Workers' Party of Korea · DPRK</span>
+              </div>
+              <div class="sblock"><div class="scirc"><svg width="42" height="42" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="46" fill="none" stroke="#8B1A1A" stroke-width="2"/><circle cx="50" cy="50" r="38" fill="none" stroke="#C9A84C" stroke-width=".8"/><text x="50" y="35" text-anchor="middle" font-size="8" fill="#8B1A1A" letter-spacing="1" font-family="serif">JUCHE</text><text x="50" y="51" text-anchor="middle" font-size="17" fill="#8B1A1A" font-family="serif">113</text><text x="50" y="64" text-anchor="middle" font-size="7" fill="#C9A84C" letter-spacing="2" font-family="serif">★ ★ ★</text><text x="50" y="76" text-anchor="middle" font-size="7" fill="#8B1A1A" letter-spacing=".5" font-family="serif">OFFICIAL</text></svg></div><div class="slbl">Juche Calendar</div></div>
+            </div>
+            <div class="regn" id="cert-regn">Registry No. STR-0001 · A4 · 200gsm · Dispatched from Desert Colony, Australia · Juche 113</div>
+            <div class="bband"><div class="bblt">조선민주주의인민공화국</div><div class="bbct">★ Supreme Title Registry · Est. Juche 113 ★</div><div class="bbrt">Democratic People's Republic of Korea</div></div>
+          </div>
+        </div>
+        <div class="order-block">
+          <div class="order-option selected" id="opt-physical" onclick="selectOpt('physical')">
+            <span class="oo-badge">POPULAR</span>
+            <span class="oo-format">Physical Certificate</span>
+            <span class="oo-name">Printed · Sealed · Posted</span>
+            <span class="oo-price">$59</span>
+            <span class="oo-desc">A4 · 200gsm cream stock<br>Wax-sealed registry card<br>Bold navy envelope<br>Worldwide shipping included<br>Dispatched within 5–7 days</span>
+          </div>
+          <div class="order-option" id="opt-digital" onclick="selectOpt('digital')">
+            <span class="oo-format">Digital Certificate</span>
+            <span class="oo-name">High-res PDF · Instant</span>
+            <span class="oo-price">$29</span>
+            <span class="oo-desc">Print-at-home or display on screen<br>Delivered to your email instantly<br>Full print-ready resolution<br>Same certificate design<br>By electronic decree</span>
+          </div>
+          <button class="order-btn" onclick="showCheckout()">★ ORDER — CLAIM YOUR ETERNAL GLORY ★</button>
+          <div class="order-note">All prices in USD · Worldwide shipping included in physical price · No additional fees · No exceptions · No refunds — the registry does not acknowledge that anything could go wrong</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section section-alt">
+      <div class="sec-bar">📋 ABOUT THIS TITLE</div>
+      <div class="info-grid">
+        <div class="info-box"><div class="info-box-title">FOR WHOM IS THIS TITLE APPROPRIATE?</div><div class="info-box-body" id="info-who">For the citizen who has, without formal appointment, been making the important decisions for years. Their guidance, when offered, is followed without question. Their assessment of any situation is considered final by all parties present.</div></div>
+        <div class="info-box"><div class="info-box-title">WHAT DOES THIS TITLE SIGNIFY?</div><div class="info-box-body" id="info-what">Of all the titles held by the Great Leaders of the Democratic People's Republic of Korea, none captures supreme commanding authority with greater precision. It has been borne by those who lead not by appointment but by nature.</div></div>
+      </div>
+      <div class="sec-bar">★ WHAT YOU RECEIVE — PHYSICAL CERTIFICATE</div>
+      <div class="get-item"><div class="get-check">★</div><div class="get-text">A4 certificate on 200gsm cream stock, posted flat<span class="get-sub">Your name in calligraphic script · Your title in full · Official registry number · Kim Jong-un signature · All seals applied</span></div></div>
+      <div class="get-item"><div class="get-check">★</div><div class="get-text">Wax-sealed registry card<span class="get-sub">Your title and name · Supreme Leader quote · Registry number · Break the wax seal to open</span></div></div>
+      <div class="get-item"><div class="get-check">★</div><div class="get-text">Bold navy official envelope<span class="get-sub">DPRK state emblem · Desert Colony postmark · Dispatched as though from an actual government</span></div></div>
+      <div class="get-item"><div class="get-check">★</div><div class="get-text">Access to the Official Registry<span class="get-sub">Search your name at the registry to find your entry, your title, and guidance from the Supreme Leader</span></div></div>
+    </div>
+
+    <div class="section">
+      <div class="sec-bar">★ Words of the Supreme Leader</div>
+      <div style="border-left:3px solid var(--red);padding:8px 12px;background:rgba(0,0,128,.04);">
+        <div class="aq-text">"Only a great people can write such a great chronicle for the times and history. As this great people throw in their lot with the country and find their greatest honour and joy of life in devoting themselves to its victory and glory, our Party is invincible and our socialism is ever-prosperous."</div>
+        <span class="aq-attr">— Kim Jong-un, General Secretary, Workers' Party of Korea · Rodong Sinmun, Juche 114</span>
+      </div>
+    </div>
+
+    <div class="section section-alt">
+      <div class="sec-bar">🎖️ OTHER TITLES — All $59 Physical · $29 Digital</div>
+      <div class="other-titles">
+        <div class="ot-card" onclick="switchTo(1)"><span class="ot-icon">🌟</span><div class="ot-name">Eternal Sun of the Revolutionary Cause</div><div class="ot-price">$59 / $29</div></div>
+        <div class="ot-card" onclick="switchTo(3)"><span class="ot-icon">🧠</span><div class="ot-name">Brilliant Genius of Humanity</div><div class="ot-price">$59 / $29</div></div>
+        <div class="ot-card" onclick="switchTo(4)"><span class="ot-icon">🌸</span><div class="ot-name">Most Beloved & Respected Comrade</div><div class="ot-price">$59 / $29</div></div>
+        <div class="ot-card" onclick="switchTo(2)"><span class="ot-icon">⚡</span><div class="ot-name">Great Marshal of the Invincible Armed Forces</div><div class="ot-price">$59 / $29</div></div>
+        <div class="ot-card" onclick="switchTo(5)"><span class="ot-icon">🏔️</span><div class="ot-name">Peerless Commander Born of Paektu</div><div class="ot-price">$59 / $29</div></div>
+        <div class="ot-card" style="border-style:dashed;opacity:.6;cursor:default;"><span class="ot-icon">✍️</span><div class="ot-name">Custom titles — coming soon</div><div class="ot-price">—</div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="sec-bar">⭐ VERIFIED REVIEWS</div>
+      <div class="reviews-row">
+        <div class="rv"><span class="rv-stars">★★★★★</span><span class="rv-title">"Updated his LinkedIn immediately."</span><div class="rv-body">Bought for my husband. By that evening the title appeared in his LinkedIn headline. Three colleagues have enquired. He has not disclosed the price. He refers to this as maintaining appropriate authority.</div><div class="rv-meta">Fiona M., Sydney <span class="rv-v">✓ VERIFIED</span></div></div>
+        <div class="rv"><span class="rv-stars">★★★★★</span><span class="rv-title">"Behind my head on every call."</span><div class="rv-body">Ordered for myself. It now hangs directly behind where my head appears on video calls. Three people have asked. I explain it in full. They are unsure how to respond. I consider this the correct outcome.</div><div class="rv-meta">James C., Melbourne <span class="rv-v">✓ VERIFIED</span></div></div>
+        <div class="rv"><span class="rv-stars">★★★★★</span><span class="rv-title">"Required full title at Christmas."</span><div class="rv-body">For my brother's birthday. By Sunday he was correcting people at the pub. At Christmas he required the full title before sitting down. He sat down eventually. Morale in the family is at a record high.</div><div class="rv-meta">Patricia H., Brisbane <span class="rv-v">✓ VERIFIED</span></div></div>
+      </div>
+    </div>
+
+    <div class="site-footer">
+      <div class="footer-badges"><div class="fbadge">NETSCAPE NOW!</div><div class="fbadge">BEST VIEWED 800×600</div><div class="fbadge">MADE WITH NOTEPAD</div><div class="fbadge">★ AWARD WINNER ★</div><div class="fbadge">DESERT CERTIFIED</div></div>
+      <div class="footer-copy">COPYRIGHT © JUCHE 113 · DPRK HONORARY TITLE REGISTRY · DESERT COLONY, AUSTRALIA<br>ALL TITLES SATIRICAL · FOR ENTERTAINMENT ONLY · NO ACTUAL AUTHORITY CONFERRED</div>
+      <div class="footer-disc">Worldwide shipping included. This website was designed in 1997. All design decisions are final.</div>
+    </div>
+  </div>
+</div>
+
+<!-- CHECKOUT -->
+<div id="checkout-page" class="page hidden">
+  <div class="mq"><span class="mq-inner">★ CHECKOUT — FINAL STEP BEFORE ETERNAL GLORY ★ COMPLETE YOUR DETAILS ★ ORDER ACKNOWLEDGED WITHIN 24 HOURS ★</span></div>
+  <div class="checkout-page">
+    <div class="checkout-header">
+      <span class="co-back" onclick="showProduct()">◀ &nbsp;Return to Title</span>
+      <span class="co-title">★ CHECKOUT ★</span>
+      <span style="font-family:Georgia,'Times New Roman',serif;font-size:12px;color:rgba(255,255,255,.4);">Step 1 of 1</span>
+    </div>
+    <div class="checkout-body">
+      <div class="co-form">
+        <div class="co-sec">★ Your Order</div>
+        <div class="co-format-display">
+          <div class="cfd-left">
+            <span class="cfd-name" id="cfd-name">Physical Certificate</span>
+            <span class="cfd-desc" id="cfd-desc">A4 · 200gsm · wax-sealed card · worldwide shipping included</span>
+            <span class="cfd-change" onclick="showProduct()">← Change format</span>
+          </div>
+          <span class="cfd-price" id="cfd-price">$59</span>
+        </div>
+        <div class="co-sec">★ Certificate Details</div>
+        <div class="co-field"><label class="co-label">Title</label><input class="co-input" id="co-title-display" readonly style="background:var(--ltgrey);color:var(--dkgrey);font-size:13px;"></div>
+        <div class="co-field"><label class="co-label">Name on certificate</label><input class="co-input" id="co-name" placeholder="Your name here"></div>
+        <div class="co-field"><label class="co-label">Is this a gift?</label><select class="co-input" style="font-size:15px;"><option>No — ordering for myself</option><option>Yes — add gift message below</option></select></div>
+        <div class="co-field"><label class="co-label">Gift message (optional)</label><input class="co-input" placeholder="e.g. You've always been an Iron-Willed Commander to me"></div>
+        <div class="co-sec">★ Your Details</div>
+        <div class="co-field"><label class="co-label">Email address</label><input class="co-input" type="email" placeholder="your@email.com"></div>
+        <div id="co-address-block">
+          <div class="co-sec" style="margin-bottom:8px;">★ Delivery Address</div>
+          <div class="co-field"><label class="co-label">Full name (for envelope)</label><input class="co-input" placeholder="Name for postage"></div>
+          <div class="co-field"><label class="co-label">Address</label><input class="co-input" placeholder="Street address"></div>
+          <div class="co-row2"><div class="co-field"><label class="co-label">City</label><input class="co-input" placeholder="City"></div><div class="co-field"><label class="co-label">Postcode</label><input class="co-input" placeholder="Postcode"></div></div>
+          <div class="co-field"><label class="co-label">Country</label><input class="co-input" placeholder="Country"></div>
+        </div>
+        <div class="co-sec">★ Payment</div>
+        <div style="background:var(--cream);border:2px inset var(--dkgrey);padding:10px;font-family:Georgia,'Times New Roman',serif;font-size:13px;color:#555;line-height:2.0;margin-bottom:10px;">⚠ PAYMENT VIA SHOPIFY CHECKOUT<br>Accepted: Credit card · PayPal · Apple Pay</div>
+        <button class="co-submit" onclick="showConfirmation()">★ SUBMIT ORDER TO THE REGISTRY ★</button>
+        <div class="co-security"><span class="co-badge">🔒 Secure</span><span class="co-badge">✈ Worldwide shipping included</span><span class="co-badge">★ 100% satisfaction</span></div>
+      </div>
+      <div class="co-summary">
+        <div class="co-sum-ttl">Order Summary</div>
+        <div class="co-sum-cert">
+          <div style="position:absolute;inset:3px;border:0.5px solid rgba(201,168,76,.3);pointer-events:none;z-index:0;"></div>
+          <div style="position:relative;z-index:1;">
+            <div style="background:var(--cn);margin:-10px -10px 6px;padding:4px 10px;font-family:'Cinzel',serif;font-size:9px;font-weight:700;color:rgba(255,255,255,.7);letter-spacing:2px;text-align:center;border-bottom:1px solid var(--cr);">DPRK TITLE REGISTRY</div>
+            <div style="font-family:'Great Vibes',cursive;font-size:21px;color:var(--cn);border-bottom:1px solid var(--cg);padding-bottom:2px;margin:0 4px 3px;text-align:center;" id="co-sum-name">Your Name Here</div>
+            <div style="font-family:'Cormorant Garamond',serif;font-size:11px;font-style:italic;color:#666;margin-bottom:3px;text-align:center;">is henceforth to be addressed as</div>
+            <div style="font-family:'Cinzel',serif;font-size:12px;font-weight:700;color:var(--cr);text-transform:uppercase;letter-spacing:.5px;line-height:1.3;border:0.5px solid var(--cr);padding:4px 6px;margin:0 4px 5px;text-align:center;" id="co-sum-title">Iron-Willed Commander<br>of the Glorious People's<br>Eternal Struggle</div>
+            <div style="font-family:'IM Fell English',serif;font-style:italic;font-size:15px;color:var(--cr);text-align:center;">Kim Jong-un</div>
+          </div>
+        </div>
+        <div class="co-sum-line"><span id="co-sum-format">Physical certificate</span><span id="co-sum-price">$59.00</span></div>
+        <div class="co-sum-line"><span>Worldwide shipping</span><span>Included</span></div>
+        <div class="co-sum-line"><span>Registry entry</span><span>Included</span></div>
+        <div class="co-sum-total"><span>Total</span><span id="co-sum-total">$59.00</span></div>
+        <div class="co-dispatch" id="co-dispatch">Dispatched from Desert Colony, Australia<br>within 5–7 working days<br>Worldwide tracked shipping included</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONFIRMATION -->
+<div id="confirm-page" class="page hidden">
+  <div class="confirm-page">
+    <div style="font-size:32px;color:var(--gold2);">★</div>
+    <div class="confirm-title">ORDER RECEIVED BY THE REGISTRY</div>
+    <div class="confirm-body">Your order has been received. The certificate will be dispatched from the Desert Colony within 5–7 working days. The registry thanks you for your participation in the Revolutionary Cause of Glory. Morale among all previous recipients stands at 100%.</div>
+    <div class="confirm-ref" id="confirm-ref">Order Reference: STR-0000 · Juche 113 · Conditions Excellent</div>
+    <button class="confirm-back" onclick="showProduct()">◀ &nbsp;Return to Registry</button>
+  </div>
+</div>
+</div>
+
+<script>
+const TITLES=[
+  {en:"Iron-Willed Commander of the<br>Glorious People's Eternal Struggle",ko:"강철의 의지를 지닌 영광스러운 인민의 사령관",short:"Iron-Willed Commander",who:"For the citizen who has, without formal appointment, been making the important decisions for years. Their guidance, when offered, is followed without question. Their assessment of any situation is considered final by all parties present.",what:"Of all the titles held by the Great Leaders of the DPRK, none captures supreme commanding authority with greater precision. It has been borne by those who lead not by appointment but by nature — the iron-willed, the resolute, the decisively correct in all things."},
+  {en:"Eternal Sun of the Revolutionary Cause<br>& Morning Star of Juche",ko:"혁명의 영원한 태양이며 주체의 새벽별",short:"Eternal Sun",who:"For the citizen whose presence measurably improves any room they enter. Studies conducted by the Bureau of Radiance Metrics confirm this effect as fully conclusive.",what:"This title designates those who illuminate the path of the revolutionary cause for all who follow. The morning star does not ask permission to rise. It rises."},
+  {en:"Great Marshal of the Invincible Armed Forces<br>& Guardian of the Socialist Flame",ko:"무적의 조선인민군 대원수이며 사회주의 불꽃의 수호자",short:"Great Marshal",who:"For the citizen who approaches every challenge with the steady composure of someone who has already won. They have not lost. Not once. The registry has verified this.",what:"The Great Marshal commands not merely through rank but through the invincible strength of their ideological correctness and strategic clarity."},
+  {en:"Brilliant Genius of Humanity, Guiding Star<br>of the 21st Century & Outstanding Thinker of Our Age",ko:"인류의 탁월한 천재이며 21세기의 길잡이 별",short:"Brilliant Genius",who:"For the citizen with a confident, well-formed opinion on all matters. They are more often correct than anyone is entirely comfortable admitting. They have waited long enough for this certificate.",what:"This title recognises minds of such exceptional clarity that their guidance constitutes a gift to all of humanity. The registry considers the 21st century fortunate."},
+  {en:"Most Beloved & Respected Comrade<br>of the Motherland, Cherished by All",ko:"조국의 가장 사랑받고 존경받는 동지",short:"Most Beloved Comrade",who:"For the citizen who remembers every birthday without being reminded, makes tea without being asked, and holds everything together with quiet competence.",what:"To be beloved and respected by all requires consistent warmth, reliable good judgement, and the kind of steady presence that others organise their lives around."},
+  {en:"Peerless Commander Born of Paektu,<br>Eternal Flame & Unconquered Colossus of History",ko:"백두에서 탄생한 무적의 사령관이며 민족의 영원한 불꽃",short:"Peerless Commander of Paektu",who:"For the truly extraordinary. Those who have endured things, overcome things, or persisted with remarkable good humour through circumstances that would have defeated a lesser person.",what:"Mount Paektu is the sacred mountain of the Korean revolution, birthplace of the eternal leaders, origin point of all revolutionary authority. The most distinguished title in the registry."}
+];
+let cur=0,fmt='physical';
+function changeTitle(){cur=parseInt(document.getElementById('title-select').value);apply(cur);}
+function switchTo(i){cur=i;document.getElementById('title-select').value=i;apply(i);scrollUp();}
+function apply(i){
+  const t=TITLES[i];
+  document.getElementById('cert-title').innerHTML=t.en;
+  document.getElementById('cert-ko').textContent=t.ko;
+  document.getElementById('info-who').textContent=t.who;
+  document.getElementById('info-what').textContent=t.what;
+  document.getElementById('breadcrumb-title').textContent=t.short;
+  document.getElementById('co-title-display').value=t.en.replace('<br>',' ');
+  document.getElementById('co-sum-title').innerHTML=t.en;
+  document.getElementById('mq-text').textContent='★ '+t.en.replace('<br>',' ').toUpperCase()+' ★ PHYSICAL $59 · DIGITAL $29 ★ WORLDWIDE SHIPPING INCLUDED ★';
+  const n=Math.floor(Math.random()*9000)+1000;
+  document.getElementById('cert-regn').textContent='Registry No. STR-'+String(n).padStart(4,'0')+' · A4 · 200gsm · Dispatched from Desert Colony, Australia · Juche 113';
+}
+function updateName(){
+  const v=document.getElementById('name-input').value.trim();
+  document.getElementById('cert-name').textContent=v||'Your Name Here';
+  document.getElementById('co-sum-name').textContent=v||'Your Name Here';
+}
+function selectOpt(id){
+  fmt=id;
+  ['physical','digital'].forEach(o=>document.getElementById('opt-'+o).classList.remove('selected'));
+  document.getElementById('opt-'+id).classList.add('selected');
+  const d=id==='digital';
+  document.getElementById('cfd-name').textContent=d?'Digital Certificate':'Physical Certificate';
+  document.getElementById('cfd-desc').textContent=d?'High-res PDF · delivered instantly':'A4 · 200gsm · wax-sealed card · worldwide shipping included';
+  document.getElementById('cfd-price').textContent=d?'$29':'$59';
+  document.getElementById('co-sum-format').textContent=d?'Digital certificate':'Physical certificate';
+  document.getElementById('co-sum-price').textContent=d?'$29.00':'$59.00';
+  document.getElementById('co-sum-total').textContent=d?'$29.00':'$59.00';
+  document.getElementById('co-address-block').style.display=d?'none':'block';
+  document.getElementById('co-dispatch').innerHTML=d?'Delivered instantly to your email<br>by electronic decree':'Dispatched from Desert Colony, Australia<br>within 5–7 working days<br>Worldwide tracked shipping included';
+}
+function showProduct(){document.getElementById('product-page').classList.remove('hidden');document.getElementById('checkout-page').classList.add('hidden');document.getElementById('confirm-page').classList.add('hidden');scrollUp();}
+function showCheckout(){
+  const name=document.getElementById('name-input').value.trim();
+  if(name)document.getElementById('co-name').value=name;
+  document.getElementById('co-sum-name').textContent=name||'Your Name Here';
+  selectOpt(fmt);
+  document.getElementById('product-page').classList.add('hidden');document.getElementById('checkout-page').classList.remove('hidden');document.getElementById('confirm-page').classList.add('hidden');scrollUp();
+}
+function showConfirmation(){
+  const n=Math.floor(Math.random()*9000)+1000;
+  document.getElementById('confirm-ref').textContent='Order Reference: STR-'+String(n).padStart(4,'0')+' · Juche 113 · Conditions Excellent';
+  document.getElementById('product-page').classList.add('hidden');document.getElementById('checkout-page').classList.add('hidden');document.getElementById('confirm-page').classList.remove('hidden');scrollUp();
+}
+function scrollUp(){document.getElementById('outer').scrollIntoView({behavior:'smooth',block:'start'});}
+function launchChollima(){
+  const h=document.getElementById('chollima'),o=document.getElementById('outer');
+  const w=o.offsetWidth,ph=o.offsetHeight,y=Math.floor(ph*(0.05+Math.random()*0.65));
+  const dur=3200+Math.random()*3000,sc=0.8+Math.random()*0.5;
+  h.style.cssText='position:absolute;z-index:9999;pointer-events:none;top:'+y+'px;left:-95px;width:'+(90*sc)+'px;height:'+(70*sc)+'px;opacity:0;transition:none;animation:horsebob 0.3s ease-in-out infinite alternate;';
+  requestAnimationFrame(()=>{h.style.transition='opacity 0.3s';h.style.opacity='1';requestAnimationFrame(()=>{h.style.transition='left '+dur+'ms linear,opacity 0.4s';h.style.left=(w+10)+'px';setTimeout(()=>h.style.opacity='0',dur-400);setTimeout(()=>{h.style.animation='none';scheduleChollima();},dur+100);});});
+}
+function scheduleChollima(){setTimeout(launchChollima,9000+Math.random()*22000);}
+const cs=document.createElement('style');cs.textContent='@keyframes horsebob{from{margin-top:0}to{margin-top:-5px}}';document.head.appendChild(cs);
+setTimeout(launchChollima,5000);
+document.getElementById('name-input').addEventListener('input',updateName);
+apply(0);
+</script>
+</body>
+</html>

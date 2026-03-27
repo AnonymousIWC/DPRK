@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__Claude_Preview__preview_start",
+      "Bash(env)",
+      "Bash(python3 -m http.server --help)",
+      "Bash(wc -l /Users/Duco/Downloads/dprk-registry/pages/*.html)",
+      "Bash(unzip -o /Users/Duco/Downloads/dprk_claude_code_project2.zip -d /tmp/dprk_extracted/)",
+      "Bash(cp /tmp/dprk_extracted/dprk-registry/pages/titles.html /Users/Duco/Downloads/dprk-registry/pages/titles.html)",
+      "Bash(cp /tmp/dprk_extracted/dprk-registry/pages/quiz.html /Users/Duco/Downloads/dprk-registry/pages/quiz.html)",
+      "Bash(cp /tmp/dprk_extracted/dprk-registry/pages/registry.html /Users/Duco/Downloads/dprk-registry/pages/registry.html)",
+      "Bash(cp /tmp/dprk_extracted/dprk-registry/pages/gift.html /Users/Duco/Downloads/dprk-registry/pages/gift.html)",
+      "Bash(cp /tmp/dprk_extracted/dprk-registry/pages/certificate.html /Users/Duco/Downloads/dprk-registry/pages/certificate.html)"
+    ]
+  }
+}
