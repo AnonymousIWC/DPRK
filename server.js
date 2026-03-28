@@ -91,6 +91,20 @@ app.post('/api/add', async (req, res) => {
   }
 });
 
+// GET /api/debug — temporary, remove after testing
+app.get('/api/debug', async (req, res) => {
+  const connStr = process.env.DATABASE_URL || process.env.POSTGRES_URL;
+  if (!connStr) return res.json({ error: 'No connection string found', env: Object.keys(process.env).filter(k => k.includes('POST') || k.includes('DATA') || k.includes('NEON')) });
+  const db = await getDb();
+  if (!db) return res.json({ error: 'pool is null' });
+  try {
+    const result = await db.query('SELECT id, name, name_lower, reg_num FROM registry ORDER BY id DESC LIMIT 20');
+    res.json({ count: result.rows.length, rows: result.rows });
+  } catch (err) {
+    res.json({ error: err.message });
+  }
+});
+
 // ── STATIC ASSETS ─────────────────────────────────────────────────────────────
 app.use('/public', express.static(path.join(__dirname, 'public')));
 
