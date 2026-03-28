@@ -295,8 +295,8 @@ body {
   writing-mode: vertical-rl; transform: rotate(180deg); font-family: monospace;
 }
 .tr-body   { padding: 14px 20px; }
-.tr-title  { font-family: 'IM Fell English', serif; font-size: 18px; font-weight: 700; color: var(--navy); margin-bottom: 6px; line-height: 1.25; }
-.tr-desc   { font-size: 14px; color: #444; line-height: 1.7; }
+.tr-title  { font-family: 'Oswald', sans-serif; font-size: 18px; font-weight: 700; color: var(--navy); margin-bottom: 6px; line-height: 1.25; letter-spacing: .5px; }
+.tr-desc   { font-family: Georgia, 'Times New Roman', serif; font-size: 15px; color: #444; line-height: 1.75; }
 .tr-tags   { margin-top: 7px; }
 .tr-tag    { display: inline-block; background: var(--ltgrey); border: 1px solid var(--dkgrey); font-size: 11px; font-weight: 700; padding: 2px 6px; margin: 4px 4px 0 0; color: #333; font-family: monospace; }
 .tr-tag.popular { background: var(--red); color: #fff; border-color: #800000; }
@@ -323,7 +323,7 @@ body {
 }
 .review-stars  { color: var(--gold); font-size: 16px; letter-spacing: 3px; display: block; margin-bottom: 6px; }
 .review-title  { font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 15px; color: var(--navy); display: block; margin-bottom: 5px; letter-spacing: .3px; }
-.review-body   { font-family: 'IM Fell English', serif; font-size: 14px; font-style: italic; color: #333; line-height: 1.7; margin-bottom: 8px; }
+.review-body   { font-family: Georgia, 'Times New Roman', serif; font-size: 15px; color: #333; line-height: 1.75; margin-bottom: 8px; }
 .review-meta   { font-size: 12px; font-weight: 700; color: var(--dkgrey); letter-spacing: 1px; font-family: monospace; }
 .review-badge  { display: inline-block; background: var(--navy); color: var(--gold2); font-size: 9px; font-weight: 700; padding: 1px 5px; margin-left: 4px; letter-spacing: 1px; }
 
