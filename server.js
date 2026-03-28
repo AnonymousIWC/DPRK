@@ -75,33 +75,21 @@ app.post('/api/add', async (req, res) => {
     'STR-' + String(Math.floor(Math.random() * 9000) + 1000).padStart(4, '0');
 
   try {
-    await db.query(
+    const result = await db.query(
       `INSERT INTO registry (name, name_lower, title_en, title_ko, reg_num)
        VALUES ($1, $2, $3, $4, $5)
        ON CONFLICT (name_lower) DO UPDATE
          SET title_en = EXCLUDED.title_en,
              title_ko = EXCLUDED.title_ko,
-             reg_num  = EXCLUDED.reg_num`,
+             reg_num  = EXCLUDED.reg_num
+       RETURNING (xmax <> 0) AS updated`,
       [name.trim(), name.trim().toLowerCase(), titleEn.trim(), (titleKo || '').trim(), reg]
     );
-    res.json({ success: true, regNum: reg });
+    const updated = result.rows[0].updated;
+    res.json({ success: true, regNum: reg, updated });
   } catch (err) {
     console.error('Add error:', err.message);
     res.status(500).json({ error: 'Failed to add entry.' });
-  }
-});
-
-// GET /api/debug — temporary, remove after testing
-app.get('/api/debug', async (req, res) => {
-  const connStr = process.env.DATABASE_URL || process.env.POSTGRES_URL;
-  if (!connStr) return res.json({ error: 'No connection string found', env: Object.keys(process.env).filter(k => k.includes('POST') || k.includes('DATA') || k.includes('NEON')) });
-  const db = await getDb();
-  if (!db) return res.json({ error: 'pool is null' });
-  try {
-    const result = await db.query('SELECT id, name, name_lower, reg_num FROM registry ORDER BY id DESC LIMIT 20');
-    res.json({ count: result.rows.length, rows: result.rows });
-  } catch (err) {
-    res.json({ error: err.message });
   }
 });
 

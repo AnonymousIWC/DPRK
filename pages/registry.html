@@ -166,9 +166,15 @@
             <div class="admin-wrong" id="admin-wrong" style="display:none;">Incorrect. The committee has noted this attempt.</div>
           </div>
           <div class="admin-form" id="admin-form">
-            <div class="admin-field">
-              <label class="admin-label">RECIPIENT NAME (as it will appear on certificate)</label>
-              <input class="admin-input" id="af-name" type="text" placeholder="Full name">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+              <div class="admin-field">
+                <label class="admin-label">FIRST NAME</label>
+                <input class="admin-input" id="af-first" type="text" placeholder="First name">
+              </div>
+              <div class="admin-field">
+                <label class="admin-label">LAST NAME</label>
+                <input class="admin-input" id="af-last" type="text" placeholder="Last name">
+              </div>
             </div>
             <div class="admin-field">
               <label class="admin-label">TITLE (English)</label>
@@ -258,7 +264,9 @@
   }
 
   async function addEntry(){
-    var name=document.getElementById('af-name').value.trim();
+    var first=document.getElementById('af-first').value.trim();
+    var last=document.getElementById('af-last').value.trim();
+    var name=(first+' '+last).trim();
     var en=document.getElementById('af-title-en').value.trim();
     var ko=document.getElementById('af-title-ko').value.trim();
     var reg=document.getElementById('af-reg').value.trim();
@@ -272,9 +280,12 @@
       var data=await res.json();
       var msg=document.getElementById('admin-msg');
       if(data.success){
-        msg.textContent='✓ '+name+' added to the registry as '+data.regNum+'. The committee has been informed.';
-        msg.style.color='var(--gold2)';
-        document.getElementById('af-name').value='';
+        msg.textContent=data.updated
+          ? '⚠ '+name+' already existed. Their title has been updated to the new entry ('+data.regNum+').'
+          : '✓ '+name+' added to the registry as '+data.regNum+'. The committee has been informed.';
+        msg.style.color=data.updated?'#ffaa00':'var(--gold2)';
+        document.getElementById('af-first').value='';
+        document.getElementById('af-last').value='';
         document.getElementById('af-title-en').value='';
         document.getElementById('af-title-ko').value='';
         document.getElementById('af-reg').value='';
