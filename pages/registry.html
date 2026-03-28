@@ -191,8 +191,10 @@
 
   </div>
 
+  <!-- hidden field to carry password after auth, never sent until submit -->
+  <input type="hidden" id="admin-pw-stored" value="">
+
   <script>
-  // Registry entries — stored in sessionStorage for demo, replace with server call in production
   var KJU_QUOTES=[
     "The fact that you exist is itself a contribution to the revolutionary cause.",
     "I have reviewed your record. The committee is satisfied. This is not a common outcome.",
@@ -204,13 +206,6 @@
     "History will remember this moment. I have ensured this by writing it down."
   ];
 
-  function getEntries(){
-    try{return JSON.parse(sessionStorage.getItem('dprk_registry')||'[]');}catch(e){return[];}
-  }
-  function saveEntries(entries){
-    try{sessionStorage.setItem('dprk_registry',JSON.stringify(entries));}catch(e){}
-  }
-
   function setState(id){
     ['state-idle','state-notfound','state-found'].forEach(function(s){
       document.getElementById(s).className='state';
@@ -218,71 +213,79 @@
     document.getElementById(id).className='state on';
   }
 
-  function doSearch(){
+  async function doSearch(){
     var name=document.getElementById('name-input').value.trim();
     if(!name){setState('state-idle');return;}
-    var entries=getEntries();
-    var match=entries.find(function(e){return e.name.toLowerCase()===name.toLowerCase();});
-    if(!match){setState('state-notfound');return;}
-    // Populate found state
-    var quote=KJU_QUOTES[Math.floor(Math.random()*KJU_QUOTES.length)];
-    document.getElementById('fm-reg').textContent='REGISTRY ENTRY — '+match.reg;
-    document.getElementById('fm-name').textContent=match.name;
-    document.getElementById('fm-title-en').textContent=match.titleEn;
-    document.getElementById('fm-title-ko').textContent=match.titleKo||'—';
-    document.getElementById('fm-quote').textContent='"'+quote+'"';
-    document.getElementById('found-cert').innerHTML=window.DPRK.renderCert({
-      name:match.name,titleEn:match.titleEn,titleKo:match.titleKo,regNum:match.reg
-    });
-    setState('state-found');
+    var btn=document.querySelector('.search-btn');
+    btn.textContent='SEARCHING…';btn.disabled=true;
+    try{
+      var res=await fetch('/api/search?name='+encodeURIComponent(name));
+      var data=await res.json();
+      if(!data.found){setState('state-notfound');return;}
+      var e=data.entry;
+      var quote=KJU_QUOTES[Math.floor(Math.random()*KJU_QUOTES.length)];
+      document.getElementById('fm-reg').textContent='REGISTRY ENTRY — '+e.reg_num;
+      document.getElementById('fm-name').textContent=e.name;
+      document.getElementById('fm-title-en').textContent=e.title_en;
+      document.getElementById('fm-title-ko').textContent=e.title_ko||'—';
+      document.getElementById('fm-quote').textContent='"'+quote+'"';
+      document.getElementById('found-cert').innerHTML=window.DPRK.renderCert({
+        name:e.name,titleEn:e.title_en,titleKo:e.title_ko,regNum:e.reg_num
+      });
+      setState('state-found');
+    }catch(err){setState('state-notfound');}
+    finally{btn.textContent='SEARCH ★';btn.disabled=false;}
   }
 
   document.getElementById('name-input').addEventListener('keydown',function(e){if(e.key==='Enter')doSearch();});
 
   function toggleAdmin(){
-    var p=document.getElementById('admin-panel');
-    p.classList.toggle('on');
+    document.getElementById('admin-panel').classList.toggle('on');
   }
 
-  function checkPw(){
+  async function checkPw(){
     var pw=document.getElementById('admin-pw-input').value;
-    if(pw==='desertcolony113'){
-      document.getElementById('admin-auth').style.display='none';
-      document.getElementById('admin-form').className='admin-form on';
-    } else {
-      document.getElementById('admin-wrong').style.display='block';
-    }
+    var wrong=document.getElementById('admin-wrong');
+    wrong.style.display='none';
+    // Verify against server — a probe add with a blank name returns 400 (not 401) if password is correct
+    var res=await fetch('/api/add',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({password:pw,name:'',titleEn:''})});
+    if(res.status===401){wrong.style.display='block';return;}
+    // 400 = bad input but correct password
+    document.getElementById('admin-pw-stored').value=pw;
+    document.getElementById('admin-auth').style.display='none';
+    document.getElementById('admin-form').className='admin-form on';
   }
 
-  function addEntry(){
+  async function addEntry(){
     var name=document.getElementById('af-name').value.trim();
     var en=document.getElementById('af-title-en').value.trim();
     var ko=document.getElementById('af-title-ko').value.trim();
-    var reg=document.getElementById('af-reg').value.trim()||'STR-'+String(Math.floor(Math.random()*9000)+1000).padStart(4,'0');
+    var reg=document.getElementById('af-reg').value.trim();
+    var pw=document.getElementById('admin-pw-stored').value;
     if(!name||!en){alert('Name and title are required.');return;}
-    var entries=getEntries();
-    entries.push({name:name,titleEn:en,titleKo:ko,reg:reg});
-    saveEntries(entries);
-    var msg=document.getElementById('admin-msg');
-    msg.textContent='✓ '+name+' added to the registry as '+reg+'. The committee has been informed.';
-    msg.style.display='block';
-    document.getElementById('af-name').value='';
-    document.getElementById('af-title-en').value='';
-    document.getElementById('af-title-ko').value='';
-    document.getElementById('af-reg').value='';
+    var btn=document.querySelector('.admin-submit');
+    btn.textContent='SUBMITTING…';btn.disabled=true;
+    try{
+      var res=await fetch('/api/add',{method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({password:pw,name:name,titleEn:en,titleKo:ko,regNum:reg})});
+      var data=await res.json();
+      var msg=document.getElementById('admin-msg');
+      if(data.success){
+        msg.textContent='✓ '+name+' added to the registry as '+data.regNum+'. The committee has been informed.';
+        msg.style.color='var(--gold2)';
+        document.getElementById('af-name').value='';
+        document.getElementById('af-title-en').value='';
+        document.getElementById('af-title-ko').value='';
+        document.getElementById('af-reg').value='';
+      }else{
+        msg.textContent='✗ '+(data.error||'Unknown error.');
+        msg.style.color='var(--red)';
+      }
+      msg.style.display='block';
+    }catch(err){alert('Request failed.');}
+    finally{btn.textContent='ADD TO REGISTRY ★';btn.disabled=false;}
   }
-
-  // Pre-populate with demo entries
-  document.addEventListener('DOMContentLoaded',function(){
-    var existing=getEntries();
-    if(!existing.length){
-      saveEntries([
-        {name:"Patricia Henderson",titleEn:"Most Beloved & Respected Comrade of the Motherland, Cherished by All",titleKo:"조국의 가장 사랑받고 존경받는 동지",reg:"STR-0001"},
-        {name:"James Crawford",titleEn:"Brilliant Genius of Humanity, Guiding Star of the 21st Century",titleKo:"인류의 탁월한 천재이며 21세기의 길잡이 별",reg:"STR-0002"},
-        {name:"Margaret Okonkwo",titleEn:"Iron-Willed Commander of the Glorious People's Eternal Struggle",titleKo:"강철의 의지를 지닌 영광스러운 인민의 사령관",reg:"STR-0003"}
-      ]);
-    }
-  });
   </script>
 </body>
 </html>
