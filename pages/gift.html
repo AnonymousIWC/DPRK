@@ -140,39 +140,6 @@
               <label>Select Title</label>
               <select id="title-select">
                 <option value="">— Choose a title —</option>
-                <optgroup label="★ Most Popular">
-                  <option value="iron-willed">Iron-Willed Commander of the Glorious People's Eternal Struggle</option>
-                  <option value="most-beloved">Most Beloved &amp; Respected Comrade of the Motherland</option>
-                  <option value="hero-republic">Hero of the Republic, Defender of the Revolution</option>
-                </optgroup>
-                <optgroup label="Supreme Grade">
-                  <option value="ever-victorious">Ever-Victorious Iron-Willed Brilliant Commander</option>
-                  <option value="supreme-commander">Supreme Commander of the Revolutionary Armed Forces</option>
-                  <option value="lodestar">Lodestar of the 21st Century &amp; Invincible Strategist</option>
-                </optgroup>
-                <optgroup label="Eternal Grade">
-                  <option value="eternal-sun">Eternal Sun of the Revolutionary Cause &amp; Morning Star of Juche</option>
-                  <option value="eternal-president">Eternal President of the Republic &amp; Sun of the Nation</option>
-                  <option value="shining-sun">Shining Sun of Juche, Great Heart of the Revolution</option>
-                </optgroup>
-                <optgroup label="Heroic Grade">
-                  <option value="great-marshal">Great Marshal of the Invincible Armed Forces</option>
-                  <option value="indomitable">Indomitable Revolutionary Fighter of Steely Will</option>
-                </optgroup>
-                <optgroup label="Brilliant Grade">
-                  <option value="brilliant-genius">Brilliant Genius of Humanity, Guiding Star of the 21st Century</option>
-                  <option value="outstanding-thinker">Outstanding Thinker of the Era, Pioneer of Original Thought</option>
-                  <option value="great-teacher">Great Teacher of the People, Propagator of Truth and Knowledge</option>
-                </optgroup>
-                <optgroup label="Beloved Grade">
-                  <option value="fatherly-leader">Fatherly Leader, Tender-Hearted Protector of the People</option>
-                  <option value="mother-korea">Mother of Korea, Warmth of the Entire Nation</option>
-                  <option value="pillar-family">Pillar of the Family, Unwavering Foundation of All That Is Good</option>
-                </optgroup>
-                <optgroup label="Mountain Grade">
-                  <option value="peerless">Peerless Commander Born of Paektu, Eternal Flame</option>
-                  <option value="towering">Towering Pinnacle of Human Achievement, Colossus Spanning All Ages</option>
-                </optgroup>
               </select>
             </div>
             <div class="field-hint">Not sure? <a href="/find" style="color:var(--cg);">Use the Title Finder</a> to get a recommendation.</div>
@@ -300,25 +267,38 @@
     document.getElementById('recip-email-field').style.display=type==='email'?'block':'none';
   }
 
-  var TITLE_KO={
-    'iron-willed':'강철의 의지를 지닌 영광스러운 인민의 사령관',
-    'most-beloved':'조국의 가장 사랑받고 존경받는 동지',
-    'hero-republic':'공화국 영웅이며 혁명의 수호자',
-    'eternal-sun':'혁명의 영원한 태양이며 주체의 새벽별',
-    'brilliant-genius':'인류의 탁월한 천재이며 21세기의 길잡이 별',
-    'peerless':'백두에서 탄생한 무적의 사령관이며 민족의 영원한 불꽃',
-    'mother-korea':'조선의 어머니이며 온 민족의 따뜻함',
-    'pillar-family':'가정의 기둥이며 모든 선한 것의 흔들리지 않는 토대',
-  };
+  // populate title select from DPRK.TITLES grouped by grade
+  (function(){
+    var sel=document.getElementById('title-select');
+    var grades=[];
+    var byGrade={};
+    window.DPRK.TITLES.forEach(function(t){
+      if(!byGrade[t.grade]){byGrade[t.grade]=[];grades.push(t.grade);}
+      byGrade[t.grade].push(t);
+    });
+    grades.forEach(function(g){
+      var og=document.createElement('optgroup');
+      og.label=g+' Grade';
+      byGrade[g].forEach(function(t){
+        var o=document.createElement('option');
+        o.value=t.id;
+        o.textContent=t.en;
+        og.appendChild(o);
+      });
+      sel.appendChild(og);
+    });
+  })();
 
   function updatePreview(){
     var sel=document.getElementById('title-select');
-    var titleText=sel.options[sel.selectedIndex]?sel.options[sel.selectedIndex].text:'';
     var titleVal=sel.value;
     var name=document.getElementById('recip-name').value||'Recipient Name';
-    var ko=TITLE_KO[titleVal]||'—';
+    var title=titleVal?window.DPRK.TITLES.find(function(t){return t.id===titleVal;}):null;
     document.getElementById('preview-cert').innerHTML=window.DPRK.renderCert({
-      name:name,titleEn:titleText||'Select a title above',titleKo:ko
+      name:name,
+      titleEn:title?title.en:'Select a title above',
+      titleKo:title?title.ko:'—',
+      bodyText:title?title.desc:''
     });
   }
 

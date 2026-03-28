@@ -124,8 +124,10 @@ app.get('/find',        (req, res) => servePage(res, 'pages/quiz.html'));
 app.get('/about',       (req, res) => servePage(res, 'pages/about.html'));
 app.get('/registry',    (req, res) => servePage(res, 'pages/registry.html'));
 app.get('/certificate', (req, res) => servePage(res, 'pages/certificate.html'));
-app.get('/gift',        (req, res) => servePage(res, 'pages/gift.html'));
-app.get('/title/:slug', (req, res) => servePage(res, 'pages/product.html'));
+app.get('/gift',              (req, res) => servePage(res, 'pages/gift.html'));
+app.get('/bulletin',         (req, res) => servePage(res, 'pages/bulletin.html'));
+app.get('/bulletin/:slug',   (req, res) => servePage(res, 'pages/bulletin/' + req.params.slug + '.html'));
+app.get('/title/:slug',      (req, res) => servePage(res, 'pages/product.html'));
 
 app.listen(PORT, () => {
   console.log(`\n★ DPRK Title Registry running at http://localhost:${PORT}`);

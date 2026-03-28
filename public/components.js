@@ -17,6 +17,7 @@
     { label: '[ ALL TITLES ]',     href: '/titles' },
     { label: '[ FIND YOUR TITLE ]',href: '/find' },
     { label: '[ GIFT A TITLE ]',   href: '/gift' },
+    { label: '[ THE BULLETIN ]',   href: '/bulletin' },
     { label: '[ THE REGISTRY ]',   href: '/registry' },
     { label: '[ ABOUT ]',          href: '/about' },
   ];

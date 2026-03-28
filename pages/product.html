@@ -14,7 +14,7 @@ html,body{width:100%;min-height:100vh;}
   --grey:#c0c0c0;--dkgrey:#808080;--ltgrey:#e8e8e8;
   --cr:#8B1A1A;--cg:#C9A84C;--cn:#00205B;
 }
-body{background:#fff;font-family:Georgia,'Times New Roman',Times,serif;font-size:20px;color:#000;width:100%;}
+body{background:#fff;font-family:Georgia,'Times New Roman',Times,serif;font-size:16px;color:#000;width:100%;}
 .outer{width:100%;background:var(--grey);position:relative;overflow:hidden;}
 .chollima{position:absolute;z-index:9999;pointer-events:none;opacity:0;}
 .titlebar{background:var(--navy);color:#fff;padding:3px 6px;display:flex;justify-content:space-between;align-items:center;font-size:16px;font-weight:700;}
@@ -178,6 +178,42 @@ body{background:#fff;font-family:Georgia,'Times New Roman',Times,serif;font-size
 .footer-copy{color:var(--navy);font-weight:700;line-height:1.9;}
 .footer-disc{color:var(--dkgrey);font-style:italic;margin-top:3px;}
 
+/* ── CERTIFICATE (renderCert) ── */
+.cert-outer{background:var(--paper);border:3px solid var(--cg);position:relative;color:var(--ink);}
+.cert-outer::before{content:'';position:absolute;inset:7px;border:1px solid rgba(201,168,76,.35);pointer-events:none;z-index:1;}
+.cert-outer::after{content:'';position:absolute;inset:10px;border:0.5px solid rgba(201,168,76,.2);pointer-events:none;z-index:1;}
+.cert-top-band{background:var(--cn);padding:10px 20px;border-bottom:3px solid var(--cr);display:flex;justify-content:space-between;align-items:center;}
+.cert-top-ko{font-family:'Noto Serif KR',serif;font-size:9px;color:rgba(255,255,255,.6);letter-spacing:2px;}
+.cert-top-en{font-family:'Cinzel',serif;font-size:10px;font-weight:700;color:#fff;letter-spacing:2px;}
+.cert-ribbon{background:var(--cr);padding:5px 20px;text-align:center;font-family:'Cinzel',serif;font-size:8px;font-weight:700;letter-spacing:4px;color:#F5D87A;border-bottom:1px solid var(--cg);}
+.cert-body{padding:24px 28px;position:relative;z-index:2;}
+.cert-emblem-row{display:flex;align-items:center;gap:16px;margin-bottom:14px;}
+.cert-rule{flex:1;height:1px;background:linear-gradient(to right,transparent,var(--cg) 30%,var(--cg) 70%,transparent);}
+.cert-hereby{font-family:'Cormorant Garamond',serif;font-size:13px;font-style:italic;text-align:center;color:#5a4030;margin-bottom:6px;}
+.cert-name{font-family:'Great Vibes',cursive;font-size:44px;text-align:center;color:var(--cn);border-bottom:1.5px solid var(--cg);padding-bottom:6px;margin:0 16px 8px;line-height:1.2;}
+.cert-conferral{font-family:'Cormorant Garamond',serif;font-size:12px;font-style:italic;text-align:center;color:#666;margin-bottom:10px;}
+.cert-title-box{border:1.5px solid var(--cr);margin:0 12px 10px;padding:12px 16px;text-align:center;background:rgba(139,26,26,.04);position:relative;}
+.cert-title-box::before{content:'';position:absolute;inset:3px;border:.5px solid rgba(139,26,26,.18);}
+.cert-title-ko{font-family:'Noto Serif KR',serif;font-size:10px;color:var(--cr);display:block;margin-bottom:5px;letter-spacing:2px;}
+.cert-title-en{font-family:'Cinzel',serif;font-size:16px;font-weight:700;color:var(--cr);text-transform:uppercase;letter-spacing:1px;line-height:1.3;display:block;}
+.cert-wheat{height:12px;background:var(--cn);margin:0 -28px;display:flex;align-items:center;justify-content:center;gap:5px;border-top:2px solid var(--cg);}
+.cert-wheat-dot{width:3px;height:3px;background:var(--cg);border-radius:50%;}
+.cert-wheat-star{color:var(--cg);font-size:7px;line-height:1;}
+.cert-body-text{font-family:'Cormorant Garamond',serif;font-size:12px;font-style:italic;text-align:center;color:#4a3828;line-height:1.75;margin:10px 16px;}
+.cert-sig-row{display:grid;grid-template-columns:60px 1fr 60px;align-items:flex-end;gap:6px;padding:8px 12px 6px;border-top:.5px solid rgba(201,168,76,.4);}
+.cert-seal{text-align:center;}
+.cert-seal-circle{width:44px;height:44px;border-radius:50%;border:1.5px solid var(--cr);display:flex;align-items:center;justify-content:center;margin:0 auto 3px;}
+.cert-seal-label{font-family:'Cinzel',serif;font-size:6px;letter-spacing:.5px;color:var(--cr);text-align:center;text-transform:uppercase;}
+.cert-sig-center{text-align:center;}
+.cert-sig-line{width:130px;height:1px;background:var(--cr);margin:3px auto;}
+.cert-sig-ko{font-family:'Noto Serif KR',serif;font-size:9px;color:var(--cr);display:block;text-align:center;letter-spacing:2px;margin-top:3px;}
+.cert-sig-label{font-family:'Cinzel',serif;font-size:6px;color:var(--cr);text-align:center;display:block;}
+.cert-reg-num{font-family:'Cormorant Garamond',serif;font-size:8px;color:#b0a090;text-align:center;letter-spacing:1.5px;padding-bottom:4px;}
+.cert-bottom-band{background:var(--cn);padding:6px 20px;border-top:2px solid var(--cr);display:flex;justify-content:space-between;align-items:center;}
+.cert-bottom-ko{font-family:'Noto Serif KR',serif;font-size:8px;color:rgba(255,255,255,.4);}
+.cert-bottom-en{font-family:'Cinzel',serif;font-size:7px;font-weight:700;color:var(--cg);letter-spacing:2px;}
+.kju-signature{display:flex;justify-content:center;margin-bottom:3px;}
+
 @media (max-width:768px){
   .navbar{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;}
   .navbar a{font-size:12px;padding:5px 10px;flex-shrink:0;}
@@ -190,6 +226,7 @@ body{background:#fff;font-family:Georgia,'Times New Roman',Times,serif;font-size
   .co-title{font-size:15px;}
 }
 </style>
+<script src="/public/components.js"></script>
 </head>
 <body>
 <div class="chollima" id="chollima">
@@ -210,7 +247,7 @@ body{background:#fff;font-family:Georgia,'Times New Roman',Times,serif;font-size
   </svg>
 </div>
 <div class="outer" id="outer">
-<div class="titlebar"><span>🌐 DPRK Title Registry — Order Your Honorary Title</span><div class="wb"><span>_</span><span>□</span><span>✕</span></div></div>
+<div class="titlebar"><span>🌐 DPRK Title Registry — Order Your Honorary Title</span></div>
 <div class="mq"><span class="mq-inner" id="mq-text">★ DPRK TITLE REGISTRY ★ PHYSICAL CERTIFICATE $59 · DIGITAL CERTIFICATE $29 ★ ALL PRICES INCLUDE WORLDWIDE SHIPPING ★ NO HIDDEN FEES ★</span></div>
 <div class="site-header">
   <div class="header-flag"><div class="hf1"></div><div class="hf2"></div><div class="hf3"></div><div class="hf4"></div><div class="hf5"></div></div>
@@ -220,8 +257,8 @@ body{background:#fff;font-family:Georgia,'Times New Roman',Times,serif;font-size
   </div>
 </div>
 <div class="navbar">
-  <a>[ HOME ]</a><a class="active">[ ALL TITLES ]</a><a>[ HOW IT WORKS ]</a>
-  <a>[ GIFT A TITLE ]</a><a>[ THE REGISTRY ]</a><a>[ ABOUT OUR AUTHORITY ]</a>
+  <a href="/">[ HOME ]</a><a class="active" href="/titles">[ ALL TITLES ]</a><a href="/find">[ FIND YOUR TITLE ]</a>
+  <a href="/gift">[ GIFT A TITLE ]</a><a href="/registry">[ THE REGISTRY ]</a><a href="/about">[ ABOUT OUR AUTHORITY ]</a>
 </div>
 
 <!-- PRODUCT PAGE -->
@@ -230,12 +267,6 @@ body{background:#fff;font-family:Georgia,'Times New Roman',Times,serif;font-size
   <div class="title-selector-bar">
     <div class="ts-label">★ SELECT TITLE:</div>
     <select class="ts-select" id="title-select" onchange="changeTitle()">
-      <option value="0">Iron-Willed Commander of the Glorious People's Eternal Struggle</option>
-      <option value="1">Eternal Sun of the Revolutionary Cause &amp; Morning Star of Juche</option>
-      <option value="2">Great Marshal of the Invincible Armed Forces &amp; Guardian of the Socialist Flame</option>
-      <option value="3">Brilliant Genius of Humanity, Guiding Star of the 21st Century &amp; Outstanding Thinker of Our Age</option>
-      <option value="4">Most Beloved &amp; Respected Comrade of the Motherland, Cherished by All</option>
-      <option value="5">Peerless Commander Born of Paektu, Eternal Flame &amp; Unconquered Colossus of History</option>
     </select>
   </div>
   <div class="content">
@@ -246,46 +277,7 @@ body{background:#fff;font-family:Georgia,'Times New Roman',Times,serif;font-size
           <input class="name-input" id="name-input" placeholder="Type your name to preview the certificate" oninput="updateName()" maxlength="36">
         </div>
         <div class="name-hint">Up to 36 characters including any titles or honorifics. The certificate does not question them.</div>
-        <div class="cert">
-          <div class="bro"></div><div class="bri"></div><div class="bri2"></div>
-          <svg class="corner co-tl" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg"><path d="M3 3 L22 3 M3 3 L3 22" stroke="#C9A84C" stroke-width="0.7" fill="none"/><path d="M3 3 L17 3 L3 17 Z" fill="none" stroke="#C9A84C" stroke-width="0.6"/><path d="M3 3 L9 3 L3 9 Z" fill="rgba(201,168,76,.22)"/><circle cx="22" cy="3" r="1.2" fill="#C9A84C"/><circle cx="3" cy="22" r="1.2" fill="#C9A84C"/><circle cx="3" cy="3" r="2" fill="#8B1A1A"/></svg>
-          <svg class="corner co-tr" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg"><path d="M3 3 L22 3 M3 3 L3 22" stroke="#C9A84C" stroke-width="0.7" fill="none"/><path d="M3 3 L17 3 L3 17 Z" fill="none" stroke="#C9A84C" stroke-width="0.6"/><path d="M3 3 L9 3 L3 9 Z" fill="rgba(201,168,76,.22)"/><circle cx="22" cy="3" r="1.2" fill="#C9A84C"/><circle cx="3" cy="22" r="1.2" fill="#C9A84C"/><circle cx="3" cy="3" r="2" fill="#8B1A1A"/></svg>
-          <svg class="corner co-bl" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg"><path d="M3 3 L22 3 M3 3 L3 22" stroke="#C9A84C" stroke-width="0.7" fill="none"/><path d="M3 3 L17 3 L3 17 Z" fill="none" stroke="#C9A84C" stroke-width="0.6"/><path d="M3 3 L9 3 L3 9 Z" fill="rgba(201,168,76,.22)"/><circle cx="22" cy="3" r="1.2" fill="#C9A84C"/><circle cx="3" cy="22" r="1.2" fill="#C9A84C"/><circle cx="3" cy="3" r="2" fill="#8B1A1A"/></svg>
-          <svg class="corner co-br" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg"><path d="M3 3 L22 3 M3 3 L3 22" stroke="#C9A84C" stroke-width="0.7" fill="none"/><path d="M3 3 L17 3 L3 17 Z" fill="none" stroke="#C9A84C" stroke-width="0.6"/><path d="M3 3 L9 3 L3 9 Z" fill="rgba(201,168,76,.22)"/><circle cx="22" cy="3" r="1.2" fill="#C9A84C"/><circle cx="3" cy="22" r="1.2" fill="#C9A84C"/><circle cx="3" cy="3" r="2" fill="#8B1A1A"/></svg>
-          <div class="cb">
-            <div class="tbnd"><div class="tbl">조선민주주의인민공화국</div><div class="tbc">DPRK Title Registry</div><div class="tbr">Juche 113 · Official Document</div></div>
-            <div class="rib">★ &nbsp; Democratic People's Republic of Korea — Supreme Title Registry &nbsp; ★</div>
-            <div class="er"><div class="ed"></div>
-            <svg width="78" height="78" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><g opacity=".9"><g transform="translate(100,100)"><ellipse cx="-62" cy="0" rx="5" ry="18" fill="#C9A84C" transform="rotate(-60 -62 0)"/><ellipse cx="-54" cy="-8" rx="4" ry="14" fill="#C9A84C" transform="rotate(-45 -54 -8)"/><ellipse cx="-72" cy="8" rx="4" ry="14" fill="#C9A84C" transform="rotate(-75 -72 8)"/><ellipse cx="62" cy="0" rx="5" ry="18" fill="#C9A84C" transform="rotate(60 62 0)"/><ellipse cx="54" cy="-8" rx="4" ry="14" fill="#C9A84C" transform="rotate(45 54 -8)"/><ellipse cx="72" cy="8" rx="4" ry="14" fill="#C9A84C" transform="rotate(75 72 8)"/></g><rect x="85" y="152" width="30" height="8" rx="2" fill="#8B1A1A"/><rect x="80" y="156" width="40" height="5" rx="1" fill="#8B1A1A"/><polygon points="100,60 60,130 140,130" fill="#00205B" opacity=".8"/><polygon points="100,70 75,115 125,115" fill="#00205B"/><rect x="78" y="112" width="44" height="22" fill="#1a3a6b"/><rect x="84" y="116" width="8" height="14" fill="#2a5a9b"/><rect x="95" y="116" width="8" height="14" fill="#2a5a9b"/><rect x="106" y="116" width="8" height="14" fill="#2a5a9b"/><rect x="74" y="134" width="52" height="4" fill="#4a8ab0" opacity=".6"/><polygon points="100,28 106,44 124,44 110,54 116,70 100,60 84,70 90,54 76,44 94,44" fill="#8B1A1A"/><polygon points="100,34 104,44 114,44 107,50 110,60 100,54 90,60 93,50 86,44 96,44" fill="#cc2200"/></g><circle cx="100" cy="100" r="92" fill="none" stroke="#C9A84C" stroke-width="1.5"/><circle cx="100" cy="100" r="86" fill="none" stroke="#C9A84C" stroke-width="0.5" stroke-dasharray="4 4"/></svg>
-            <div class="ed"></div></div>
-            <div class="srw"><div class="sdot"></div><div class="ss">★</div><div class="sdot"></div><div class="sm">★</div><div class="sdot"></div><div class="sm">★</div><div class="sdot"></div><div class="sm">★</div><div class="sdot"></div><div class="ss">★</div><div class="sdot"></div></div>
-            <div class="iby">Supreme Title Registry</div>
-            <div class="iau">By Supreme Decree of the Democratic People's Republic of Korea<br>Issued from the Official Registry, Desert Colony, Australia</div>
-            <div class="mhr"></div><div class="mht"></div>
-            <div class="dl">Be it known throughout all the nation and beyond that</div>
-            <div class="rname" id="cert-name">Your Name Here</div>
-            <div class="conf" style="margin-top:6px;">is henceforth and in absolute perpetuity to be addressed by the title of</div>
-            <div class="tbox">
-              <span class="tko" id="cert-ko">강철의 의지를 지닌 영광스러운 인민의 사령관</span>
-              <span class="ten" id="cert-title">Iron-Willed Commander of the<br>Glorious People's Eternal Struggle</span>
-            </div>
-            <div class="wstrip"><div class="wd"></div><div class="ws">★</div><div class="wd"></div><div class="ws">✦</div><div class="wd"></div><div class="ws">★</div><div class="wd"></div><div class="ws">✦</div><div class="wd"></div><div class="ws">★</div><div class="wd"></div><div class="ws">✦</div><div class="wd"></div><div class="ws">★</div><div class="wd"></div></div>
-            <div class="btext">In solemn recognition of their formidable qualities, their absolute correctness in all matters,<br>and their outstanding contribution to the Revolutionary Cause of the People.<br>This honour is granted by Supreme Decree. It is permanent, eternal, and without condition.</div>
-            <div class="sigr">
-              <div class="sblock"><div class="scirc"><svg width="42" height="42" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="46" fill="none" stroke="#8B1A1A" stroke-width="2"/><circle cx="50" cy="50" r="38" fill="none" stroke="#C9A84C" stroke-width=".8"/><polygon points="50,14 62,42 93,42 70,59 78,88 50,71 22,88 30,59 7,42 38,42" fill="#8B1A1A"/><polygon points="50,28 57,46 76,46 62,57 67,75 50,64 33,75 38,57 23,46 43,46" fill="#C9A84C" opacity=".4"/><text x="50" y="91" text-anchor="middle" font-size="9" fill="#8B1A1A" font-family="serif" letter-spacing="1">REGISTRY</text></svg></div><div class="slbl">Official Seal</div></div>
-              <div class="sigcenter">
-                <div class="sigsvgw"><svg width="210" height="60" viewBox="0 0 220 64" xmlns="http://www.w3.org/2000/svg" fill="none"><path d="M8 46 Q14 52 22 50 Q34 46 44 40 Q50 36 48 44 Q46 50 42 54" stroke="#1a0a00" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M62 38 Q66 28 72 32 Q76 36 72 42 Q68 48 64 46" stroke="#1a0a00" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M86 22 Q88 20 91 21 Q96 24 104 34 Q108 40 106 44" stroke="#1a0a00" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="88" cy="20" r="3.5" fill="#1a0a00"/><path d="M118 42 Q124 36 132 28 Q142 18 158 10 Q168 6 178 8" stroke="#1a0a00" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/><ellipse cx="178" cy="8" rx="5" ry="3.5" fill="#1a0a00" transform="rotate(-20 178 8)"/><path d="M180 10 Q186 18 182 28 Q178 36 172 40" stroke="#1a0a00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-                <div class="sigl"></div>
-                <span class="sigko">김정은 · Kim Jong-un</span>
-                <span class="sigtl">Supreme Leader · General Secretary</span>
-                <span class="sigtl" style="color:#aaa;margin-top:1px;">Workers' Party of Korea · DPRK</span>
-              </div>
-              <div class="sblock"><div class="scirc"><svg width="42" height="42" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="46" fill="none" stroke="#8B1A1A" stroke-width="2"/><circle cx="50" cy="50" r="38" fill="none" stroke="#C9A84C" stroke-width=".8"/><text x="50" y="35" text-anchor="middle" font-size="8" fill="#8B1A1A" letter-spacing="1" font-family="serif">JUCHE</text><text x="50" y="51" text-anchor="middle" font-size="17" fill="#8B1A1A" font-family="serif">113</text><text x="50" y="64" text-anchor="middle" font-size="7" fill="#C9A84C" letter-spacing="2" font-family="serif">★ ★ ★</text><text x="50" y="76" text-anchor="middle" font-size="7" fill="#8B1A1A" letter-spacing=".5" font-family="serif">OFFICIAL</text></svg></div><div class="slbl">Juche Calendar</div></div>
-            </div>
-            <div class="regn" id="cert-regn">Registry No. STR-0001 · A4 · 200gsm · Dispatched from Desert Colony, Australia · Juche 113</div>
-            <div class="bband"><div class="bblt">조선민주주의인민공화국</div><div class="bbct">★ Supreme Title Registry · Est. Juche 113 ★</div><div class="bbrt">Democratic People's Republic of Korea</div></div>
-          </div>
-        </div>
+        <div id="cert-display" style="width:100%;max-width:580px;"></div>
         <div class="order-block">
           <div class="order-option selected" id="opt-physical" onclick="selectOpt('physical')">
             <span class="oo-badge">POPULAR</span>
@@ -329,14 +321,7 @@ body{background:#fff;font-family:Georgia,'Times New Roman',Times,serif;font-size
 
     <div class="section section-alt">
       <div class="sec-bar">🎖️ OTHER TITLES — All $59 Physical · $29 Digital</div>
-      <div class="other-titles">
-        <div class="ot-card" onclick="switchTo(1)"><span class="ot-icon">🌟</span><div class="ot-name">Eternal Sun of the Revolutionary Cause</div><div class="ot-price">$59 / $29</div></div>
-        <div class="ot-card" onclick="switchTo(3)"><span class="ot-icon">🧠</span><div class="ot-name">Brilliant Genius of Humanity</div><div class="ot-price">$59 / $29</div></div>
-        <div class="ot-card" onclick="switchTo(4)"><span class="ot-icon">🌸</span><div class="ot-name">Most Beloved & Respected Comrade</div><div class="ot-price">$59 / $29</div></div>
-        <div class="ot-card" onclick="switchTo(2)"><span class="ot-icon">⚡</span><div class="ot-name">Great Marshal of the Invincible Armed Forces</div><div class="ot-price">$59 / $29</div></div>
-        <div class="ot-card" onclick="switchTo(5)"><span class="ot-icon">🏔️</span><div class="ot-name">Peerless Commander Born of Paektu</div><div class="ot-price">$59 / $29</div></div>
-        <div class="ot-card" style="border-style:dashed;opacity:.6;cursor:default;"><span class="ot-icon">✍️</span><div class="ot-name">Custom titles — coming soon</div><div class="ot-price">—</div></div>
-      </div>
+      <div class="other-titles" id="other-titles-container"></div>
     </div>
 
     <div class="section">
@@ -430,38 +415,77 @@ body{background:#fff;font-family:Georgia,'Times New Roman',Times,serif;font-size
 </div>
 
 <script>
-const TITLES=[
-  {en:"Iron-Willed Commander of the<br>Glorious People's Eternal Struggle",ko:"강철의 의지를 지닌 영광스러운 인민의 사령관",short:"Iron-Willed Commander",who:"For the citizen who has, without formal appointment, been making the important decisions for years. Their guidance, when offered, is followed without question. Their assessment of any situation is considered final by all parties present.",what:"Of all the titles held by the Great Leaders of the DPRK, none captures supreme commanding authority with greater precision. It has been borne by those who lead not by appointment but by nature — the iron-willed, the resolute, the decisively correct in all things."},
-  {en:"Eternal Sun of the Revolutionary Cause<br>& Morning Star of Juche",ko:"혁명의 영원한 태양이며 주체의 새벽별",short:"Eternal Sun",who:"For the citizen whose presence measurably improves any room they enter. Studies conducted by the Bureau of Radiance Metrics confirm this effect as fully conclusive.",what:"This title designates those who illuminate the path of the revolutionary cause for all who follow. The morning star does not ask permission to rise. It rises."},
-  {en:"Great Marshal of the Invincible Armed Forces<br>& Guardian of the Socialist Flame",ko:"무적의 조선인민군 대원수이며 사회주의 불꽃의 수호자",short:"Great Marshal",who:"For the citizen who approaches every challenge with the steady composure of someone who has already won. They have not lost. Not once. The registry has verified this.",what:"The Great Marshal commands not merely through rank but through the invincible strength of their ideological correctness and strategic clarity."},
-  {en:"Brilliant Genius of Humanity, Guiding Star<br>of the 21st Century & Outstanding Thinker of Our Age",ko:"인류의 탁월한 천재이며 21세기의 길잡이 별",short:"Brilliant Genius",who:"For the citizen with a confident, well-formed opinion on all matters. They are more often correct than anyone is entirely comfortable admitting. They have waited long enough for this certificate.",what:"This title recognises minds of such exceptional clarity that their guidance constitutes a gift to all of humanity. The registry considers the 21st century fortunate."},
-  {en:"Most Beloved & Respected Comrade<br>of the Motherland, Cherished by All",ko:"조국의 가장 사랑받고 존경받는 동지",short:"Most Beloved Comrade",who:"For the citizen who remembers every birthday without being reminded, makes tea without being asked, and holds everything together with quiet competence.",what:"To be beloved and respected by all requires consistent warmth, reliable good judgement, and the kind of steady presence that others organise their lives around."},
-  {en:"Peerless Commander Born of Paektu,<br>Eternal Flame & Unconquered Colossus of History",ko:"백두에서 탄생한 무적의 사령관이며 민족의 영원한 불꽃",short:"Peerless Commander of Paektu",who:"For the truly extraordinary. Those who have endured things, overcome things, or persisted with remarkable good humour through circumstances that would have defeated a lesser person.",what:"Mount Paektu is the sacred mountain of the Korean revolution, birthplace of the eternal leaders, origin point of all revolutionary authority. The most distinguished title in the registry."}
-];
-let cur=0,fmt='physical';
-function changeTitle(){cur=parseInt(document.getElementById('title-select').value);apply(cur);}
-function switchTo(i){cur=i;document.getElementById('title-select').value=i;apply(i);scrollUp();}
-function apply(i){
-  const t=TITLES[i];
-  document.getElementById('cert-title').innerHTML=t.en;
-  document.getElementById('cert-ko').textContent=t.ko;
-  document.getElementById('info-who').textContent=t.who;
-  document.getElementById('info-what').textContent=t.what;
-  document.getElementById('breadcrumb-title').textContent=t.short;
-  document.getElementById('co-title-display').value=t.en.replace('<br>',' ');
-  document.getElementById('co-sum-title').innerHTML=t.en;
-  document.getElementById('mq-text').textContent='★ '+t.en.replace('<br>',' ').toUpperCase()+' ★ PHYSICAL $59 · DIGITAL $29 ★ WORLDWIDE SHIPPING INCLUDED ★';
-  const n=Math.floor(Math.random()*9000)+1000;
-  document.getElementById('cert-regn').textContent='Registry No. STR-'+String(n).padStart(4,'0')+' · A4 · 200gsm · Dispatched from Desert Colony, Australia · Juche 113';
+let curIdx=0,fmt='physical';
+
+// Populate select from DPRK.TITLES grouped by grade
+(function(){
+  const sel=document.getElementById('title-select');
+  const grades=[],byGrade={};
+  window.DPRK.TITLES.forEach(function(t,i){
+    if(!byGrade[t.grade]){byGrade[t.grade]=[];grades.push(t.grade);}
+    byGrade[t.grade].push({t:t,i:i});
+  });
+  grades.forEach(function(g){
+    const og=document.createElement('optgroup');
+    og.label=g+' Grade';
+    byGrade[g].forEach(function(x){
+      const o=document.createElement('option');
+      o.value=x.i;
+      o.textContent=x.t.en;
+      og.appendChild(o);
+    });
+    sel.appendChild(og);
+  });
+})();
+
+function buildOtherTitles(){
+  const container=document.getElementById('other-titles-container');
+  const shown=window.DPRK.TITLES
+    .map(function(t,i){return {t:t,i:i};})
+    .filter(function(x){return x.i!==curIdx;})
+    .slice(0,5);
+  container.innerHTML=shown.map(function(x){
+    return '<div class="ot-card" onclick="switchTo('+x.i+')">'
+      +'<span class="ot-icon">'+x.t.icon+'</span>'
+      +'<div class="ot-name">'+x.t.en+'</div>'
+      +'<div class="ot-price">$59 / $29</div>'
+      +'</div>';
+  }).join('')
+  +'<div class="ot-card" style="border-style:dashed;opacity:.6;cursor:default;">'
+  +'<span class="ot-icon">🔍</span>'
+  +'<div class="ot-name"><a href="/titles" style="color:var(--navy);text-decoration:none;">Browse all '+window.DPRK.TITLES.length+' titles →</a></div>'
+  +'<div class="ot-price">—</div>'
+  +'</div>';
 }
+
+function changeTitle(){curIdx=parseInt(document.getElementById('title-select').value);apply(curIdx);}
+function switchTo(i){curIdx=i;document.getElementById('title-select').value=i;apply(i);scrollUp();}
+
+function apply(i){
+  const t=window.DPRK.TITLES[i];
+  const name=document.getElementById('name-input').value.trim()||'Your Name Here';
+  const regN='STR-'+String(Math.floor(Math.random()*9000)+1000).padStart(4,'0');
+  document.getElementById('cert-display').innerHTML=window.DPRK.renderCert({
+    name:name,titleEn:t.en,titleKo:t.ko,bodyText:t.desc,regNum:regN
+  });
+  document.getElementById('info-who').textContent=t.desc;
+  document.getElementById('info-what').textContent='Grade: '+t.grade+' · '+t.ko;
+  document.getElementById('breadcrumb-title').textContent=t.en;
+  document.getElementById('co-title-display').value=t.en;
+  document.getElementById('co-sum-title').textContent=t.en;
+  document.getElementById('mq-text').textContent='★ '+t.en.toUpperCase()+' ★ PHYSICAL $59 · DIGITAL $29 ★ WORLDWIDE SHIPPING INCLUDED ★';
+  buildOtherTitles();
+}
+
 function updateName(){
   const v=document.getElementById('name-input').value.trim();
-  document.getElementById('cert-name').textContent=v||'Your Name Here';
   document.getElementById('co-sum-name').textContent=v||'Your Name Here';
+  apply(curIdx);
 }
+
 function selectOpt(id){
   fmt=id;
-  ['physical','digital'].forEach(o=>document.getElementById('opt-'+o).classList.remove('selected'));
+  ['physical','digital'].forEach(function(o){document.getElementById('opt-'+o).classList.remove('selected');});
   document.getElementById('opt-'+id).classList.add('selected');
   const d=id==='digital';
   document.getElementById('cfd-name').textContent=d?'Digital Certificate':'Physical Certificate';
@@ -473,6 +497,7 @@ function selectOpt(id){
   document.getElementById('co-address-block').style.display=d?'none':'block';
   document.getElementById('co-dispatch').innerHTML=d?'Delivered instantly to your email<br>by electronic decree':'Dispatched from Desert Colony, Australia<br>within 5–7 working days<br>Worldwide tracked shipping included';
 }
+
 function showProduct(){document.getElementById('product-page').classList.remove('hidden');document.getElementById('checkout-page').classList.add('hidden');document.getElementById('confirm-page').classList.add('hidden');scrollUp();}
 function showCheckout(){
   const name=document.getElementById('name-input').value.trim();
@@ -492,13 +517,19 @@ function launchChollima(){
   const w=o.offsetWidth,ph=o.offsetHeight,y=Math.floor(ph*(0.05+Math.random()*0.65));
   const dur=3200+Math.random()*3000,sc=0.8+Math.random()*0.5;
   h.style.cssText='position:absolute;z-index:9999;pointer-events:none;top:'+y+'px;left:-95px;width:'+(90*sc)+'px;height:'+(70*sc)+'px;opacity:0;transition:none;animation:horsebob 0.3s ease-in-out infinite alternate;';
-  requestAnimationFrame(()=>{h.style.transition='opacity 0.3s';h.style.opacity='1';requestAnimationFrame(()=>{h.style.transition='left '+dur+'ms linear,opacity 0.4s';h.style.left=(w+10)+'px';setTimeout(()=>h.style.opacity='0',dur-400);setTimeout(()=>{h.style.animation='none';scheduleChollima();},dur+100);});});
+  requestAnimationFrame(function(){h.style.transition='opacity 0.3s';h.style.opacity='1';requestAnimationFrame(function(){h.style.transition='left '+dur+'ms linear,opacity 0.4s';h.style.left=(w+10)+'px';setTimeout(function(){h.style.opacity='0';},dur-400);setTimeout(function(){h.style.animation='none';scheduleChollima();},dur+100);});});
 }
 function scheduleChollima(){setTimeout(launchChollima,9000+Math.random()*22000);}
 const cs=document.createElement('style');cs.textContent='@keyframes horsebob{from{margin-top:0}to{margin-top:-5px}}';document.head.appendChild(cs);
-setTimeout(launchChollima,5000);
+
+// Init: match URL slug to title index
+const slug=window.location.pathname.replace('/title/','').replace(/\//g,'');
+const slugIdx=slug?window.DPRK.TITLES.findIndex(function(t){return t.id===slug;}):-1;
+curIdx=slugIdx>=0?slugIdx:0;
+document.getElementById('title-select').value=curIdx;
 document.getElementById('name-input').addEventListener('input',updateName);
-apply(0);
+setTimeout(launchChollima,5000);
+apply(curIdx);
 </script>
 </body>
 </html>

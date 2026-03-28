@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Official Bulletin · DPRK Title Registry</title>
+  <meta name="description" content="Official dispatches, announcements and guidance from the DPRK Title Registry. Issued from the Desert Colony, Australia. All content is correct.">
+  <meta property="og:title" content="The Official Bulletin · DPRK Title Registry">
+  <meta property="og:description" content="Official dispatches, announcements and guidance from the DPRK Title Registry. Issued from the Desert Colony, Australia. All content is correct.">
+  <link rel="canonical" href="https://dprk-kappa.vercel.app/bulletin">
+  <link rel="stylesheet" href="/public/style.css">
+  <style>
+
+    /* ── MASTHEAD ── */
+    .bulletin-masthead {
+      background: var(--cn);
+      padding: 48px 40px 40px;
+      border-bottom: 4px solid var(--red);
+      position: relative;
+      overflow: hidden;
+    }
+    .bulletin-masthead::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: repeating-conic-gradient(from 0deg at 50% 120%, rgba(255,221,0,.018) 0deg 4deg, transparent 4deg 14deg);
+      pointer-events: none;
+    }
+    .bm-inner {
+      max-width: 1200px; margin: 0 auto;
+      position: relative; z-index: 1;
+      display: flex; flex-direction: column; align-items: center; gap: 10px;
+    }
+    .bm-rule-top {
+      display: flex; align-items: center; gap: 16px; width: 100%; max-width: 700px; margin-bottom: 8px;
+    }
+    .bm-rule-line { flex: 1; height: 1px; background: linear-gradient(to right, transparent, rgba(201,168,76,.5), transparent); }
+    .bm-rule-star { font-family: 'VT323', monospace; font-size: 18px; color: var(--cg); }
+    .bm-ko {
+      font-family: 'Noto Serif KR', serif; font-size: 12px;
+      color: rgba(255,255,255,.45); letter-spacing: 4px; text-align: center;
+    }
+    .bm-title {
+      font-family: 'VT323', monospace; font-size: 72px; color: var(--gold2);
+      line-height: 1; letter-spacing: 4px; text-align: center; text-transform: uppercase;
+    }
+    .bm-sub {
+      font-family: monospace; font-size: 11px; font-weight: 700;
+      color: rgba(255,255,255,.4); letter-spacing: 3px; text-align: center; text-transform: uppercase;
+    }
+    .bm-divider {
+      width: 80px; height: 1px;
+      background: linear-gradient(to right, transparent, var(--cg), transparent);
+      margin: 4px 0;
+    }
+    .bm-stats {
+      display: flex; gap: 0; margin-top: 12px;
+      border: 1px solid rgba(201,168,76,.25);
+    }
+    .bm-stat {
+      padding: 12px 28px; text-align: center;
+      border-right: 1px solid rgba(201,168,76,.25);
+    }
+    .bm-stat:last-child { border-right: none; }
+    .bm-stat-num {
+      font-family: 'VT323', monospace; font-size: 32px; color: var(--gold2);
+      line-height: 1; display: block;
+    }
+    .bm-stat-label {
+      font-family: monospace; font-size: 9px; font-weight: 700;
+      color: rgba(255,255,255,.4); letter-spacing: 2px; text-transform: uppercase;
+      display: block; margin-top: 3px;
+    }
+
+    /* ── FEATURED ARTICLE ── */
+    .featured-wrap {
+      padding: 32px 40px;
+      background: #f5f5f0;
+      border-bottom: 2px solid var(--ltgrey);
+    }
+    .featured-inner { max-width: 1200px; margin: 0 auto; }
+    .featured-label {
+      font-family: monospace; font-size: 10px; font-weight: 700;
+      letter-spacing: 3px; color: var(--dkgrey); text-transform: uppercase;
+      margin-bottom: 12px; display: block;
+    }
+    .featured-article {
+      background: var(--cn);
+      border: 2px solid var(--cg);
+      padding: 36px 40px;
+      position: relative;
+      overflow: hidden;
+    }
+    .featured-article::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 4px;
+      background: linear-gradient(to right, var(--cr), var(--cg), var(--cr));
+    }
+    .fa-meta {
+      display: flex; align-items: center; gap: 10px; margin-bottom: 16px;
+    }
+    .fa-num {
+      font-family: monospace; font-size: 10px; font-weight: 700;
+      color: rgba(255,255,255,.45); letter-spacing: 2px; text-transform: uppercase;
+    }
+    .fa-type-tag {
+      font-family: monospace; font-size: 9px; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase;
+      padding: 2px 8px; border: 1px solid;
+    }
+    .fa-type-dispatch { color: var(--gold2); border-color: var(--gold2); background: rgba(255,221,0,.08); }
+    .fa-type-responds { color: #ff8080; border-color: var(--red); background: rgba(204,0,0,.12); }
+    .fa-type-guidance  { color: var(--grey); border-color: var(--dkgrey); background: rgba(192,192,192,.08); }
+    .fa-headline {
+      font-family: 'VT323', monospace; font-size: 46px; color: var(--gold2);
+      line-height: 1.1; margin-bottom: 12px; max-width: 800px;
+    }
+    .fa-date {
+      font-family: monospace; font-size: 10px; font-weight: 700;
+      color: rgba(255,255,255,.35); letter-spacing: 2px; text-transform: uppercase;
+      margin-bottom: 16px; display: block;
+    }
+    .fa-excerpt {
+      font-family: 'IM Fell English', serif; font-style: italic;
+      font-size: 17px; color: rgba(255,255,255,.7);
+      line-height: 1.75; max-width: 720px; margin-bottom: 24px;
+    }
+    .fa-btn {
+      display: inline-block;
+      background: var(--gold2); color: #000;
+      font-family: monospace; font-size: 11px; font-weight: 700;
+      letter-spacing: 3px; padding: 10px 24px;
+      text-decoration: none; text-transform: uppercase;
+      border: none; cursor: pointer;
+    }
+    .fa-btn:hover { background: #ffe44d; }
+
+    /* ── ARTICLE LIST ── */
+    .article-list-wrap {
+      padding: 0 40px 48px;
+      background: #f5f5f0;
+    }
+    .article-list-inner { max-width: 1200px; margin: 0 auto; }
+    .al-header {
+      background: var(--grey);
+      border: 2px solid; border-color: #fff var(--dkgrey) var(--dkgrey) #fff;
+      padding: 4px 12px; font-size: 12px; font-weight: 700;
+      letter-spacing: 1px; font-family: monospace;
+      margin-bottom: 0;
+    }
+    .article-item {
+      display: grid; grid-template-columns: 52px 1fr auto;
+      gap: 20px; align-items: center;
+      background: #fff;
+      border: 1px solid var(--ltgrey);
+      border-top: none;
+      border-left: 4px solid var(--dkgrey);
+      padding: 18px 20px;
+      transition: border-left-color .15s;
+    }
+    .article-item:hover { background: var(--cream); }
+    .article-item.type-dispatch { border-left-color: var(--gold); }
+    .article-item.type-responds { border-left-color: var(--red); }
+    .article-item.type-guidance { border-left-color: var(--grey); }
+    .ai-num-pill {
+      background: var(--cn); color: var(--gold2);
+      font-family: 'VT323', monospace; font-size: 22px;
+      padding: 4px 8px; text-align: center; line-height: 1;
+      white-space: nowrap; display: block;
+    }
+    .ai-body { min-width: 0; }
+    .ai-meta {
+      display: flex; align-items: center; gap: 8px; margin-bottom: 5px;
+    }
+    .ai-type-tag {
+      font-family: monospace; font-size: 8px; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase; padding: 1px 6px; border: 1px solid;
+    }
+    .ai-type-dispatch { color: var(--gold); border-color: var(--gold); }
+    .ai-type-responds { color: var(--red); border-color: var(--red); }
+    .ai-type-guidance  { color: var(--dkgrey); border-color: var(--dkgrey); }
+    .ai-date {
+      font-family: monospace; font-size: 9px; color: var(--dkgrey);
+      letter-spacing: 1px; text-transform: uppercase;
+    }
+    .ai-headline {
+      font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 17px;
+      color: var(--cn); line-height: 1.2; margin-bottom: 5px;
+    }
+    .ai-excerpt {
+      font-family: Georgia, serif; font-size: 13px; color: #555;
+      line-height: 1.55; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .ai-read {
+      font-family: monospace; font-size: 11px; font-weight: 700;
+      color: var(--navy); text-decoration: none; white-space: nowrap;
+      letter-spacing: 1px;
+    }
+    .ai-read:hover { color: var(--red); }
+
+    /* ── BOTTOM CTA ── */
+    .bulletin-cta {
+      background: var(--cn); padding: 52px 40px;
+      border-top: 4px solid var(--red);
+      text-align: center;
+    }
+    .bulletin-cta-inner { max-width: 680px; margin: 0 auto; }
+    .bcta-rule { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
+    .bcta-rule-line { flex: 1; height: 1px; background: linear-gradient(to right, transparent, rgba(201,168,76,.4), transparent); }
+    .bcta-rule-star { font-family: 'VT323', monospace; font-size: 18px; color: var(--cg); }
+    .bcta-quote {
+      font-family: 'IM Fell English', serif; font-style: italic;
+      font-size: 20px; color: rgba(255,255,255,.75);
+      line-height: 1.75; margin-bottom: 8px;
+    }
+    .bcta-attr {
+      font-family: monospace; font-size: 10px; font-weight: 700;
+      color: rgba(255,255,255,.3); letter-spacing: 2px; text-transform: uppercase;
+      margin-bottom: 28px; display: block;
+    }
+
+    @media (max-width: 768px) {
+      .bulletin-masthead { padding: 32px 16px 28px; }
+      .bm-title { font-size: 48px; }
+      .bm-stats { flex-direction: column; }
+      .bm-stat { border-right: none; border-bottom: 1px solid rgba(201,168,76,.25); }
+      .bm-stat:last-child { border-bottom: none; }
+      .featured-wrap, .article-list-wrap { padding-left: 16px; padding-right: 16px; }
+      .featured-article { padding: 24px 20px; }
+      .fa-headline { font-size: 32px; }
+      .article-item { grid-template-columns: 44px 1fr; gap: 12px; }
+      .ai-read { display: none; }
+      .ai-excerpt { white-space: normal; }
+      .bulletin-cta { padding: 36px 16px; }
+      .bcta-quote { font-size: 16px; }
+    }
+
+  </style>
+</head>
+<body>
+  <script src="/public/components.js"></script>
+
+  <div id="page-content">
+
+    <div class="breadcrumb">
+      <a href="/">Home</a> › The Bulletin
+    </div>
+
+    <!-- PAGE HEADER BAR -->
+    <div class="sec-bar" style="margin-bottom:0; border-left:none; border-right:none;">
+      ★ THE OFFICIAL BULLETIN — Issued by the Supreme Title Registry, Desert Colony, Australia
+    </div>
+
+    <!-- MASTHEAD -->
+    <div class="bulletin-masthead">
+      <div class="bm-inner">
+        <div class="bm-rule-top">
+          <div class="bm-rule-line"></div>
+          <div class="bm-rule-star">★ ★ ★</div>
+          <div class="bm-rule-line"></div>
+        </div>
+        <div class="bm-ko">공식 등록부 회보</div>
+        <div class="bm-title">THE REGISTRY BULLETIN</div>
+        <div class="bm-divider"></div>
+        <div class="bm-sub">An organ of record. Issued when the Registry deems it necessary. Frequency: sufficient.</div>
+        <div class="bm-stats">
+          <div class="bm-stat">
+            <span class="bm-stat-num">7</span>
+            <span class="bm-stat-label">Issues Published</span>
+          </div>
+          <div class="bm-stat">
+            <span class="bm-stat-num">0</span>
+            <span class="bm-stat-label">Corrections Issued</span>
+          </div>
+          <div class="bm-stat">
+            <span class="bm-stat-num">ALL</span>
+            <span class="bm-stat-label">Facts Confirmed Correct</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FEATURED ARTICLE -->
+    <div class="featured-wrap">
+      <div class="featured-inner">
+        <span class="featured-label">★ Latest Dispatch</span>
+        <div class="featured-article">
+          <div class="fa-meta">
+            <span class="fa-num">Bulletin No. 7</span>
+            <span class="fa-type-tag fa-type-dispatch">Registry Dispatch</span>
+          </div>
+          <div class="fa-headline">The Registry Has Now Issued Its Three Hundredth Title. The Recipient Has Been Informed. Morale Is at a Record High.</div>
+          <span class="fa-date">Juche 113, Month 11 · Desert Colony, Australia</span>
+          <div class="fa-excerpt">The three hundredth title was issued on the morning of Month 11. The Approvals Committee convened briefly to note this milestone and voted unanimously to consider it satisfactory. Comrade Director Choe Kwang-sop, Bureau of Recipient Happiness, confirmed that the recipient appeared pleased. The Bureau considers this outcome fully consistent with the Registry's record of one hundred percent recipient satisfaction.</div>
+          <a href="/bulletin/bulletin-007-three-hundredth-title" class="fa-btn">Read Full Dispatch →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ARTICLE LIST -->
+    <div class="article-list-wrap">
+      <div class="article-list-inner">
+        <div class="al-header">★ ALL BULLETINS — Complete archive. All bulletins are correct. No bulletin has been retracted.</div>
+
+        <div class="article-item type-responds">
+          <span class="ai-num-pill">No. 5</span>
+          <div class="ai-body">
+            <div class="ai-meta">
+              <span class="ai-type-tag ai-type-responds">The Registry Responds</span>
+              <span class="ai-date">Juche 113, Month 9</span>
+            </div>
+            <div class="ai-headline">The Registry Notes That International News Organisations Continue to Describe North Korea as Isolated. The Registry Considers This Assessment Incorrect and Provides Evidence.</div>
+            <div class="ai-excerpt">The Registry operates from Australia. It has shipped certificates to fourteen countries. It does not consider this isolation. The committee has reviewed the claim and found it without foundation.</div>
+          </div>
+          <a href="/bulletin/bulletin-005-isolation-assessment" class="ai-read">READ →</a>
+        </div>
+
+        <div class="article-item type-guidance">
+          <span class="ai-num-pill">No. 2</span>
+          <div class="ai-body">
+            <div class="ai-meta">
+              <span class="ai-type-tag ai-type-guidance">Official Guidance</span>
+              <span class="ai-date">Juche 113, Month 2</span>
+            </div>
+            <div class="ai-headline">On the Correct Display of an Honorary Title Certificate: Guidance Issued by the Bureau of Correct Display Following Several Enquiries the Bureau Did Not Expect to Receive</div>
+            <div class="ai-excerpt">The Bureau has received questions about optimal certificate placement. The Bureau provides its findings here. The approved positions are: above the mantelpiece, behind the head on video calls, and framed beside professional credentials. Not in a drawer.</div>
+          </div>
+          <a href="/bulletin/bulletin-002-correct-display" class="ai-read">READ →</a>
+        </div>
+
+        <div class="article-item type-dispatch">
+          <span class="ai-num-pill">No. 1</span>
+          <div class="ai-body">
+            <div class="ai-meta">
+              <span class="ai-type-tag ai-type-dispatch">Registry Dispatch</span>
+              <span class="ai-date">Juche 113, Month 1</span>
+            </div>
+            <div class="ai-headline">The Registry Is Now Operational. Conditions Are Excellent. There Is Nothing Further to Report.</div>
+            <div class="ai-excerpt">The founding dispatch. Announces the establishment of the Desert Colony, the appointment of Kim Jong-fun as Supreme Registrar, the first committee meeting (unanimous), and confirms that potatoes are abundant.</div>
+          </div>
+          <a href="/bulletin/article-template" class="ai-read">READ →</a>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- BOTTOM CTA -->
+    <div class="bulletin-cta">
+      <div class="bulletin-cta-inner">
+        <div class="bcta-rule">
+          <div class="bcta-rule-line"></div>
+          <div class="bcta-rule-star">★</div>
+          <div class="bcta-rule-line"></div>
+        </div>
+        <div class="bcta-quote">"The registry has never published an incorrect bulletin. This record will be maintained."</div>
+        <span class="bcta-attr">— Kim Jong-fun, Supreme Registrar · Juche 113</span>
+        <div>
+          <button class="btn btn-primary" onclick="location.href='/titles'">★ Claim Your Title</button>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- #page-content -->
+</body>
+</html>
