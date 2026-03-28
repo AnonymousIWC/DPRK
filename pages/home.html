@@ -71,6 +71,33 @@
     .cta-section { background: var(--cn); padding: 48px 40px; text-align: center; border-bottom: 4px solid var(--red); }
     .cta-head { font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 40px; color: var(--gold2); margin-bottom: 12px; letter-spacing: 2px; text-transform: uppercase; }
     .cta-body { font-size: 17px; color: #aaccff; line-height: 1.8; margin-bottom: 28px; }
+
+  @media (max-width: 768px) {
+    .hero { padding: 28px 16px 32px; }
+    .hero-grid { grid-template-columns: 1fr; }
+    .showcase { display: none; }
+    .hero-headline { font-size: 38px; }
+    .hero-headline em { font-size: 26px; }
+    .hero-sub { font-size: 15px; margin-bottom: 20px; }
+    .price-row { gap: 10px; margin-bottom: 20px; }
+    .cta-row { flex-direction: column; gap: 8px; }
+    .cta-row .btn { width: 100%; text-align: center; }
+
+    .pkg-section { padding: 32px 16px; }
+    .pkg-grid { grid-template-columns: 1fr 1fr; }
+
+    .reviews-summary { flex-direction: column; gap: 8px; }
+    .rs-score { font-size: 40px; }
+    .reviews-grid-4 { grid-template-columns: 1fr; }
+
+    .titles-cta { flex-direction: column; gap: 12px; }
+    .btn-gold { width: 100%; }
+
+    .cta-section { padding: 36px 16px; }
+    .cta-head { font-size: 28px; }
+    .cta-body { font-size: 15px; }
+    .cta-section .btn { display: block; width: 100%; margin: 0 0 8px !important; text-align: center; }
+  }
   </style>
 </head>
 <body>

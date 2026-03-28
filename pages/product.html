@@ -177,6 +177,18 @@ body{background:#fff;font-family:Georgia,'Times New Roman',Times,serif;font-size
 .fbadge{background:var(--grey);border:2px solid;border-color:#fff var(--dkgrey) var(--dkgrey) #fff;padding:2px 6px;font-size:11px;font-weight:700;letter-spacing:1px;}
 .footer-copy{color:var(--navy);font-weight:700;line-height:1.9;}
 .footer-disc{color:var(--dkgrey);font-style:italic;margin-top:3px;}
+
+@media (max-width:768px){
+  .navbar{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .navbar a{font-size:12px;padding:5px 10px;flex-shrink:0;}
+  .cert-hero{padding:20px 4% 16px;}
+  .name-row{flex-direction:column;align-items:flex-start;}
+  .name-label{display:none;}
+  .order-block{grid-template-columns:1fr;}
+  .order-btn{grid-column:1;}
+  .order-note{grid-column:1;}
+  .co-title{font-size:15px;}
+}
 </style>
 </head>
 <body>

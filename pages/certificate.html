@@ -53,6 +53,14 @@
     .size-btns{display:flex;gap:8px;margin-bottom:16px;}
     .size-btn{flex:1;padding:7px;text-align:center;font-family:monospace;font-size:10px;font-weight:700;letter-spacing:1px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.5);cursor:pointer;}
     .size-btn.on{background:rgba(201,168,76,.15);border-color:var(--cg);color:var(--gold2);}
+
+    @media (max-width:768px){
+      .cert-page{padding:28px 14px;}
+      .cp-title{font-size:26px;}
+      .cp-grid{grid-template-columns:1fr;gap:24px;}
+      .controls{position:static;}
+      .size-btns{display:none;}
+    }
   </style>
 </head>
 <body>
