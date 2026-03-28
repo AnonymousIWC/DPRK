@@ -55,6 +55,16 @@
     .fm-order{width:100%;background:transparent;color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.2);font-family:monospace;font-size:12px;font-weight:700;letter-spacing:2px;padding:12px;cursor:pointer;}
     .fm-order:hover{color:#fff;border-color:rgba(255,255,255,.5);}
 
+    /* Multiple results picker */
+    .multi-head{font-family:'VT323',monospace;font-size:32px;color:var(--gold2);margin-bottom:8px;}
+    .multi-sub{font-family:monospace;font-size:12px;color:rgba(255,255,255,.4);letter-spacing:1px;margin-bottom:28px;}
+    .multi-list{display:flex;flex-direction:column;gap:10px;max-width:560px;margin:0 auto;}
+    .multi-item{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.12);padding:16px 20px;cursor:pointer;text-align:left;display:flex;justify-content:space-between;align-items:center;transition:border-color .15s;}
+    .multi-item:hover{border-color:var(--cg);}
+    .multi-item-reg{font-family:monospace;font-size:11px;font-weight:700;letter-spacing:3px;color:var(--cg);}
+    .multi-item-title{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:14px;color:rgba(255,255,255,.5);margin-top:4px;}
+    .multi-item-arrow{font-size:18px;color:rgba(255,255,255,.3);}
+
     /* Admin panel */
     .admin-section{background:#0d0d1f;border-top:3px solid var(--dkgrey);padding:48px 40px;}
     .admin-inner{max-width:620px;margin:0 auto;}
@@ -127,6 +137,13 @@
           This could mean no title has been purchased for this person yet.<br><br>
           <a onclick="location.href='/titles'">Order a title to add them to the registry.</a>
         </div>
+      </div>
+
+      <!-- Multiple entries — pick by registry number -->
+      <div class="state" id="state-multiple">
+        <div class="multi-head">Multiple entries found.</div>
+        <div class="multi-sub">THIS NAME APPEARS MORE THAN ONCE IN THE REGISTRY · IDENTIFY YOUR ENTRY BY REGISTRY NUMBER</div>
+        <div class="multi-list" id="multi-list"></div>
       </div>
 
       <!-- Found -->
@@ -213,10 +230,23 @@
   ];
 
   function setState(id){
-    ['state-idle','state-notfound','state-found'].forEach(function(s){
+    ['state-idle','state-notfound','state-multiple','state-found'].forEach(function(s){
       document.getElementById(s).className='state';
     });
     document.getElementById(id).className='state on';
+  }
+
+  function showEntry(e){
+    var quote=KJU_QUOTES[Math.floor(Math.random()*KJU_QUOTES.length)];
+    document.getElementById('fm-reg').textContent='REGISTRY ENTRY — '+e.reg_num;
+    document.getElementById('fm-name').textContent=e.name;
+    document.getElementById('fm-title-en').textContent=e.title_en;
+    document.getElementById('fm-title-ko').textContent=e.title_ko||'—';
+    document.getElementById('fm-quote').textContent='"'+quote+'"';
+    document.getElementById('found-cert').innerHTML=window.DPRK.renderCert({
+      name:e.name,titleEn:e.title_en,titleKo:e.title_ko,regNum:e.reg_num
+    });
+    setState('state-found');
   }
 
   async function doSearch(){
@@ -228,17 +258,18 @@
       var res=await fetch('/api/search?name='+encodeURIComponent(name));
       var data=await res.json();
       if(!data.found){setState('state-notfound');return;}
-      var e=data.entry;
-      var quote=KJU_QUOTES[Math.floor(Math.random()*KJU_QUOTES.length)];
-      document.getElementById('fm-reg').textContent='REGISTRY ENTRY — '+e.reg_num;
-      document.getElementById('fm-name').textContent=e.name;
-      document.getElementById('fm-title-en').textContent=e.title_en;
-      document.getElementById('fm-title-ko').textContent=e.title_ko||'—';
-      document.getElementById('fm-quote').textContent='"'+quote+'"';
-      document.getElementById('found-cert').innerHTML=window.DPRK.renderCert({
-        name:e.name,titleEn:e.title_en,titleKo:e.title_ko,regNum:e.reg_num
+      if(data.entries.length===1){showEntry(data.entries[0]);return;}
+      // Multiple — show picker
+      var list=document.getElementById('multi-list');
+      list.innerHTML='';
+      data.entries.forEach(function(e){
+        var item=document.createElement('div');
+        item.className='multi-item';
+        item.innerHTML='<div><div class="multi-item-reg">'+e.reg_num+'</div><div class="multi-item-title">'+e.title_en+'</div></div><span class="multi-item-arrow">›</span>';
+        item.onclick=function(){showEntry(e);};
+        list.appendChild(item);
       });
-      setState('state-found');
+      setState('state-multiple');
     }catch(err){setState('state-notfound');}
     finally{btn.textContent='SEARCH ★';btn.disabled=false;}
   }
@@ -280,10 +311,8 @@
       var data=await res.json();
       var msg=document.getElementById('admin-msg');
       if(data.success){
-        msg.textContent=data.updated
-          ? '⚠ '+name+' already existed. Their title has been updated to the new entry ('+data.regNum+').'
-          : '✓ '+name+' added to the registry as '+data.regNum+'. The committee has been informed.';
-        msg.style.color=data.updated?'#ffaa00':'var(--gold2)';
+        msg.textContent='✓ '+name+' added to the registry as '+data.regNum+'. The committee has been informed.';
+        msg.style.color='var(--gold2)';
         document.getElementById('af-first').value='';
         document.getElementById('af-last').value='';
         document.getElementById('af-title-en').value='';
