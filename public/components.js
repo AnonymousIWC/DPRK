@@ -65,11 +65,6 @@
     return `
       <div class="site-titlebar">
         <span>🌐 DPRK Title Registry — Official Distributor of North Korean Honorary Titles</span>
-        <div class="win-buttons">
-          <span class="win-btn">_</span>
-          <span class="win-btn">□</span>
-          <span class="win-btn">✕</span>
-        </div>
       </div>
 
       <div class="marquee">
