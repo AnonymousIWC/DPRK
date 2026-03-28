@@ -3,7 +3,7 @@
    All pages import this. Do not duplicate rules here in pages.
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=VT323&family=IM+Fell+English:ital@0;1&family=Cinzel:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Noto+Serif+KR:wght@400;700&family=Great+Vibes&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=VT323&family=Oswald:wght@700&family=IM+Fell+English:ital@0;1&family=Cinzel:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Noto+Serif+KR:wght@400;700&family=Great+Vibes&display=swap');
 
 /* ── TOKENS ── */
 :root {
@@ -74,7 +74,7 @@ body {
 }
 .header-title-block { flex: 1; text-align: center; }
 .header-korean  { font-family: 'Noto Serif KR', serif; font-size: 12px; color: var(--red); letter-spacing: 2px; display: block; }
-.header-main    { font-family: 'VT323', monospace; font-size: 36px; color: var(--navy); line-height: 1; display: block; }
+.header-main    { font-family: 'Oswald', sans-serif; font-size: 34px; font-weight: 700; color: var(--navy); line-height: 1; display: block; letter-spacing: 3px; text-transform: uppercase; }
 .header-sub     { font-size: 9px; font-weight: 700; color: var(--red); display: block; margin-top: 2px; letter-spacing: 1px; font-family: monospace; }
 .header-counter {
   text-align: center; flex-shrink: 0; font-family: monospace; font-size: 12px;
