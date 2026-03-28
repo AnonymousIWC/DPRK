@@ -8,14 +8,15 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 
 // ── DATABASE ──────────────────────────────────────────────────────────────────
-let sql = null;
+let pool = null;
 
 async function getDb() {
-  if (!process.env.POSTGRES_URL) return null;
-  if (!sql) {
-    const pg = require('@vercel/postgres');
-    sql = pg.sql;
-    await sql`
+  const connStr = process.env.DATABASE_URL || process.env.POSTGRES_URL;
+  if (!connStr) return null;
+  if (!pool) {
+    const { Pool } = require('pg');
+    pool = new Pool({ connectionString: connStr, ssl: { rejectUnauthorized: false } });
+    await pool.query(`
       CREATE TABLE IF NOT EXISTS registry (
         id         SERIAL PRIMARY KEY,
         name       TEXT NOT NULL,
@@ -25,9 +26,9 @@ async function getDb() {
         reg_num    TEXT NOT NULL,
         created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
       )
-    `;
+    `);
   }
-  return sql;
+  return pool;
 }
 
 // Initialise on startup (non-blocking)
@@ -44,12 +45,10 @@ app.get('/api/search', async (req, res) => {
   if (!db) return res.status(503).json({ error: 'Registry database not configured.' });
 
   try {
-    const result = await db`
-      SELECT name, title_en, title_ko, reg_num
-      FROM registry
-      WHERE name_lower = ${name.toLowerCase()}
-      LIMIT 1
-    `;
+    const result = await db.query(
+      'SELECT name, title_en, title_ko, reg_num FROM registry WHERE name_lower = $1 LIMIT 1',
+      [name.toLowerCase()]
+    );
     if (result.rows.length === 0) return res.json({ found: false });
     res.json({ found: true, entry: result.rows[0] });
   } catch (err) {
@@ -76,14 +75,15 @@ app.post('/api/add', async (req, res) => {
     'STR-' + String(Math.floor(Math.random() * 9000) + 1000).padStart(4, '0');
 
   try {
-    await db`
-      INSERT INTO registry (name, name_lower, title_en, title_ko, reg_num)
-      VALUES (${name.trim()}, ${name.trim().toLowerCase()}, ${titleEn.trim()}, ${(titleKo || '').trim()}, ${reg})
-      ON CONFLICT (name_lower) DO UPDATE
-        SET title_en = EXCLUDED.title_en,
-            title_ko = EXCLUDED.title_ko,
-            reg_num  = EXCLUDED.reg_num
-    `;
+    await db.query(
+      `INSERT INTO registry (name, name_lower, title_en, title_ko, reg_num)
+       VALUES ($1, $2, $3, $4, $5)
+       ON CONFLICT (name_lower) DO UPDATE
+         SET title_en = EXCLUDED.title_en,
+             title_ko = EXCLUDED.title_ko,
+             reg_num  = EXCLUDED.reg_num`,
+      [name.trim(), name.trim().toLowerCase(), titleEn.trim(), (titleKo || '').trim(), reg]
+    );
     res.json({ success: true, regNum: reg });
   } catch (err) {
     console.error('Add error:', err.message);
