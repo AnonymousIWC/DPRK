@@ -191,6 +191,9 @@ body {
   border: 3px solid var(--cg);
   position: relative;
   color: var(--ink);
+  max-width: 420px;
+  margin-left: auto;
+  margin-right: auto;
 }
 .cert-outer::before {
   content: '';
