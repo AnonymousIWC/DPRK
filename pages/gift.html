@@ -10,7 +10,7 @@
     .gift-hero::before{content:'';position:absolute;inset:0;background:repeating-conic-gradient(from 0deg at 50% 130%,rgba(255,221,0,.018) 0deg 4deg,transparent 4deg 14deg);pointer-events:none;}
     .gh-inner{max-width:1200px;margin:0 auto;position:relative;z-index:1;display:grid;grid-template-columns:1fr 400px;gap:64px;align-items:start;}
     .gh-kick{font-family:monospace;font-size:11px;font-weight:700;letter-spacing:4px;color:var(--cr);text-transform:uppercase;display:block;margin-bottom:14px;border-left:3px solid var(--cr);padding-left:12px;}
-    .gh-title{font-family:'Oswald',sans-serif;font-weight:700;font-size:54px;color:var(--gold2);line-height:1;margin-bottom:14px;letter-spacing:2px;text-transform:uppercase;}
+    .gh-title{font-family:'Oswald',sans-serif;font-weight:700;font-size:54px;color:var(--gold2);line-height:1;margin-bottom:14px;letter-spacing:2px;text-transform:uppercase;white-space:nowrap;}
     .gh-sub{font-size:18px;color:#aaccff;line-height:1.8;margin-bottom:28px;}
     .reasons{display:flex;flex-direction:column;gap:12px;margin-top:8px;}
     .reason{display:flex;gap:14px;align-items:flex-start;}
@@ -81,6 +81,60 @@
     .confirm-sub{font-size:18px;color:#aaccff;line-height:1.8;max-width:600px;margin:0 auto 32px;}
     .confirm-reg{font-family:monospace;font-size:14px;color:var(--cg);letter-spacing:3px;margin-bottom:24px;}
 
+    /* ── PACKAGE ITEMS ── */
+    .pkg-list{display:flex;flex-direction:column;gap:20px;}
+    .pkg-item{display:flex;gap:18px;align-items:flex-start;}
+    .pkg-visual{flex-shrink:0;width:72px;}
+
+    /* Certificate miniature */
+    .pv-cert{width:72px;height:102px;background:#f5f0e0;border:2px solid var(--cg);position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:6px;}
+    .pv-cert::after{content:'';position:absolute;inset:4px;border:.5px solid rgba(201,168,76,.4);pointer-events:none;}
+    .pv-cert-star{font-size:14px;color:var(--cg);line-height:1;}
+    .pv-cert-lines{display:flex;flex-direction:column;gap:3px;width:100%;padding:0 4px;}
+    .pv-cert-line{height:2px;background:rgba(0,0,0,.15);border-radius:1px;}
+    .pv-cert-line.thick{height:3px;background:rgba(0,32,91,.35);}
+
+    /* Envelope */
+    .pv-env{width:72px;height:50px;background:var(--cn);border:1px solid rgba(201,168,76,.3);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+    .pv-env::before{content:'';position:absolute;top:0;left:0;right:0;height:5px;background:var(--red);}
+    .pv-env::after{content:'';position:absolute;bottom:0;left:0;right:0;height:5px;background:var(--red);}
+    .pv-env-seal{width:20px;height:20px;border-radius:50%;background:var(--cr);border:1px solid rgba(201,168,76,.5);display:flex;align-items:center;justify-content:center;font-size:7px;color:rgba(255,255,255,.7);font-family:monospace;font-weight:700;letter-spacing:-.5px;}
+    .pv-env-lines{position:absolute;left:8px;display:flex;flex-direction:column;gap:3px;}
+    .pv-env-line{height:1.5px;background:rgba(255,255,255,.15);border-radius:1px;}
+
+    /* Registry card */
+    .pv-card{width:72px;height:50px;background:#f5f0e0;border:1px solid rgba(139,26,26,.3);position:relative;display:flex;align-items:center;justify-content:center;}
+    .pv-card-seal{width:18px;height:18px;border-radius:50%;background:var(--cr);border:1px solid rgba(139,26,26,.5);display:flex;align-items:center;justify-content:center;font-size:6px;color:rgba(255,255,255,.8);font-family:monospace;font-weight:700;}
+    .pv-card-fold{position:absolute;bottom:0;left:0;right:0;height:50%;background:rgba(0,0,0,.04);border-top:1px dashed rgba(0,0,0,.1);}
+
+    /* Registry entry */
+    .pv-reg{width:72px;height:50px;background:#0d0d1f;border:1px solid rgba(201,168,76,.3);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:6px;}
+    .pv-reg-label{font-family:monospace;font-size:6px;font-weight:700;letter-spacing:2px;color:var(--cg);text-transform:uppercase;}
+    .pv-reg-num{font-family:'VT323',monospace;font-size:16px;color:var(--gold2);line-height:1;}
+
+    .pkg-text{}
+    .pkg-name{font-family:'Oswald',sans-serif;font-weight:700;font-size:14px;color:var(--gold2);letter-spacing:.5px;text-transform:uppercase;display:block;margin-bottom:4px;}
+    .pkg-desc{font-size:13px;color:rgba(255,255,255,.5);line-height:1.65;font-family:Georgia,serif;}
+    .pkg-tag{display:inline-block;font-family:monospace;font-size:8px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:1px 6px;border:1px solid;margin-left:6px;vertical-align:middle;}
+    .pkg-tag.phys{color:var(--cg);border-color:rgba(201,168,76,.4);}
+    .pkg-tag.both{color:rgba(255,255,255,.4);border-color:rgba(255,255,255,.2);}
+
+    /* ── FAQ ── */
+    .faq-section{background:#0d0d1f;padding:64px 40px;border-top:3px solid rgba(255,255,255,.06);}
+    .faq-inner{max-width:860px;margin:0 auto;}
+    .faq-heading{font-family:'Oswald',sans-serif;font-weight:700;font-size:36px;color:var(--gold2);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;}
+    .faq-sub{font-family:monospace;font-size:11px;color:rgba(255,255,255,.35);letter-spacing:2px;text-transform:uppercase;margin-bottom:40px;}
+    .faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;}
+    .faq-item{padding:24px 28px;border:1px solid rgba(255,255,255,.06);border-top:none;border-right:none;}
+    .faq-item:nth-child(odd){border-left:none;}
+    .faq-item:nth-child(1),.faq-item:nth-child(2){border-top:1px solid rgba(255,255,255,.06);}
+    .faq-q{font-family:'Oswald',sans-serif;font-weight:700;font-size:16px;color:#fff;line-height:1.35;margin-bottom:10px;letter-spacing:.3px;}
+    .faq-q::before{content:'Q — ';color:var(--cr);font-size:12px;font-family:monospace;letter-spacing:1px;}
+    .faq-a{font-family:Georgia,'Times New Roman',serif;font-size:14px;color:rgba(255,255,255,.55);line-height:1.75;}
+    .faq-a strong{color:rgba(255,255,255,.8);font-weight:normal;font-style:italic;}
+    .faq-footer{margin-top:40px;padding-top:28px;border-top:1px solid rgba(255,255,255,.08);text-align:center;}
+    .faq-footer-text{font-family:monospace;font-size:11px;color:rgba(255,255,255,.25);letter-spacing:1.5px;text-transform:uppercase;line-height:2;}
+
     @media (max-width:768px){
       .gift-hero{padding:28px 16px;}
       .gh-inner{grid-template-columns:1fr;gap:24px;}
@@ -92,6 +146,11 @@
       .preview-grid{grid-template-columns:1fr;gap:24px;}
       .confirm-head{font-size:28px;}
       .confirm-sub{font-size:15px;}
+      .faq-section{padding:40px 16px;}
+      .faq-grid{grid-template-columns:1fr;}
+      .faq-item{border-left:none;border-right:none;}
+      .faq-item:nth-child(2){border-top:none;}
+      .gh-title{font-size:38px;white-space:normal;}
     }
   </style>
 </head>
@@ -105,7 +164,7 @@
       <div class="gh-inner">
         <div>
           <span class="gh-kick">Give the Gift of Official Recognition</span>
-          <div class="gh-title">Gift a<br>Title.</div>
+          <div class="gh-title">Gift a Title.</div>
           <div class="gh-sub">The most useful gift a person can give is formal confirmation of what was already known. Someone in your life has been remarkable for years without official documentation. Correct this.</div>
           <div class="reasons">
             <div class="reason"><span class="reason-icon">🎂</span><div class="reason-text"><strong>Birthdays.</strong> The certificate arrives. They read it. They go quiet. They put it on the wall. You have given them the best birthday present they will receive this decade.</div></div>
@@ -220,14 +279,142 @@
         <div class="preview-grid">
           <div class="preview-cert-wrap" id="preview-cert"></div>
           <div class="preview-notes">
-            <div class="pn-head">What They'll Receive</div>
-            <div class="pn-item"><span class="pn-tick">★</span><div>A4 certificate on 200gsm cream stock, printed flat</div></div>
-            <div class="pn-item"><span class="pn-tick">★</span><div>Calligraphic name, title in English and Korean, two official seals, KJU signature</div></div>
-            <div class="pn-item physical-only"><span class="pn-tick">★</span><div>Wax-sealed registry card with a personal message from Kim Jong-un</div></div>
-            <div class="pn-item physical-only"><span class="pn-tick">★</span><div>Bold DPRK navy envelope with crimson bands, Desert Colony postmark, STR wax seal</div></div>
-            <div class="pn-item"><span class="pn-tick">★</span><div>Permanent entry in the official online registry</div></div>
-            <div class="pn-item physical-only"><span class="pn-tick">★</span><div>Worldwide tracked shipping included. No extra fees.</div></div>
+            <div class="pn-head" style="margin-bottom:20px;">What They'll Receive</div>
+            <div class="pkg-list">
+
+              <!-- Certificate -->
+              <div class="pkg-item">
+                <div class="pkg-visual">
+                  <div class="pv-cert">
+                    <div class="pv-cert-star">★</div>
+                    <div class="pv-cert-lines">
+                      <div class="pv-cert-line thick"></div>
+                      <div class="pv-cert-line"></div>
+                      <div class="pv-cert-line thick"></div>
+                      <div class="pv-cert-line"></div>
+                      <div class="pv-cert-line"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="pkg-text">
+                  <span class="pkg-name">Certificate <span class="pkg-tag both">Physical &amp; Digital</span></span>
+                  <div class="pkg-desc">A4 on 200gsm cream stock. Personalised name in calligraphic script, title in full in English and Korean, state emblem, KJU signature, and two official seals. Printed flat. Correct.</div>
+                </div>
+              </div>
+
+              <!-- Envelope -->
+              <div class="pkg-item physical-only">
+                <div class="pkg-visual">
+                  <div class="pv-env">
+                    <div class="pv-env-lines">
+                      <div class="pv-env-line" style="width:30px;"></div>
+                      <div class="pv-env-line" style="width:22px;"></div>
+                      <div class="pv-env-line" style="width:26px;"></div>
+                    </div>
+                    <div class="pv-env-seal">STR</div>
+                  </div>
+                </div>
+                <div class="pkg-text">
+                  <span class="pkg-name">Navy Envelope <span class="pkg-tag phys">Physical</span></span>
+                  <div class="pkg-desc">C4 hard-backed, bold DPRK navy (#00205B), crimson top and bottom bands, state emblem watermark, Desert Colony postmark. Certificate ships flat and uncreased. Worldwide tracked shipping included — no extra fees.</div>
+                </div>
+              </div>
+
+              <!-- Registry Card -->
+              <div class="pkg-item physical-only">
+                <div class="pkg-visual">
+                  <div class="pv-card">
+                    <div class="pv-card-fold"></div>
+                    <div class="pv-card-seal">STR</div>
+                  </div>
+                </div>
+                <div class="pkg-text">
+                  <span class="pkg-name">Registry Card <span class="pkg-tag phys">Physical</span></span>
+                  <div class="pkg-desc">A6, folded, sealed with a crimson STR monogram wax seal. The recipient breaks the seal to open. Inside: a personal message from Kim Jong-un, sourced from Rodong Sinmun and selected to reflect the title. The committee approves every message.</div>
+                </div>
+              </div>
+
+              <!-- Registry Entry -->
+              <div class="pkg-item">
+                <div class="pkg-visual">
+                  <div class="pv-reg">
+                    <div class="pv-reg-label">Registry</div>
+                    <div class="pv-reg-num">STR-★</div>
+                    <div class="pv-reg-label" style="margin-top:1px;">Confirmed</div>
+                  </div>
+                </div>
+                <div class="pkg-text">
+                  <span class="pkg-name">Registry Entry <span class="pkg-tag both">Physical &amp; Digital</span></span>
+                  <div class="pkg-desc">Name entered permanently into the official DPRK Title Registry. Searchable at /registry by exact name. Private — no public browsing. The entry is permanent. It cannot be removed. The committee has confirmed this.</div>
+                </div>
+              </div>
+
+            </div>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="faq-section">
+      <div class="faq-inner">
+        <div class="faq-heading">Frequently Asked Questions</div>
+        <div class="faq-sub">The registry has answered these. The answers are correct.</div>
+        <div class="faq-grid">
+
+          <div class="faq-item">
+            <div class="faq-q">How long does shipping take?</div>
+            <div class="faq-a">Physical certificates are dispatched from the Desert Colony within 3–5 business days of order confirmation. Delivery worldwide typically takes <strong>3 to 4 weeks</strong>, depending on Australia Post routing and local customs procedures. The committee monitors morale throughout the dispatch process. Morale is always perfect. This has never affected delivery times, which are considered excellent.</div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q">How does gifting work? Will the recipient know it's from me?</div>
+            <div class="faq-a">You fill in the recipient's name, choose a title, and optionally include a personal gift message. Your message is printed on a separate card that accompanies the certificate. The official certificate itself carries no sender information — it is issued by the Registry, not by you. This is consistent with the Registry's position that all recognition is, ultimately, official.</div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q">Is the certificate personalised with their name?</div>
+            <div class="faq-a">Yes. The recipient's full name appears in calligraphic Great Vibes script on the certificate. Their title appears below it in English and Korean. Please double-check the spelling at checkout — the Registry does not acknowledge responsibility for incorrect spellings, as all certificates are issued correctly and have always been issued correctly.</div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q">Can I choose any title, or are some better for gifts?</div>
+            <div class="faq-a">All titles are available for gifting. The committee recommends <strong>Most Beloved & Respected Comrade</strong> for birthdays, anniversaries, and retirement; <strong>Iron-Willed Commander</strong> for those in leadership roles; and <strong>Brilliant Genius of Humanity</strong> for individuals who are already aware of their own intelligence and will appreciate the confirmation. Use the Title Finder if uncertain.</div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q">What's the difference between Physical and Digital?</div>
+            <div class="faq-a">The Physical package ($59) includes the printed A4 certificate, a wax-sealed registry card containing a personal KJU message, and the certificate dispatched in a bold DPRK navy C4 envelope with crimson bands and Desert Colony postmark. Worldwide shipping is included. The Digital package ($29) delivers an instant PDF certificate by email. Both formats include a permanent registry entry. The committee recommends Physical. It has voted on this. The vote was unanimous.</div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q">Is the Korean on the certificate accurate?</div>
+            <div class="faq-a">Yes. All Korean translations are verified by Comrade Secretary Ri Hyun-ok of the Bureau of Korean Translation. No amendment has ever been required. This record has stood since the Registry's founding in Juche 113, Month 1. The committee noted this in the founding minutes. The minutes are correct.</div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q">What if the recipient already has a title from the Registry?</div>
+            <div class="faq-a">Multiple titles may be held. The Registry does not impose a limit. Each title is distinct and represents a different dimension of the holder's excellence. Recipients who hold two or more titles are encouraged to use all of them in appropriate contexts. The Bureau of Correct Display will provide guidance on title ordering upon request.</div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q">Is this satirical? What actually arrives?</div>
+            <div class="faq-a">The Registry is completely real and takes itself entirely seriously. What physically arrives is a <strong>beautifully printed, properly framed-worthy A4 certificate</strong> on quality cream stock — the kind of thing that goes on a wall and gets talked about. The premise is satirical. The product is genuine. The committee sees no contradiction here and has voted to note that there is none.</div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q">Can I get a refund if I change my mind?</div>
+            <div class="faq-a">Digital orders are non-refundable once the PDF has been issued, as the certificate has entered the registry and cannot be un-entered. For physical orders, please contact the Registry before dispatch — once a certificate has been signed by Kim Jong-fun and sealed, it is considered issued and is not eligible for return. The committee has reviewed this policy. The vote was unanimous.</div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q">Can I order more than one title at a time?</div>
+            <div class="faq-a">At present, each order covers one title for one recipient. For multiple recipients or multiple titles, please complete separate orders. The committee is aware that this is a moderate inconvenience and has noted it. It remains the correct procedure for the time being. Conditions remain excellent.</div>
+          </div>
+
+        </div>
+        <div class="faq-footer">
+          <div class="faq-footer-text">Further questions may be directed to the Registry.<br>The Registry reads all correspondence. All correspondence is reviewed before reply.<br>This is a standard operational procedure and is in no way cause for concern.</div>
         </div>
       </div>
     </div>
