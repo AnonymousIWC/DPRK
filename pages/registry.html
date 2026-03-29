@@ -25,7 +25,7 @@
     .search-btn:hover{background:#aa0000;}
     .search-hint{font-family:monospace;font-size:11px;color:rgba(255,255,255,.25);letter-spacing:1px;margin-top:10px;text-align:center;}
 
-    .result-area{padding:40px;max-width:920px;margin:0 auto;}
+    .result-area{padding:40px;}
 
     /* States */
     .state{display:none;text-align:center;padding:60px 20px;}
@@ -35,7 +35,7 @@
     .state-notfound .state-sub a{color:var(--gold);text-decoration:underline;cursor:pointer;}
 
     /* Found result */
-    .found-wrap{display:grid;grid-template-columns:1fr 340px;gap:48px;align-items:start;}
+    .found-wrap{display:grid;grid-template-columns:1fr 340px;gap:48px;align-items:start;max-width:920px;margin:0 auto;}
     .found-cert{}
     .found-meta{}
     .fm-reg{font-family:monospace;font-size:10px;color:var(--cg);letter-spacing:3px;display:block;margin-bottom:12px;}
@@ -86,42 +86,42 @@
     .admin-wrong{font-family:monospace;font-size:12px;color:var(--red);letter-spacing:1px;margin-top:8px;}
 
     /* ── DISPATCH FEED (idle state) ── */
-    #dispatch-feed { padding: 20px 0 40px; }
+    #dispatch-feed { padding: 24px 0 56px; max-width: 920px; margin: 0 auto; }
     .df-win {
       border: 2px solid; border-color: #fff #808080 #808080 #fff;
       background: var(--grey);
     }
     .df-winbar {
       background: var(--navy);
-      padding: 4px 6px 4px 10px;
+      padding: 5px 8px 5px 12px;
       display: flex; align-items: center; gap: 8px;
       user-select: none;
     }
-    .df-winbar-icon { font-size: 12px; }
+    .df-winbar-icon { font-size: 13px; }
     .df-winbar-title {
-      font-family: monospace; font-size: 12px; font-weight: 700;
+      font-family: monospace; font-size: 13px; font-weight: 700;
       color: #fff; letter-spacing: 1px; flex: 1;
     }
     .df-winbar-btns { display: flex; gap: 2px; }
     .df-winbar-btns span {
-      width: 16px; height: 14px; background: var(--grey);
+      width: 18px; height: 16px; background: var(--grey);
       border: 1px solid; border-color: #fff #000 #000 #fff;
-      font-size: 11px; display: flex; align-items: center;
+      font-size: 12px; display: flex; align-items: center;
       justify-content: center; cursor: pointer; font-weight: 700; color: #000;
       font-family: monospace;
     }
     .df-body {
       background: var(--cn);
       border: 2px solid; border-color: #808080 #fff #fff #808080;
-      padding: 20px;
+      padding: 28px;
     }
     .df-status {
-      display: flex; align-items: center; gap: 8px;
-      padding-bottom: 14px; margin-bottom: 14px;
+      display: flex; align-items: center; gap: 10px;
+      padding-bottom: 18px; margin-bottom: 18px;
       border-bottom: 1px solid rgba(201,168,76,.25);
     }
     .df-dot {
-      width: 7px; height: 7px; border-radius: 50%;
+      width: 9px; height: 9px; border-radius: 50%;
       background: #33dd55; box-shadow: 0 0 6px #33dd55;
       animation: dfpulse 1.8s ease-in-out infinite; flex-shrink: 0;
     }
@@ -130,23 +130,23 @@
       50%      { opacity: .3; }
     }
     .df-live-lbl {
-      font-family: monospace; font-size: 10px; font-weight: 700;
-      letter-spacing: 3px; color: rgba(255,255,255,.45); text-transform: uppercase;
+      font-family: monospace; font-size: 11px; font-weight: 700;
+      letter-spacing: 3px; color: rgba(255,255,255,.5); text-transform: uppercase;
     }
     .df-tally {
-      margin-left: auto; font-family: monospace; font-size: 10px;
+      margin-left: auto; font-family: monospace; font-size: 11px;
       color: var(--cg); letter-spacing: 1px;
     }
-    .df-items { display: flex; flex-direction: column; gap: 6px; }
+    .df-items { display: flex; flex-direction: column; gap: 10px; }
     .df-item {
       display: grid;
-      grid-template-columns: 68px 1fr auto;
+      grid-template-columns: 80px 1fr auto;
       grid-template-rows: auto auto;
-      column-gap: 14px; row-gap: 0;
-      padding: 11px 14px;
+      column-gap: 18px; row-gap: 3px;
+      padding: 16px 20px;
       background: rgba(255,255,255,.04);
-      border: 1px solid rgba(255,255,255,.08);
-      border-left: 3px solid var(--cg);
+      border: 1px solid rgba(255,255,255,.1);
+      border-left: 4px solid var(--cg);
     }
     .df-item.is-new { animation: dfslide .35s ease both; }
     @keyframes dfslide {
@@ -155,41 +155,41 @@
     }
     .df-badge {
       grid-row: 1 / 3; align-self: center;
-      font-family: monospace; font-size: 8px; font-weight: 700;
+      font-family: monospace; font-size: 9px; font-weight: 700;
       letter-spacing: 1.5px; text-transform: uppercase;
-      padding: 3px 6px; border: 1px solid; text-align: center;
+      padding: 4px 8px; border: 1px solid; text-align: center;
       color: var(--cg); border-color: rgba(201,168,76,.45);
-      background: rgba(201,168,76,.08); white-space: nowrap;
+      background: rgba(201,168,76,.08); white-space: nowrap; line-height: 1.6;
     }
     .df-badge.dig {
-      color: rgba(255,255,255,.45); border-color: rgba(255,255,255,.2);
+      color: rgba(255,255,255,.5); border-color: rgba(255,255,255,.25);
       background: transparent;
     }
     .df-name {
       font-family: 'Oswald', sans-serif; font-weight: 700;
-      font-size: 14px; color: #fff; line-height: 1.2;
+      font-size: 17px; color: #fff; line-height: 1.2;
     }
     .df-name span {
-      font-family: monospace; font-size: 9px; font-weight: 400;
-      color: rgba(255,255,255,.35); letter-spacing: 1px; margin-left: 6px;
+      font-family: monospace; font-size: 10px; font-weight: 400;
+      color: rgba(255,255,255,.4); letter-spacing: 1px; margin-left: 8px;
       vertical-align: middle;
     }
     .df-title-sm {
       font-family: 'Cormorant Garamond', serif; font-style: italic;
-      font-size: 13px; color: rgba(255,255,255,.5); line-height: 1.3;
+      font-size: 15px; color: rgba(255,255,255,.55); line-height: 1.4;
       overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
     }
     .df-ago {
       grid-row: 1 / 3; align-self: center;
-      font-family: monospace; font-size: 9px;
-      color: rgba(255,255,255,.22); letter-spacing: .5px;
+      font-family: monospace; font-size: 10px;
+      color: rgba(255,255,255,.28); letter-spacing: .5px;
       white-space: nowrap; text-align: right;
     }
     .df-foot {
-      margin-top: 14px; padding-top: 12px;
-      border-top: 1px solid rgba(255,255,255,.07);
-      font-family: monospace; font-size: 9px; letter-spacing: 1.5px;
-      color: rgba(255,255,255,.18); text-transform: uppercase; text-align: center;
+      margin-top: 18px; padding-top: 14px;
+      border-top: 1px solid rgba(255,255,255,.08);
+      font-family: monospace; font-size: 10px; letter-spacing: 1.5px;
+      color: rgba(255,255,255,.22); text-transform: uppercase; text-align: center;
     }
 
     @media (max-width:768px){
@@ -199,8 +199,14 @@
       .privacy-note{padding:10px 14px;}
       .search-section{padding:0 16px 32px;}
       .search-btn{padding:14px 16px;font-size:11px;letter-spacing:1px;}
-      .result-area{padding:24px 14px;}
-      .found-wrap{grid-template-columns:1fr;gap:24px;}
+      .result-area{padding:16px;}
+      #dispatch-feed{padding:12px 0 32px;}
+      .df-body{padding:16px;}
+      .df-item{grid-template-columns:70px 1fr;padding:12px 14px;}
+      .df-ago{display:none;}
+      .df-name{font-size:15px;}
+      .df-title-sm{font-size:13px;}
+      .found-wrap{grid-template-columns:1fr;gap:24px;max-width:100%;}
       .fm-name{font-size:36px;}
       .admin-section{padding:32px 16px;}
       .admin-inner{max-width:100%;}
