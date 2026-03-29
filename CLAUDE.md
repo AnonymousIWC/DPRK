@@ -59,7 +59,7 @@ Two SKUs:
 
 ## The Registry Leadership
 
-**Kim Jong-fun** — Supreme Registrar  
+**Kim Jong-un** — Supreme Registrar  
 - Born Juche 82, DPRK, under remarkable circumstances (double rainbow, birds arranged meaningfully)  
 - Appointed Month 1, Juche 113  
 - Has personally signed every certificate  
