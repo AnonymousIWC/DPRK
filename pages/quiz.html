@@ -201,10 +201,10 @@
   ];
 
   var Titles={
-    commanding:{grade:"SUPREME GRADE",en:"Iron-Willed Commander of the\nGlorious People's Eternal Struggle",ko:"강철의 의지를 지닌 영광스러운 인민의 사령관",why:"Your responses describe a person of decisive, unquestioned authority. You make decisions. Others follow. You have been doing this for years without formal recognition. The Iron-Willed Commander is the most appropriate title in the registry for someone of your precise profile. The committee was unanimous."},
-    radiant:{grade:"ETERNAL GRADE",en:"Eternal Sun of the Revolutionary Cause\n& Morning Star of Juche",ko:"혁명의 영원한 태양이며 주체의 새벽별",why:"Your responses describe someone whose presence has a measurable effect on those around them. You attract rather than demand. You are a source of warmth and light in ways you may not fully appreciate. The Eternal Sun title has been assigned with great confidence."},
-    brilliant:{grade:"BRILLIANT GRADE",en:"Brilliant Genius of Humanity, Guiding Star\nof the 21st Century & Outstanding Thinker",ko:"인류의 탁월한 천재이며 21세기의 길잡이 별",why:"Your responses describe exceptional analytical clarity and a documented record of being correct when others were not. You have opinions. They are well-formed. People find this occasionally challenging and frequently useful. The Brilliant Genius title is the only appropriate designation."},
-    beloved:{grade:"BELOVED GRADE",en:"Most Beloved & Respected Comrade\nof the Motherland, Cherished by All",ko:"조국의 가장 사랑받고 존경받는 동지",why:"Your responses describe genuine warmth and consistent generosity. You remember. You act. You hold things together with quiet competence that others rely on without always acknowledging. The Most Beloved Comrade is not a consolation — it is one of the most distinguished titles in the registry."}
+    commanding:{en:"Iron-Willed Commander of the\nGlorious People's Eternal Struggle",ko:"강철의 의지를 지닌 영광스러운 인민의 사령관",why:"Your responses describe a person of decisive, unquestioned authority. You make decisions. Others follow. You have been doing this for years without formal recognition. The Iron-Willed Commander is the most appropriate title in the registry for someone of your precise profile. The committee was unanimous."},
+    radiant:{en:"Eternal Sun of the Revolutionary Cause\n& Morning Star of Juche",ko:"혁명의 영원한 태양이며 주체의 새벽별",why:"Your responses describe someone whose presence has a measurable effect on those around them. You attract rather than demand. You are a source of warmth and light in ways you may not fully appreciate. The Eternal Sun title has been assigned with great confidence."},
+    brilliant:{en:"Brilliant Genius of Humanity, Guiding Star\nof the 21st Century & Outstanding Thinker",ko:"인류의 탁월한 천재이며 21세기의 길잡이 별",why:"Your responses describe exceptional analytical clarity and a documented record of being correct when others were not. You have opinions. They are well-formed. People find this occasionally challenging and frequently useful. The Brilliant Genius title is the only appropriate designation."},
+    beloved:{en:"Most Beloved & Respected Comrade\nof the Motherland, Cherished by All",ko:"조국의 가장 사랑받고 존경받는 동지",why:"Your responses describe genuine warmth and consistent generosity. You remember. You act. You hold things together with quiet competence that others rely on without always acknowledging. The Most Beloved Comrade is not a consolation — it is one of the most distinguished titles in the registry."}
   };
 
   var cur=0,sel=[],picked=null;
@@ -268,7 +268,7 @@
 
   function startLoad(){
     show('s-load');
-    var msgs=['Analysing your responses against 50+ titles','Consulting the committee on your profile','Cross-referencing with the official registry','Calibrating your grade and distinction','Preparing your certificate'];
+    var msgs=['Analysing your responses against 50+ titles','Consulting the committee on your profile','Cross-referencing with the official registry','Assessing your distinction and profile','Preparing your certificate'];
     var i=0;
     var iv=setInterval(function(){document.getElementById('load-sub').textContent=msgs[Math.min(i++,msgs.length-1)];},480);
     setTimeout(function(){clearInterval(iv);showResult();},2600);
@@ -279,7 +279,7 @@
     sel.forEach(function(ai,qi){tally[Qs[qi].a[ai].tr]++;});
     var winner=Object.entries(tally).sort(function(a,b){return b[1]-a[1];})[0][0];
     var T=Titles[winner];
-    document.getElementById('rp-grade').textContent=T.grade;
+    document.getElementById('rp-grade').textContent='★ REGISTRY DETERMINATION';
     document.getElementById('rp-tname').textContent=T.en.replace('\n',' ');
     document.getElementById('rp-why').textContent=T.why;
     var n=Math.floor(Math.random()*9000)+1000;

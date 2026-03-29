@@ -35,13 +35,19 @@
     }
     .bm-rule-line { flex: 1; height: 1px; background: linear-gradient(to right, transparent, rgba(201,168,76,.5), transparent); }
     .bm-rule-star { font-family: 'VT323', monospace; font-size: 18px; color: var(--cg); }
+    .bm-kick {
+      font-family: monospace; font-size: 11px; font-weight: 700;
+      letter-spacing: 4px; color: var(--cr); text-transform: uppercase;
+      display: block; margin-bottom: 16px; text-align: center;
+    }
     .bm-ko {
       font-family: 'Noto Serif KR', serif; font-size: 12px;
       color: rgba(255,255,255,.45); letter-spacing: 4px; text-align: center;
     }
     .bm-title {
-      font-family: 'VT323', monospace; font-size: 72px; color: var(--gold2);
+      font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 64px; color: var(--gold2);
       line-height: 1; letter-spacing: 4px; text-align: center; text-transform: uppercase;
+      margin-bottom: 4px;
     }
     .bm-sub {
       font-family: monospace; font-size: 12px; font-weight: 700;
@@ -74,7 +80,7 @@
     /* ── FEATURED ARTICLE ── */
     .featured-wrap {
       padding: 32px 40px;
-      background: #f5f5f0;
+      background: var(--cream);
       border-bottom: 2px solid var(--ltgrey);
     }
     .featured-inner { max-width: 1200px; margin: 0 auto; }
@@ -137,7 +143,7 @@
     /* ── ARTICLE LIST ── */
     .article-list-wrap {
       padding: 0 40px 48px;
-      background: #f5f5f0;
+      background: var(--cream);
     }
     .article-list-inner { max-width: 1200px; margin: 0 auto; }
     .al-header {
@@ -245,14 +251,10 @@
       <a href="/">Home</a> › The Bulletin
     </div>
 
-    <!-- PAGE HEADER BAR -->
-    <div class="sec-bar" style="margin-bottom:0; border-left:none; border-right:none;">
-      ★ THE OFFICIAL BULLETIN — Issued by the Supreme Title Registry, Desert Colony, Australia
-    </div>
-
     <!-- MASTHEAD -->
     <div class="bulletin-masthead">
       <div class="bm-inner">
+        <span class="bm-kick">★ Official Dispatches · Supreme Title Registry · Desert Colony, Australia</span>
         <div class="bm-rule-top">
           <div class="bm-rule-line"></div>
           <div class="bm-rule-star">★ ★ ★</div>

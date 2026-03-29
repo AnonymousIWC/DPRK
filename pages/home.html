@@ -254,9 +254,8 @@
       // Render titles
       document.getElementById('titles-list').innerHTML = T.slice(0, 4).map(t => `
         <div class="title-row ${t.popular ? 'featured' : ''}" onclick="location.href='/title/${t.id}'">
-          <div class="tr-rank" style="background:${t.gradeColour};">
+          <div class="tr-rank" style="background:var(--cn);">
             <span class="tr-rank-icon">${t.icon}</span>
-            <span class="tr-rank-label">${t.grade.toUpperCase()}</span>
           </div>
           <div class="tr-body">
             <div class="tr-title">${t.en}</div>
