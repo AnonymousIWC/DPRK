@@ -30,9 +30,6 @@
     /* States */
     .state{display:none;text-align:center;padding:60px 20px;}
     .state.on{display:block;}
-    .state-idle .state-icon{font-size:48px;margin-bottom:16px;}
-    .state-idle .state-head{font-family:'Oswald',sans-serif;font-weight:700;font-size:28px;color:rgba(255,255,255,.3);margin-bottom:8px;letter-spacing:1px;}
-    .state-idle .state-sub{font-family:monospace;font-size:12px;color:rgba(255,255,255,.2);letter-spacing:1px;}
     .state-notfound .state-head{font-family:'Oswald',sans-serif;font-weight:700;font-size:28px;color:var(--dkgrey);margin-bottom:8px;letter-spacing:1px;}
     .state-notfound .state-sub{font-size:14px;color:#888;line-height:1.8;font-family:monospace;}
     .state-notfound .state-sub a{color:var(--gold);text-decoration:underline;cursor:pointer;}
@@ -88,6 +85,113 @@
     .admin-msg{font-family:monospace;font-size:12px;color:var(--gold2);letter-spacing:1px;margin-top:12px;}
     .admin-wrong{font-family:monospace;font-size:12px;color:var(--red);letter-spacing:1px;margin-top:8px;}
 
+    /* ── DISPATCH FEED (idle state) ── */
+    #dispatch-feed { padding: 20px 0 40px; }
+    .df-win {
+      border: 2px solid; border-color: #fff #808080 #808080 #fff;
+      background: var(--grey);
+    }
+    .df-winbar {
+      background: var(--navy);
+      padding: 4px 6px 4px 10px;
+      display: flex; align-items: center; gap: 8px;
+      user-select: none;
+    }
+    .df-winbar-icon { font-size: 12px; }
+    .df-winbar-title {
+      font-family: monospace; font-size: 12px; font-weight: 700;
+      color: #fff; letter-spacing: 1px; flex: 1;
+    }
+    .df-winbar-btns { display: flex; gap: 2px; }
+    .df-winbar-btns span {
+      width: 16px; height: 14px; background: var(--grey);
+      border: 1px solid; border-color: #fff #000 #000 #fff;
+      font-size: 11px; display: flex; align-items: center;
+      justify-content: center; cursor: pointer; font-weight: 700; color: #000;
+      font-family: monospace;
+    }
+    .df-body {
+      background: var(--cn);
+      border: 2px solid; border-color: #808080 #fff #fff #808080;
+      padding: 20px;
+    }
+    .df-status {
+      display: flex; align-items: center; gap: 8px;
+      padding-bottom: 14px; margin-bottom: 14px;
+      border-bottom: 1px solid rgba(201,168,76,.25);
+    }
+    .df-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: #33dd55; box-shadow: 0 0 6px #33dd55;
+      animation: dfpulse 1.8s ease-in-out infinite; flex-shrink: 0;
+    }
+    @keyframes dfpulse {
+      0%,100% { opacity: 1; }
+      50%      { opacity: .3; }
+    }
+    .df-live-lbl {
+      font-family: monospace; font-size: 10px; font-weight: 700;
+      letter-spacing: 3px; color: rgba(255,255,255,.45); text-transform: uppercase;
+    }
+    .df-tally {
+      margin-left: auto; font-family: monospace; font-size: 10px;
+      color: var(--cg); letter-spacing: 1px;
+    }
+    .df-items { display: flex; flex-direction: column; gap: 6px; }
+    .df-item {
+      display: grid;
+      grid-template-columns: 68px 1fr auto;
+      grid-template-rows: auto auto;
+      column-gap: 14px; row-gap: 0;
+      padding: 11px 14px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+      border-left: 3px solid var(--cg);
+    }
+    .df-item.is-new { animation: dfslide .35s ease both; }
+    @keyframes dfslide {
+      from { opacity:0; transform:translateY(-10px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+    .df-badge {
+      grid-row: 1 / 3; align-self: center;
+      font-family: monospace; font-size: 8px; font-weight: 700;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      padding: 3px 6px; border: 1px solid; text-align: center;
+      color: var(--cg); border-color: rgba(201,168,76,.45);
+      background: rgba(201,168,76,.08); white-space: nowrap;
+    }
+    .df-badge.dig {
+      color: rgba(255,255,255,.45); border-color: rgba(255,255,255,.2);
+      background: transparent;
+    }
+    .df-name {
+      font-family: 'Oswald', sans-serif; font-weight: 700;
+      font-size: 14px; color: #fff; line-height: 1.2;
+    }
+    .df-name span {
+      font-family: monospace; font-size: 9px; font-weight: 400;
+      color: rgba(255,255,255,.35); letter-spacing: 1px; margin-left: 6px;
+      vertical-align: middle;
+    }
+    .df-title-sm {
+      font-family: 'Cormorant Garamond', serif; font-style: italic;
+      font-size: 13px; color: rgba(255,255,255,.5); line-height: 1.3;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+    .df-ago {
+      grid-row: 1 / 3; align-self: center;
+      font-family: monospace; font-size: 9px;
+      color: rgba(255,255,255,.22); letter-spacing: .5px;
+      white-space: nowrap; text-align: right;
+    }
+    .df-foot {
+      margin-top: 14px; padding-top: 12px;
+      border-top: 1px solid rgba(255,255,255,.07);
+      font-family: monospace; font-size: 9px; letter-spacing: 1.5px;
+      color: rgba(255,255,255,.18); text-transform: uppercase; text-align: center;
+    }
+
     @media (max-width:768px){
       .reg-hero{padding:28px 16px;}
       .rh-title{font-size:32px;}
@@ -135,11 +239,28 @@
     <!-- RESULTS -->
     <div class="result-area" style="background:var(--cn);">
 
-      <!-- Idle state -->
-      <div class="state state-idle on" id="state-idle">
-        <div class="state-icon">🔍</div>
-        <div class="state-head">Enter a name above.</div>
-        <div class="state-sub">EXACT MATCH REQUIRED · CASE INSENSITIVE</div>
+      <!-- Dispatch Feed (idle state) -->
+      <div id="dispatch-feed">
+        <div class="df-win">
+          <div class="df-winbar">
+            <span class="df-winbar-icon">★</span>
+            <span class="df-winbar-title">Recent Registry Activity</span>
+            <div class="df-winbar-btns">
+              <span title="Minimise">_</span>
+              <span title="Maximise">□</span>
+              <span title="Close">✕</span>
+            </div>
+          </div>
+          <div class="df-body">
+            <div class="df-status">
+              <span class="df-dot"></span>
+              <span class="df-live-lbl">Live Feed</span>
+              <span class="df-tally">★ 312 titles issued worldwide</span>
+            </div>
+            <div class="df-items" id="df-items"></div>
+            <div class="df-foot">The registry is permanent. All entries are correct. The committee has confirmed this.</div>
+          </div>
+        </div>
       </div>
 
       <!-- Not found -->
@@ -244,10 +365,16 @@
   ];
 
   function setState(id){
-    ['state-idle','state-notfound','state-multiple','state-found'].forEach(function(s){
+    var feed=document.getElementById('dispatch-feed');
+    if(id==='state-idle'){
+      feed.style.display='';
+    }else{
+      feed.style.display='none';
+    }
+    ['state-notfound','state-multiple','state-found'].forEach(function(s){
       document.getElementById(s).className='state';
     });
-    document.getElementById(id).className='state on';
+    if(id!=='state-idle') document.getElementById(id).className='state on';
   }
 
   function showEntry(e){
@@ -289,6 +416,66 @@
   }
 
   document.getElementById('name-input').addEventListener('keydown',function(e){if(e.key==='Enter')doSearch();});
+  document.getElementById('name-input').addEventListener('input',function(e){if(!e.target.value.trim())setState('state-idle');});
+
+  /* ── DISPATCH FEED ── */
+  var DF_ORDERS=[
+    {name:'James M.',   loc:'Melbourne, AU', title:'Iron-Willed Commander of the Glorious People\'s Eternal Struggle',              type:'physical', ago:'2 min ago'  },
+    {name:'Sarah T.',   loc:'Brisbane, AU',  title:'Most Beloved & Respected Comrade of the Motherland, Cherished by All',          type:'physical', ago:'38 min ago' },
+    {name:'Chen W.',    loc:'Singapore',     title:'Brilliant Genius of Humanity, Guiding Star of the 21st Century',               type:'digital',  ago:'1 hr ago'   },
+    {name:'Alex B.',    loc:'New York, US',  title:'Eternal Sun of the Revolutionary Cause & Morning Star of Juche',               type:'physical', ago:'3 hr ago'   },
+    {name:'Emma R.',    loc:'London, UK',    title:'Peerless Commander Born of Paektu, Eternal Flame & Unconquered Colossus',      type:'physical', ago:'4 hr ago'   },
+    {name:'Liam K.',    loc:'Dublin, IE',    title:'Great Marshal of the Invincible Armed Forces & Guardian of the Socialist Flame',type:'digital',  ago:'5 hr ago'   },
+    {name:'Priya S.',   loc:'Mumbai, IN',    title:'Iron-Willed Commander of the Glorious People\'s Eternal Struggle',              type:'physical', ago:'7 hr ago'   },
+    {name:'Marcus F.',  loc:'Berlin, DE',    title:'Most Beloved & Respected Comrade of the Motherland, Cherished by All',         type:'digital',  ago:'9 hr ago'   },
+    {name:'Yuki T.',    loc:'Tokyo, JP',     title:'Brilliant Genius of Humanity, Guiding Star of the 21st Century',               type:'physical', ago:'11 hr ago'  },
+    {name:'Oliver N.',  loc:'Auckland, NZ',  title:'Eternal Sun of the Revolutionary Cause & Morning Star of Juche',               type:'physical', ago:'13 hr ago'  },
+    {name:'Fatima A.',  loc:'Dubai, UAE',    title:'Peerless Commander Born of Paektu, Eternal Flame & Unconquered Colossus',      type:'digital',  ago:'14 hr ago'  },
+    {name:'Noah C.',    loc:'Toronto, CA',   title:'Great Marshal of the Invincible Armed Forces & Guardian of the Socialist Flame',type:'physical', ago:'yesterday'  },
+    {name:'Isla M.',    loc:'Edinburgh, UK', title:'Iron-Willed Commander of the Glorious People\'s Eternal Struggle',              type:'physical', ago:'yesterday'  },
+    {name:'Ravi P.',    loc:'Bangalore, IN', title:'Brilliant Genius of Humanity, Guiding Star of the 21st Century',               type:'physical', ago:'yesterday'  },
+    {name:'Chloe D.',   loc:'Paris, FR',     title:'Most Beloved & Respected Comrade of the Motherland, Cherished by All',         type:'digital',  ago:'2 days ago' },
+    {name:'Ben W.',     loc:'Cape Town, ZA', title:'Peerless Commander Born of Paektu, Eternal Flame & Unconquered Colossus',      type:'physical', ago:'2 days ago' },
+    {name:'Sofia G.',   loc:'Barcelona, ES', title:'Eternal Sun of the Revolutionary Cause & Morning Star of Juche',               type:'digital',  ago:'2 days ago' },
+    {name:'Jin H.',     loc:'Seoul, KR',     title:'Great Marshal of the Invincible Armed Forces & Guardian of the Socialist Flame',type:'physical', ago:'3 days ago' },
+    {name:'Mia R.',     loc:'Chicago, US',   title:'Iron-Willed Commander of the Glorious People\'s Eternal Struggle',              type:'physical', ago:'3 days ago' },
+    {name:'Tom S.',     loc:'Sydney, AU',    title:'Brilliant Genius of Humanity, Guiding Star of the 21st Century',               type:'physical', ago:'4 days ago' },
+  ];
+  var dfIdx=0, DF_MAX=4;
+
+  function dfMakeItem(o,isNew){
+    var d=document.createElement('div');
+    d.className='df-item'+(isNew?' is-new':'');
+    d.innerHTML=
+      '<div class="df-badge'+(o.type==='digital'?' dig':'')+'">'+
+        (o.type==='physical'?'PHYSICAL<br>DISPATCHED':'DIGITAL<br>ISSUED')+
+      '</div>'+
+      '<div class="df-name">'+o.name+'<span>'+o.loc+'</span></div>'+
+      '<div class="df-ago">'+o.ago+'</div>'+
+      '<div class="df-title-sm">'+o.title+'</div>';
+    return d;
+  }
+
+  (function dfInit(){
+    var c=document.getElementById('df-items');
+    if(!c)return;
+    for(var i=0;i<DF_MAX&&i<DF_ORDERS.length;i++) c.appendChild(dfMakeItem(DF_ORDERS[i],false));
+    dfIdx=DF_MAX;
+  })();
+
+  setInterval(function(){
+    var c=document.getElementById('df-items');
+    if(!c||document.getElementById('dispatch-feed').style.display==='none')return;
+    var item=dfMakeItem(DF_ORDERS[dfIdx%DF_ORDERS.length],true);
+    dfIdx++;
+    c.insertBefore(item,c.firstChild);
+    var all=c.querySelectorAll('.df-item');
+    if(all.length>DF_MAX){
+      var last=all[all.length-1];
+      last.style.transition='opacity .3s';last.style.opacity='0';
+      setTimeout(function(){if(last.parentNode)last.parentNode.removeChild(last);},320);
+    }
+  },6000);
 
   function toggleAdmin(){
     document.getElementById('admin-panel').classList.toggle('on');
